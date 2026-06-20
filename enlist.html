@@ -194,50 +194,79 @@
    ============================================================ */
 const ENDPOINT = "PASTE_APPS_SCRIPT_WEB_APP_URL_HERE";
 
+/* Civil taxonomy grounded in the NCEES FE Civil + five PE Civil depth specs (April 2024).
+   Fundamentals = FE breadth every civil engineer/EIT has; the five disciplines = PE depth.
+   PhD / research-grade topics are intentionally excluded (added later as a research tier). */
 const CIVIL = [
+  {d:"Fundamentals (every civil engineer)", m:[
+    {name:"Engineering mathematics & statistics", subs:["Analytic geometry & trigonometry","Single-variable calculus","Differential equations","Vector operations","Probability & statistics","Numerical methods"]},
+    {name:"Engineering economics", subs:["Time value of money","Cost analysis","Benefit-cost & life-cycle","Risk & uncertainty"]},
+    {name:"Ethics & professional practice", subs:["Codes of ethics","Professional liability","Licensure","Contracts & contract law"]},
+    {name:"Statics", subs:["Force systems & resultants","Equilibrium of rigid bodies","Trusses & frames","Centroids & moments of inertia","Friction"]},
+    {name:"Dynamics", subs:["Kinematics","Force, mass & acceleration","Work, energy & power","Mass moments of inertia"]},
+    {name:"Mechanics of materials", subs:["Shear & moment diagrams","Axial, torsion, bending & shear stress","Deformations","Combined & principal stresses (Mohr)"]},
+    {name:"Engineering materials", subs:["Concrete properties","Concrete mix design","Asphalt & aggregates","Steel & metals","Wood","Material testing & specifications"]},
+    {name:"Fluid mechanics", subs:["Fluid properties","Fluid statics","Energy, impulse & momentum","Flow measurement"]},
+    {name:"Surveying", subs:["Distances, angles & trigonometry","Leveling & elevations","Area & earthwork volumes","Coordinate systems","Curves & layout"]}
+  ]},
   {d:"Structural", m:[
-    {name:"Steel design", subs:["Buildings & frames","Transmission & lattice towers","Bridges","Connections","Plate girders","Cold-formed steel","Stability & buckling","Fatigue & fracture"]},
-    {name:"Reinforced concrete", subs:["Flexure","Shear & torsion","Columns (P-M)","Two-way slabs","Detailing & development","Seismic detailing"]},
-    {name:"Prestressed / post-tensioned", subs:["Pretensioned members","Post-tensioned slabs","Losses & transfer","Anchorage zones"]},
-    {name:"FRC / UHPC / TRC", subs:["Flexure (C1609 / EN 14651)","Tunnel segments (ACI 544.7R)","Slab-on-ground","Residual strength / inverse analysis","Hybrid reinforcement"]},
-    {name:"Foundations (structural)", subs:["Spread footings","Mat foundations","Pile caps","Retaining walls"]},
-    {name:"Loads & combinations", subs:["Dead & live","Wind (ASCE 7)","Snow","Seismic","Flood","LRFD / ASD combinations"]},
-    {name:"Structural analysis", subs:["Statics & determinacy","Indeterminate structures","Matrix / FEM","Dynamics & vibration"]},
-    {name:"Masonry / Timber / Composite", subs:["Masonry design","Timber design","Steel-concrete composite"]},
-    {name:"Bridges (AASHTO LRFD)", subs:["Girder design","Load rating","Decks"]},
-    {name:"Forensic & strengthening", subs:["Condition assessment","FRP strengthening","Failure investigation"]}
+    {name:"Loads & load paths", subs:["Dead loads","Live loads","Wind loads","Seismic loads","Snow, rain & ice","Moving & impact loads","Earth pressure & surcharge","Tributary areas & load paths","Load combinations"]},
+    {name:"Structural analysis", subs:["Shear & moment diagrams","Axial, shear & flexure","Combined stresses","Deflection","Buckling & stability","Determinate & indeterminate structures","Matrix / FEM analysis"]},
+    {name:"Structural materials", subs:["Reinforced concrete","Prestressed / post-tensioned concrete","Structural steel","Cold-formed steel","Timber","Masonry"]},
+    {name:"Component design & detailing", subs:["Beams & horizontal members","Columns & bearing walls","Shear walls & diaphragms","Trusses, braces & frames","Connections (bolted & welded)","Shallow foundations","Deep foundations","Retaining walls"]},
+    {name:"Bridges", subs:["AASHTO LRFD girder design","Load rating","Decks"]},
+    {name:"Temporary structures & construction", subs:["Formwork & shoring","Special inspections","Submittals","Construction safety"]},
+    {name:"Codes & standards", subs:["ACI 318 (concrete)","AISC 360 (steel)","ASCE 7 (loads)","IBC","AASHTO LRFD","TMS 402 (masonry)","NDS (wood)","PCI (precast)"]}
   ]},
   {d:"Geotechnical", m:[
-    {name:"Soil mechanics", subs:["Classification","Consolidation & settlement","Shear strength","Seepage"]},
-    {name:"Foundation geotech", subs:["Bearing capacity","Lateral earth pressure","Deep foundations","Ground improvement"]},
-    {name:"Stability", subs:["Slope stability","Retaining structures","Liquefaction"]}
+    {name:"Site characterization", subs:["Subsurface exploration planning","Drilling & sampling","In-situ testing (SPT, CPT)","Soil classification (USCS, AASHTO)","Rock characterization (RQD)","Groundwater investigation"]},
+    {name:"Soil mechanics & testing", subs:["Index & phase relationships","Effective stress","Shear strength","Permeability & seepage","Consolidation & settlement","Laboratory testing"]},
+    {name:"Foundations", subs:["Shallow foundation bearing capacity","Settlement analysis","Deep foundations (piles, drilled shafts)","Lateral capacity (LPILE)","Load & integrity testing"]},
+    {name:"Retaining & earth structures", subs:["Lateral earth pressure","Rigid & gravity retaining walls","Cantilever, anchored & braced walls","MSE walls","Ground anchors & soil nails","Cofferdams"]},
+    {name:"Slope stability & embankments", subs:["Slope stability analysis","Embankments, dams & levees","Landfills & caps"]},
+    {name:"Ground improvement", subs:["Grouting & soil mixing","Geosynthetics","Lime / cement stabilization","Aggregate piers & rigid inclusions"]},
+    {name:"Earthquake geotechnical", subs:["Seismic site characterization","Liquefaction","Seismic analysis & design"]},
+    {name:"Groundwater & seepage", subs:["Dewatering","Seepage analysis","Drainage & infiltration control"]},
+    {name:"Problematic soils", subs:["Expansive & collapsible soils","Karst","Frost susceptibility","Corrosive soils"]},
+    {name:"Earthwork & QA/QC", subs:["Compaction (lab & field)","Excavation & fill","Instrumentation & monitoring","Erosion & scour protection"]}
   ]},
   {d:"Transportation", m:[
-    {name:"Geometric design", subs:["Horizontal & vertical curves","Sight distance","Intersections"]},
-    {name:"Pavement", subs:["Flexible pavement","Rigid pavement","Airport pavement"]},
-    {name:"Traffic", subs:["Capacity & LOS","Signal timing","Safety analysis"]}
+    {name:"Geometric design", subs:["Horizontal curves & superelevation","Vertical curves & sight distance","Cross-section elements","Intersection geometry","Interchanges & roundabouts"]},
+    {name:"Traffic engineering", subs:["Capacity & level of service","Traffic flow theory","Intersection capacity","Traffic studies & forecasting","Safety analysis (HSM)"]},
+    {name:"Traffic signals & control", subs:["Signal timing & phasing","Signal warrants","Signs & markings (MUTCD)","Temporary traffic control"]},
+    {name:"Roadside & cross-section", subs:["Clear zone & forgiving roadside","Barrier & crash cushion design","Nonmotorized & ADA facilities"]},
+    {name:"Pavement", subs:["Flexible pavement design","Rigid pavement design","Subgrade & materials","Rehabilitation"]},
+    {name:"Drainage", subs:["Culvert hydraulics","Stormwater collection","Runoff & water-quality mitigation"]},
+    {name:"Project management", subs:["Quantity & cost estimating","Scheduling","Economic analysis"]}
   ]},
-  {d:"Water resources & hydraulics", m:[
-    {name:"Hydrology", subs:["Rainfall-runoff","Watershed modeling","Floodplain"]},
-    {name:"Hydraulics", subs:["Open channel (Manning)","Pipe networks","Pumps & systems"]},
-    {name:"Stormwater", subs:["Detention / retention","Storm sewer design","Water quality BMPs"]},
-    {name:"Dams & groundwater", subs:["Spillway design","Flood routing","Wells & drawdown"]}
+  {d:"Water Resources & Environmental", m:[
+    {name:"Hydrology", subs:["Storm characteristics & IDF","Runoff analysis (Rational, SCS/NRCS)","Hydrographs","Time of concentration","Stormwater management"]},
+    {name:"Closed-conduit hydraulics", subs:["Energy & continuity (Bernoulli)","Pressure pipe (Hazen-Williams, Darcy)","Pumps & lift stations","Pipe network analysis"]},
+    {name:"Open-channel hydraulics", subs:["Open-channel flow (Manning)","Energy dissipation","Culverts & storm drainage","Sub & supercritical flow"]},
+    {name:"Groundwater & wells", subs:["Aquifers","Groundwater flow","Well & drawdown analysis"]},
+    {name:"Water quality", subs:["Stream oxygen dynamics","TMDL & load allocation","Biological & chemical contaminants"]},
+    {name:"Drinking water", subs:["Distribution systems","Coagulation, flocculation & sedimentation","Filtration & membranes","Disinfection","Hardness & softening"]},
+    {name:"Wastewater", subs:["Collection systems","Primary & secondary treatment","Nutrient removal","Solids handling","Advanced treatment"]},
+    {name:"Sitework & drainage", subs:["Erosion & sediment control","Grading, cut & fill","Detention & retention ponds"]}
   ]},
-  {d:"Environmental", m:[
-    {name:"Water & wastewater", subs:["Treatment process design","Distribution","Collection systems"]},
-    {name:"Quality & compliance", subs:["Water quality","Air quality","Contamination & remediation","Permitting / NEPA"]}
+  {d:"Construction", m:[
+    {name:"Estimating & cost", subs:["Quantity takeoff","Cost estimating","Economic analysis","Earned value & productivity"]},
+    {name:"Planning & scheduling", subs:["Construction sequencing","CPM & network analysis","Resource leveling","Time-cost trade-off"]},
+    {name:"Operations & methods", subs:["Earthwork & mass haul","Cranes, lifting & rigging","Equipment selection","Dewatering & pumping","Deep foundation installation"]},
+    {name:"Support of construction loads", subs:["Formwork","Falsework & scaffolding","Shoring & reshoring","Bracing & anchorage","Support of excavation"]},
+    {name:"Quality control", subs:["Material testing & conformance","Concrete placement & maturity","Weld & bolt QA","Compaction control"]},
+    {name:"Site layout & development", subs:["Staking & control","Curve elements","Site investigation"]},
+    {name:"Health & safety", subs:["OSHA regulations","Work-zone & public safety"]}
   ]},
-  {d:"Construction & materials", m:[
-    {name:"Concrete mix design", subs:["ACI 211.1 proportioning","Durability & exposure","SCMs & admixtures","Special concretes (SCC / HPC)"]},
-    {name:"Construction", subs:["Methods & sequencing","Estimating & takeoff","Scheduling (CPM)","QA/QC & inspection"]},
-    {name:"Durability & service life", subs:["Chloride ingress","Carbonation","Corrosion","Service-life modeling"]}
-  ]},
-  {d:"Surveying & geomatics", m:[
-    {name:"Surveying", subs:["Leveling & traverse","Curves & layout","Earthwork volumes"]},
-    {name:"Geospatial", subs:["GIS","GNSS","Photogrammetry / LiDAR"]}
-  ]},
-  {d:"Codes & compliance", m:[
-    {name:"Code provisions", subs:["ACI 318","AISC 360","ASCE 7","AASHTO LRFD","IBC","Eurocode","fib Model Code"]}
+  {d:"Software & tools", m:[
+    {name:"CAD & BIM", subs:["AutoCAD","Civil 3D","MicroStation / OpenRoads","Revit","Tekla Structures"]},
+    {name:"Structural analysis & design", subs:["SAP2000","ETABS","SAFE","STAAD.Pro","RISA","RAM","MIDAS","spColumn"]},
+    {name:"Geotechnical", subs:["PLAXIS","GeoStudio (SLOPE/W, SEEP/W)","Settle3","LPILE / GROUP","gINT"]},
+    {name:"Water & hydraulics", subs:["HEC-RAS","HEC-HMS","EPA SWMM","EPANET","StormCAD / WaterCAD"]},
+    {name:"Transportation", subs:["HCS","Synchro / SimTraffic","PTV Vissim","AutoTURN"]},
+    {name:"Construction & project management", subs:["Primavera P6","MS Project","Bluebeam Revu","Procore"]},
+    {name:"GIS & geospatial", subs:["ArcGIS","QGIS"]},
+    {name:"Computation & general", subs:["Excel / VBA","MATLAB","Python","Mathcad"]}
   ]}
 ];
 
