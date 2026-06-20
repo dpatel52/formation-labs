@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Formation Labs — Knowledge Atlas</title>
+<meta name="description" content="The full Formation Labs knowledge universe: a base engineer trained from first principles, a domain-expert library, capabilities, workflows, and the verification harness." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=2" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<style>
+  :root{--bg:#130a0f;--cream:#ece3da;--muted:#a8949c;--faint:#74636c;--gold:#e2b557;--velvet:#8e3358;--rose:#e79ab2;--line:rgba(236,227,218,0.12);
+    --mono:'IBM Plex Mono',monospace;--serif:'Fraunces',serif;--sans:'Inter',system-ui,sans-serif;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden}
+  body{font-family:var(--sans);background:var(--bg);color:var(--cream)}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(60% 50% at 12% 4%,rgba(123,45,78,0.34),transparent 60%),radial-gradient(48% 44% at 92% 92%,rgba(212,168,67,0.12),transparent 62%),linear-gradient(180deg,#130a0f,#0d0609);}
+  header{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:16px 26px;border-bottom:1px solid rgba(236,227,218,0.07);background:rgba(13,6,9,0.66);backdrop-filter:blur(12px);flex-wrap:wrap}
+  .brand{display:flex;align-items:baseline;gap:9px}
+  .brand .a{font-family:var(--serif);font-style:italic;font-weight:400;font-size:21px}
+  .brand .b{font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;font-size:17px}
+  .motto{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--gold)}
+  .hint{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+  .back{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .back:hover{color:var(--gold)}
+  a{color:inherit;text-decoration:none}
+  #chart{position:fixed;inset:0;z-index:1}
+  .tag{position:fixed;left:0;right:0;bottom:0;z-index:10;text-align:center;padding:9px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);background:rgba(13,6,9,0.5)}
+  .node text{paint-order:stroke;stroke:#0d0609;stroke-width:3px;stroke-linejoin:round}
+  .legend{position:fixed;right:22px;bottom:34px;z-index:10;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);text-align:right;line-height:1.9}
+  .legend b{color:var(--cream)}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:8px;vertical-align:middle}
+  @media(max-width:680px){.motto,.hint{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="a">formation</span><span class="b">Labs</span></div>
+  <div class="motto">Built on first principles &middot; Verified by domain experts</div>
+  <div class="hint">Click a node to open &middot; scroll to zoom &middot; drag to pan</div>
+  <a class="back" href="index.html">&larr; Back to site</a>
+</header>
+<div id="chart"></div>
+<div class="legend">
+  <div><b>Expandable</b><span class="dot" style="background:#e2b557"></span></div>
+  <div><b>Skill / leaf</b><span class="dot" style="background:#8e3358"></span></div>
+</div>
+<div class="tag">The Formation Labs knowledge universe &middot; base engineer + domain-expert library + capabilities + workflows + the harness</div>
+
+<script>
+function n(name, kids){ return {name:name, children:(kids||[]).map(function(k){return (typeof k==='string')?{name:k}:k;})}; }
+
+var DATA = n("FORMATION LABS", [
+  n("The Base Engineer · Civil (the standard package)", [
+    n("Fundamentals", ["Engineering mathematics","Statics","Dynamics","Mechanics of materials","Fluid mechanics","Engineering economics","Ethics & practice","Programming & computation","Communication & sustainability"]),
+    n("Structural", ["Structural analysis","Structural dynamics","Stability & buckling","Nonlinear & plastic analysis","Loads & combinations","Steel design (AISC)","Cold-formed steel","Reinforced concrete (ACI)","Prestressed & post-tensioned","Masonry","Wood & mass timber","Foundations","Lateral systems & seismic","Wind engineering","Bridge engineering","Specialty structures","Forensic, repair & strengthening","Construction-phase engineering"]),
+    n("Geotechnical", ["Soil mechanics","Site investigation","Laboratory testing","Shallow foundations","Deep foundations","Earth-retaining structures","Slope stability","Ground improvement","Seepage & dewatering","Earthquake geotechnical","Rock mechanics","Geosynthetics","Problematic soils","Instrumentation & earthwork"]),
+    n("Transportation", ["Highway geometric design","Roadway & corridor design","Intersections & interchanges","Traffic flow theory","Capacity & LOS (HCM)","Traffic signals & control","Traffic studies & data","Planning & travel demand","Traffic safety (HSM)","Traffic control devices (MUTCD)","Work zones & MOT","Pavement engineering","Roadside safety","Transportation drainage","Multimodal & accessibility","ITS & connected vehicles"]),
+    n("Water Resources & Environmental", ["Hydrology — statistical","Hydrology — rainfall-runoff","Open-channel hydraulics","Closed-conduit hydraulics","Stormwater management","Floodplain & river engineering","Water distribution","Drinking water treatment","Wastewater collection","Wastewater treatment","Water quality","Groundwater & hydrogeology","Environmental engineering","Specialty water resources"]),
+    n("Construction Eng. & Management", ["Cost estimating","Scheduling","Project & construction management","Operations & methods","Equipment & productivity","Temporary works","Construction safety","Quality control & assurance","Construction surveying & layout","Sustainability in construction"]),
+    n("Materials", ["Concrete mix design","Concrete properties & testing","Concrete durability & special","Asphalt & bituminous","Aggregates","Steel, rebar, masonry & timber","Nondestructive testing"]),
+    n("Surveying & Geomatics", ["Measurement & error theory","Distance & angle measurement","Leveling","Traverse & COGO","Topographic surveys & mapping","Boundary & cadastral","Route surveying & curves","GNSS / GPS surveying","Geodesy & coordinate systems","Photogrammetry & remote sensing","LiDAR, drones & monitoring"]),
+    n("Digital, BIM & Emerging", ["BIM modeling & coordination","Civil infrastructure modeling","Digital twins","GIS analysis","Reality capture","Data, automation & ML"]),
+    n("Software & tools", ["CAD & drafting","Civil / corridor design","BIM & coordination","Structural analysis & design","Structural FEA","Connection & component design","Geotechnical software","Hydraulics & stormwater","Water & treatment","Groundwater & environmental","Transportation software","Construction PM, estimating & field","Survey & reality capture","GIS & geospatial","Computation & math"])
+  ]),
+  n("The Domain-Expert Library · buy when you need it", [
+    n("Reliability & risk", ["Structural reliability (FORM / SORM)","Monte Carlo simulation","Code calibration & LRFD","Systems reliability","FMEA & risk analysis","Probabilistic load & resistance","Bayesian updating"]),
+    n("Durability & service life", ["Chloride ingress & corrosion","Carbonation","ASR & sulfate attack","Freeze-thaw","Service-life modeling (fib MC)","Cathodic protection","300-year design"]),
+    n("Fracture & fatigue mechanics", ["LEFM & fracture toughness","Quasi-brittle fracture & size effect","Crack-band & cohesive models","Fatigue life & S-N","Crack growth (Paris)"]),
+    n("Advanced materials science", ["Fiber-reinforced concrete (FRC)","UHPC","Textile-reinforced concrete (TRC)","Hybrid reinforced concrete","Concrete constitutive modeling","Advanced binders & asphalt","Composites & FRP"]),
+    n("Forensic engineering", ["Failure analysis & root cause","Structural collapse investigation","Distress & damage assessment","Fire & explosion investigation","Expert witness & litigation","Reverse engineering"]),
+    n("Structural fire engineering", ["Fire dynamics & loads","Thermal-structural analysis","Fire-resistance design","Performance-based fire"]),
+    n("Blast & extreme loading", ["Blast loading & dynamics","Progressive & disproportionate collapse","Impact & missile","Hardening & standoff"]),
+    n("Advanced seismic engineering", ["Performance-based seismic design","Nonlinear response history","Base isolation & damping","Seismic soil-structure interaction","Ground-motion selection","Seismic hazard analysis"]),
+    n("Wind engineering", ["Aerodynamics & wind tunnel","CFD for wind","Vortex-induced vibration","Tall-building wind","Long-span & cable aerodynamics"]),
+    n("Computational mechanics", ["Advanced nonlinear FEA","Multiphysics simulation","Meshless & peridynamics","ML surrogates & reduced-order","High-performance computing"]),
+    n("Advanced geotechnical", ["Liquefaction & dynamic soil","Centrifuge & physical modeling","Constitutive soil modeling","Unsaturated soil mechanics","Numerical geomechanics"]),
+    n("Tunneling & underground", ["TBM & NATM","Ground-support interaction","Settlement & risk","Deep excavation","Underground space"]),
+    n("Dams & hydraulic structures", ["Dam design & safety","Spillway hydraulics","Seepage & internal erosion","Dam-break & risk","Levees & flood control"]),
+    n("Bridge engineering (advanced)", ["Long-span (cable-stayed / suspension)","Segmental & balanced cantilever","Bridge dynamics & wind","Seismic bridge design","Load rating & assessment","Bridge inspection"]),
+    n("Coastal, offshore & marine", ["Coastal hydrodynamics","Storm surge & sea-level rise","Offshore platforms","Monopiles & marine foundations","Ports & harbors"]),
+    n("Transmission & telecom structures", ["Lattice towers","Transmission line design","Pole structures","Communication towers"]),
+    n("Pipelines & pressure systems", ["Pipeline design","Pipe stress & fatigue","Trenchless engineering","Water hammer & surge"]),
+    n("Industrial & nuclear", ["Nuclear structures","Power-plant structures","Industrial & process structures","Equipment & vessel supports","Machine foundations"]),
+    n("Energy & renewable structures", ["Wind turbine structures & foundations","Solar / PV structures","Battery & energy storage","Offshore wind"]),
+    n("Sustainability & carbon", ["Life-cycle assessment (LCA)","Embodied carbon & EPDs","Low-carbon concrete","Net-zero design","Circular economy"]),
+    n("Resilience & climate adaptation", ["Multi-hazard resilience","Climate-adaptive design","Flood / wildfire / heat resilience","Community resilience"]),
+    n("Sensors, SHM & digital twins", ["Structural health monitoring","Sensor networks & IoT","Data-driven diagnostics","Digital-twin operations"]),
+    n("Optimization & generative design", ["Structural optimization","Topology optimization","Generative & parametric design","AI-assisted design"]),
+    n("Geohazards", ["Seismic hazard","Landslide & rockfall","Subsidence & sinkholes","Tsunami & flood hazard"]),
+    n("+ many more, authored by experts", ["Each new expert adds a verified mind","Open-ended, federated library"])
+  ]),
+  n("Capabilities · how the harness engages reality", [
+    n("See (vision)", ["Read drawings & plans","Produce drawings & details","Site photos & imagery","Defect & crack detection","Scans, point clouds & LiDAR"]),
+    n("Read (documents)", ["Specs & reports","Geotech & test reports","Contracts & RFPs","Data extraction"]),
+    n("Retrieve (codes)", ["Live code retrieval (ACI / ASCE / IBC / AASHTO)","Jurisdiction & amendments","Standards & test methods","Cite-or-refuse"]),
+    n("Compute (verified tools)", ["Deterministic solvers","Answer-key benchmarks","Units & sanity checks"]),
+    n("Drive (software)", ["Operate Revit / Civil 3D","Run FEA (SAP / ETABS / ABAQUS)","Hydraulic & geotech solvers","Scripting & automation"]),
+    n("Judge & refuse", ["Problem framing","Sanity & plausibility","Scope & refusal contracts","Uncertainty communication"]),
+    n("Communicate (deliverables)", ["Calculation packages","Engineering reports","Drawings & details","Permit & submittal sets","Plain-language summaries"]),
+    n("Remember", ["Firm standards & preferences","Project context & history","Provenance & audit"])
+  ]),
+  n("Workflows · what gets delivered", ["Design & sizing","Analysis & modeling","Review & QC","Code compliance & plan review","Quantity takeoff & estimating","Permitting & entitlement","Inspection & condition assessment","Forensic investigation & litigation","Monitoring & digital twin","Feasibility & due diligence","Multi-domain council (hard problems)","Research & literature synthesis"]),
+  n("The Harness · the moat", ["First-principles logic (not pattern-matching)","Verified tools with answer keys","Benchmark & continuous re-certification","Named domain-expert verifiers","Provenance & full audit trail","Scope & refusal contracts","The human holds the stamp","Agentic orchestration & federation"]),
+  n("The Built Environment · the canvas", ["Architecture & design","MEP & fire protection","Environmental & sustainability","Urban planning & land use","Real estate, finance & risk","Facilities & asset management","Regulation, codes & resilience","Energy & utilities","Construction law & contracts"])
+]);
+
+var dx=15, dy=270;
+var root = d3.hierarchy(DATA);
+root.x0=0; root.y0=0;
+root.descendants().forEach(function(d,i){ d.id=i; d._children=d.children; if(d.depth>=2) d.children=null; });
+
+var W=window.innerWidth, H=window.innerHeight;
+var svg=d3.select("#chart").append("svg").attr("width",W).attr("height",H)
+  .style("font-family","Inter, sans-serif").style("font-size","12.5px");
+var gZoom=svg.append("g");
+var gLink=gZoom.append("g").attr("fill","none").attr("stroke","rgba(226,181,87,0.22)").attr("stroke-width",1);
+var gNode=gZoom.append("g").attr("class","node").attr("cursor","pointer").attr("pointer-events","all");
+var zoom=d3.zoom().scaleExtent([0.18,2.2]).on("zoom",function(e){ gZoom.attr("transform",e.transform); });
+svg.call(zoom);
+
+var tree=d3.tree().nodeSize([dx,dy]);
+var diagonal=d3.linkHorizontal().x(function(d){return d.y;}).y(function(d){return d.x;});
+
+function update(source){
+  var nodes=root.descendants().reverse();
+  var links=root.links();
+  tree(root);
+
+  var node=gNode.selectAll("g").data(nodes,function(d){return d.id;});
+  var nodeEnter=node.enter().append("g")
+    .attr("transform",function(){return "translate("+source.y0+","+source.x0+")";})
+    .attr("fill-opacity",0).attr("stroke-opacity",0)
+    .on("click",function(event,d){ d.children=d.children?null:d._children; update(d); });
+  nodeEnter.append("circle")
+    .attr("r",function(d){return d.depth===0?7:(d.depth===1?5.5:4);})
+    .attr("fill",function(d){return d._children?"#e2b557":"#8e3358";})
+    .attr("stroke",function(d){return d._children?"#e2b557":"#b1648a";})
+    .attr("stroke-width",function(d){return d.depth===0?2:1;});
+  nodeEnter.append("text")
+    .attr("dy","0.32em")
+    .attr("x",function(d){return d._children||d.depth===0?-10:10;})
+    .attr("text-anchor",function(d){return d._children||d.depth===0?"end":"start";})
+    .attr("fill",function(d){return d.depth<=1?"#ece3da":"#bfa9b2";})
+    .attr("font-weight",function(d){return d.depth<=1?600:400;})
+    .attr("font-size",function(d){return d.depth===0?"15px":(d.depth===1?"13.5px":"12.5px");})
+    .text(function(d){return d.data.name;});
+
+  var nodeUpdate=node.merge(nodeEnter);
+  nodeUpdate.transition().duration(260)
+    .attr("transform",function(d){return "translate("+d.y+","+d.x+")";})
+    .attr("fill-opacity",1).attr("stroke-opacity",1);
+  nodeUpdate.select("circle").attr("fill",function(d){return d._children?"#e2b557":"#8e3358";});
+
+  node.exit().transition().duration(260)
+    .attr("transform",function(){return "translate("+source.y+","+source.x+")";})
+    .attr("fill-opacity",0).attr("stroke-opacity",0).remove();
+
+  var link=gLink.selectAll("path").data(links,function(d){return d.target.id;});
+  var linkEnter=link.enter().append("path").attr("d",function(){var o={x:source.x0,y:source.y0};return diagonal({source:o,target:o});});
+  link.merge(linkEnter).transition().duration(260).attr("d",diagonal);
+  link.exit().transition().duration(260).attr("d",function(){var o={x:source.x,y:source.y};return diagonal({source:o,target:o});}).remove();
+
+  root.eachBefore(function(d){ d.x0=d.x; d.y0=d.y; });
+}
+update(root);
+
+// fit the initial view
+setTimeout(function(){
+  var b={x0:1e9,x1:-1e9,y0:1e9,y1:-1e9};
+  root.descendants().forEach(function(d){ b.x0=Math.min(b.x0,d.x); b.x1=Math.max(b.x1,d.x); b.y0=Math.min(b.y0,d.y); b.y1=Math.max(b.y1,d.y); });
+  var w=(b.y1-b.y0)+460, h=(b.x1-b.x0)+120;
+  var k=Math.min(W/w, H/h, 1)*0.92;
+  var tx=W/2 - k*((b.y0+b.y1)/2) + 30;
+  var ty=H/2 - k*((b.x0+b.x1)/2);
+  svg.transition().duration(450).call(zoom.transform, d3.zoomIdentity.translate(tx,ty).scale(k));
+}, 120);
+
+window.addEventListener("resize",function(){ W=window.innerWidth; H=window.innerHeight; svg.attr("width",W).attr("height",H); });
+</script>
+</body>
+</html>
