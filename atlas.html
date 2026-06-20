@@ -46,10 +46,12 @@
 </header>
 <div id="chart"></div>
 <div class="legend">
-  <div><b>Expandable</b><span class="dot" style="background:#e2b557"></span></div>
-  <div><b>Skill / leaf</b><span class="dot" style="background:#8e3358"></span></div>
+  <div><b>Live</b><span class="dot" style="background:#e2b557"></span></div>
+  <div><b>In progress</b><span class="dot" style="background:#e79ab2"></span></div>
+  <div><b>Planned</b><span class="dot" style="background:#6f5c66"></span></div>
+  <div style="margin-top:7px;color:var(--faint);text-transform:none;letter-spacing:0">filled = has more inside</div>
 </div>
-<div class="tag">The Formation Labs knowledge universe &middot; base engineer + domain-expert library + capabilities + workflows + the harness</div>
+<div class="tag" id="statusbar">The Formation Labs knowledge universe</div>
 
 <script>
 function n(name, kids){ return {name:name, children:(kids||[]).map(function(k){return (typeof k==='string')?{name:k}:k;})}; }
@@ -92,6 +94,14 @@ var DATA = n("FORMATION LABS", [
     n("Sensors, SHM & digital twins", ["Structural health monitoring","Sensor networks & IoT","Data-driven diagnostics","Digital-twin operations"]),
     n("Optimization & generative design", ["Structural optimization","Topology optimization","Generative & parametric design","AI-assisted design"]),
     n("Geohazards", ["Seismic hazard","Landslide & rockfall","Subsidence & sinkholes","Tsunami & flood hazard"]),
+    n("Structural dynamics, vibration & acoustics", ["Vibration serviceability (footfall, ISO 10137)","Machine foundation dynamics & isolation","Tuned mass & viscous dampers","Architectural & building acoustics","Ground-borne noise & vibration","Aeroelasticity & flutter","Tall-building motion & comfort"]),
+    n("Material-specific structural", ["Steel connection & joint mechanics","Weld engineering & metallurgy","Structural masonry","Mass timber systems (CLT, glulam)","Aluminium & light-alloy structures","Structural glass & curtain walls","Cable, membrane & tensile structures","Polymer & adhesive joint mechanics"]),
+    n("Solid mechanics & failure science", ["Plasticity & crystal plasticity","Contact mechanics, tribology & wear","Creep & viscoelasticity","Continuum damage mechanics","Fastening & post-installed anchorage","Experimental mechanics (DIC, modal)","Stability & buckling theory","Residual stress & distortion"]),
+    n("Thermal & multiphysics loading", ["Heat transfer & thermal stress","Cryogenic structures (LNG)","Hygrothermal & moisture transport","Ice & snow engineering","Corrosion-fatigue & EAC","Stress-corrosion cracking"]),
+    n("Construction technology & industrialized construction", ["Lean construction & Last Planner","Modular & offsite (DfMA)","Construction robotics & automation","3D-printed / additive construction","4D / 5D BIM & simulation","Reality capture & progress tracking","Safety analytics & wearables"]),
+    n("AI & computation for AEC", ["Generative & design-space exploration","Automated code-compliance checking","Computer vision for defects & progress","Predictive maintenance analytics","Schedule & risk forecasting (ML)","Building energy & occupancy forecasting","Knowledge graphs & semantic AEC data"]),
+    n("Geospatial & digital infrastructure", ["Spatial data infrastructure (OGC)","City-scale & infrastructure digital twins","Hydrography & bathymetric survey","SAR / InSAR deformation monitoring","openBIM / IFC interoperability","Asset information & golden-thread data"]),
+    n("Specialty MEP & energy systems", ["Advanced HVAC & thermal systems","Refrigeration & cleanroom cooling","Power systems & electrical distribution","Electrification & heat-pump retrofits","EV charging infrastructure","On-site solar, storage & microgrids","Data-center & mission-critical facilities","Hydrogen & alternative-fuel systems"]),
     n("+ many more, authored by experts", ["Each new expert adds a verified mind","Open-ended, federated library"])
   ]),
   n("Capabilities · how the harness engages reality", [
@@ -106,13 +116,46 @@ var DATA = n("FORMATION LABS", [
   ]),
   n("Workflows · what gets delivered", ["Design & sizing","Analysis & modeling","Review & QC","Code compliance & plan review","Quantity takeoff & estimating","Permitting & entitlement","Inspection & condition assessment","Forensic investigation & litigation","Monitoring & digital twin","Feasibility & due diligence","Multi-domain council (hard problems)","Research & literature synthesis"]),
   n("The Harness · the moat", ["First-principles logic (not pattern-matching)","Verified tools with answer keys","Benchmark & continuous re-certification","Named domain-expert verifiers","Provenance & full audit trail","Scope & refusal contracts","The human holds the stamp","Agentic orchestration & federation"]),
-  n("The Built Environment · the canvas", ["Architecture & design","MEP & fire protection","Environmental & sustainability","Urban planning & land use","Real estate, finance & risk","Facilities & asset management","Regulation, codes & resilience","Energy & utilities","Construction law & contracts"])
+  n("The Built Environment · the canvas", [
+    n("Architecture, interiors & space", ["Architectural design & schematic layout","Interior systems & fit-out","Space programming & adjacency","Accessibility & universal design","Acoustics & daylighting","Historic preservation & adaptive reuse"]),
+    n("Building physics & specialty building engineering", ["Building envelope & moisture","Thermal performance & energy modeling","Façade engineering & curtain wall","Fire & life safety engineering","Vertical transportation (elevators)","Building acoustics & vibration isolation"]),
+    n("Green & high-performance buildings", ["LEED / WELL / green certification","Embodied & operational carbon","Net-zero & passive design","Daylight & occupant comfort","Material health & circularity","Resilient & climate-adaptive design"]),
+    n("Planning, urban systems & mobility", ["Urban planning & land use","Zoning & entitlement","Transportation planning & demand","Transit, micromobility & parking","Smart cities & sensing","Public realm & landscape"]),
+    n("Real estate, cost & delivery", ["Feasibility & highest-and-best-use","Development pro forma & finance","Cost estimating & quantity takeoff","Procurement & delivery models","Scheduling & construction sequencing","Risk, claims & contingency"]),
+    n("Operations & asset management", ["Facilities management & O&M","Asset registers & lifecycle","Digital twin & BIM-FM handoff","Condition assessment & maintenance","Energy & utility operations","Space & occupancy management"]),
+    n("Environment, water & utilities", ["Stormwater & site drainage","Water supply & distribution","Wastewater & treatment","Solid waste & utilities","Environmental permitting & impact","Ecology, wetlands & remediation"]),
+    n("Codes, compliance & risk governance", ["Building codes & amendments","Permitting & plan review","Zoning & land-use law","Construction law & contracts","Insurance, bonding & liability","Resilience, hazard & continuity"])
+  ])
 ]);
 
 var dx=15, dy=270;
 var root = d3.hierarchy(DATA);
 root.x0=0; root.y0=0;
 root.descendants().forEach(function(d,i){ d.id=i; d._children=d.children; if(d.depth>=2) d.children=null; });
+
+var COL = {live:"#e2b557", building:"#e79ab2", open:"#6f5c66"};
+var STATUS = {
+  "Statics":"live","Mechanics of materials":"live","Compute (verified tools)":"live",
+  "First-principles logic (not pattern-matching)":"live","Verified tools with answer keys":"live",
+  "The human holds the stamp":"live","Scope & refusal contracts":"live",
+  "Structural analysis":"building","Loads & combinations":"building","Steel design (AISC)":"building",
+  "Reinforced concrete (ACI)":"building","Engineering mathematics":"building","Judge & refuse":"building",
+  "Named domain-expert verifiers":"building","Benchmark & continuous re-certification":"building",
+  "Agentic orchestration & federation":"building","Provenance & full audit trail":"building","Calculation packages":"building"
+};
+function st(d){ return STATUS[d.data.name] || "open"; }
+function computeAgg(d){
+  var kids = d._children || d.children;
+  if(!kids || !kids.length){ d.agg = st(d); return d.agg; }
+  var best="open";
+  kids.forEach(function(c){ var s=computeAgg(c); if(s==="live") best="live"; else if(s==="building" && best!=="live") best="building"; });
+  d.agg=best; return d.agg;
+}
+computeAgg(root);
+var counts={live:0,building:0,open:0};
+(function countAll(d){ var k=d._children||d.children; if(!k||!k.length){ counts[st(d)]++; return; } k.forEach(countAll); })(root);
+var sb=document.getElementById("statusbar");
+if(sb){ sb.textContent = counts.live+" live  ·  "+counts.building+" in progress  ·  "+counts.open+" planned  —  the Formation Labs knowledge universe"; }
 
 var W=window.innerWidth, H=window.innerHeight;
 var svg=d3.select("#chart").append("svg").attr("width",W).attr("height",H)
@@ -137,15 +180,15 @@ function update(source){
     .attr("fill-opacity",0).attr("stroke-opacity",0)
     .on("click",function(event,d){ d.children=d.children?null:d._children; update(d); });
   nodeEnter.append("circle")
-    .attr("r",function(d){return d.depth===0?7:(d.depth===1?5.5:4);})
-    .attr("fill",function(d){return d._children?"#e2b557":"#8e3358";})
-    .attr("stroke",function(d){return d._children?"#e2b557":"#b1648a";})
-    .attr("stroke-width",function(d){return d.depth===0?2:1;});
+    .attr("r",function(d){return d.depth===0?7:(d._children?5:3.6);})
+    .attr("fill",function(d){return d.children?"#130a0f":COL[d.agg];})
+    .attr("stroke",function(d){return COL[d.agg];})
+    .attr("stroke-width",function(d){return d.depth===0?2:(d._children?1.5:1);});
   nodeEnter.append("text")
     .attr("dy","0.32em")
     .attr("x",function(d){return d._children||d.depth===0?-10:10;})
     .attr("text-anchor",function(d){return d._children||d.depth===0?"end":"start";})
-    .attr("fill",function(d){return d.depth<=1?"#ece3da":"#bfa9b2";})
+    .attr("fill",function(d){ if(d._children) return d.depth<=1?"#ece3da":"#cdbcc4"; var c={live:"#f0d486",building:"#e79ab2",open:"#9d8a92"}; return c[d.agg]; })
     .attr("font-weight",function(d){return d.depth<=1?600:400;})
     .attr("font-size",function(d){return d.depth===0?"15px":(d.depth===1?"13.5px":"12.5px");})
     .text(function(d){return d.data.name;});
@@ -154,7 +197,7 @@ function update(source){
   nodeUpdate.transition().duration(260)
     .attr("transform",function(d){return "translate("+d.y+","+d.x+")";})
     .attr("fill-opacity",1).attr("stroke-opacity",1);
-  nodeUpdate.select("circle").attr("fill",function(d){return d._children?"#e2b557":"#8e3358";});
+  nodeUpdate.select("circle").attr("fill",function(d){return d.children?"#130a0f":COL[d.agg];}).attr("stroke",function(d){return COL[d.agg];});
 
   node.exit().transition().duration(260)
     .attr("transform",function(){return "translate("+source.y+","+source.x+")";})

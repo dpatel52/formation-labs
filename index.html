@@ -153,6 +153,13 @@
   /* closing */
   #hire{padding:130px 0 100px;text-align:center;border-top:1px solid var(--line-2)}
   .close-h{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.6vw,54px);line-height:1.1;max-width:18ch;margin:30px auto 34px;letter-spacing:-.015em}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:48px}
+  .pcard{border:1px solid var(--line);border-radius:3px;padding:24px;background:rgba(255,255,255,0.025);transition:border-color .3s}
+  .pcard:hover{border-color:rgba(226,181,87,.4)}
+  .pcard .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+  .pcard h3{font-family:var(--serif);font-weight:400;font-size:20px;margin:13px 0 8px;line-height:1.15}
+  .pcard p{font-size:14px;color:var(--muted);line-height:1.55}
+  @media(max-width:760px){.pillars{grid-template-columns:1fr}}
   footer{border-top:1px solid var(--line-2);padding:38px 0}
   .foot{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
   .foot .meta{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
@@ -302,9 +309,7 @@
   <div class="shell reveal">
     <div class="sec-head"><span class="num">04</span><span class="lbl">Scope</span><span class="ln"></span></div>
     <h2>Civil engineering is where we begin. The built environment is where we are going.</h2>
-    <p class="lead">The same harness extends to every discipline that shares the same need, a trustworthy answer and not enough people to produce it.</p>
-    <div class="hero-cta" style="margin-top:26px"><a href="atlas.html" class="btn btn-gold">Explore the knowledge atlas <span class="ar">&rarr;</span></a></div>
-    <div class="tags">
+    <p class="lead">The same harness extends to every discipline that shares the same need, a trustworthy answer and not enough people to produce it.</p>    <div class="tags">
       <span class="tag on">Civil</span>
       <span class="tag next">Environmental</span>
       <span class="tag">Geotechnical</span>
@@ -315,6 +320,23 @@
       <span class="tag">Surveying</span>
       <span class="tag">Sustainability</span>
     </div>
+  </div>
+</section>
+
+<section id="library" class="band">
+  <div class="shell reveal">
+    <div class="sec-head"><span class="num">05</span><span class="lbl">The library</span><span class="ln"></span></div>
+    <h2>One harness. A growing universe of verified engineering.</h2>
+    <p class="lead">The base engineer is only the start. Around it grows a living library of verified, expert-owned knowledge, the deep minds an agent reaches for when a problem demands them. This is everything we are building, and where each piece stands today.</p>
+    <div class="pillars">
+      <div class="pcard"><div class="pn">01 &middot; The base engineer</div><h3>Hundreds of first-principles skills</h3><p>The standard civil package, across ten disciplines, from statics to surveying.</p></div>
+      <div class="pcard"><div class="pn">02 &middot; The expert library</div><h3>Deep minds, on demand</h3><p>Reliability, durability, fracture, forensics, fire, blast, tunneling, and far more.</p></div>
+      <div class="pcard"><div class="pn">03 &middot; Capabilities</div><h3>How it touches reality</h3><p>Read drawings, retrieve codes, run the tools, refuse what it cannot verify, write the deliverable.</p></div>
+      <div class="pcard"><div class="pn">04 &middot; Workflows</div><h3>What gets delivered</h3><p>Design, review, plan checks, takeoff, permitting, inspection, forensics, the council.</p></div>
+      <div class="pcard"><div class="pn">05 &middot; The harness</div><h3>The trust core</h3><p>First-principles logic, verified tools, named experts, full provenance. The human holds the stamp.</p></div>
+      <div class="pcard"><div class="pn">06 &middot; The built environment</div><h3>The canvas</h3><p>Civil is the start. The reach is everything humans design, build, and maintain.</p></div>
+    </div>
+    <div class="hero-cta" style="margin-top:36px"><a href="atlas.html" class="btn btn-gold">Explore the live knowledge atlas <span class="ar">&rarr;</span></a><a href="atlas.html" class="btn btn-ghost">See what is live, building, and planned</a></div>
   </div>
 </section>
 
