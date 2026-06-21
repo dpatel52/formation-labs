@@ -75,6 +75,7 @@
   .subs{display:grid;grid-template-columns:repeat(2,1fr);gap:7px 18px;padding-left:2px}
   .subs label{display:flex;align-items:flex-start;gap:9px;font-size:14px;color:var(--muted);cursor:pointer;line-height:1.35}
   .subs label:hover{color:var(--cream)}
+  .claimcount{display:inline-block;margin-left:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--gold);background:rgba(226,181,87,.12);border:1px solid rgba(226,181,87,.32);border-radius:9px;padding:1px 7px;white-space:nowrap;vertical-align:middle}
   input[type=checkbox]{appearance:none;-webkit-appearance:none;width:16px;height:16px;border:1px solid var(--line);border-radius:3px;background:transparent;cursor:pointer;flex-shrink:0;margin-top:1px;position:relative;transition:.15s}
   input[type=checkbox]:checked{background:var(--gold);border-color:var(--gold)}
   input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1.5px;width:4px;height:9px;border:solid #2a1607;border-width:0 2px 2px 0;transform:rotate(45deg)}
@@ -217,6 +218,11 @@
    ============================================================ */
 const BACKUP_EMAIL = "devanshpatel77@gmail.com";
 const ENDPOINT = "https://formsubmit.co/ajax/" + BACKUP_EMAIL;
+/* Your Apps Script /exec URL. Powers the structured Google Sheet record AND the
+   live per-section claim counts. Leave empty to disable both (the page still
+   works through the email relay). Paste the SAME /exec URL into both. */
+const STORE_URL  = "https://script.google.com/macros/s/AKfycbxKba1pJOs4q2O-FQMNL3-qmTxnN87hjElBRRhemEvKPsTM7IAGKAvB1kytJEA0Ju6OFQ/exec";
+const COUNTS_URL = STORE_URL;
 
 /* Civil taxonomy grounded in the NCEES FE Civil + five PE Civil depth specs (April 2024).
    Fundamentals = FE breadth every civil engineer/EIT has; the five disciplines = PE depth.
@@ -487,6 +493,12 @@ function doSubmit(){
   submitBtn.disabled=true; submitBtn.textContent='Submitting...';
   var fd=new FormData();
   Object.keys(data).forEach(function(key){ fd.append(key, data[key]); });
+  if(STORE_URL){
+    try {
+      var us=Object.keys(data).map(function(k){ return encodeURIComponent(k)+'='+encodeURIComponent(data[k]); }).join('&');
+      fetch(STORE_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:us});
+    } catch(e){}
+  }
   function attempt(n){
     return fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:fd})
       .then(function(r){ return r.json().then(function(j){return {ok:r.ok,j:j};}).catch(function(){return {ok:r.ok,j:null};}); })
@@ -563,6 +575,44 @@ document.getElementById('expandAll').addEventListener('click', function(){ docum
 document.getElementById('collapseAll').addEventListener('click', function(){ document.querySelectorAll('.disc').forEach(function(d){ d.open=false; }); });
 
 refresh();
+
+/* Live per-section claim counts. Inert until COUNTS_URL is set to your Apps
+   Script /exec URL; the page works without it. Read over JSONP so the counts
+   load cross-origin from GitHub Pages. */
+function fl_setBadge(host, n){
+  if(!host) return;
+  var b=host.querySelector(':scope > .claimcount');
+  if(n>0){
+    if(!b){ b=document.createElement('span'); b.className='claimcount'; host.appendChild(b); }
+    b.textContent=n+(n===1?' claim':' claims');
+  } else if(b){ b.remove(); }
+}
+function fl_applyCounts(counts){
+  document.querySelectorAll('.mod').forEach(function(mod){
+    var modTotal=0;
+    mod.querySelectorAll('.sub').forEach(function(cb){
+      var key=cb.dataset.d+' > '+cb.dataset.m+' > '+cb.value;
+      var n=counts[key]||0;
+      fl_setBadge(cb.closest('label'), n);
+      modTotal+=n;
+    });
+    fl_setBadge(mod.querySelector('.mod-h'), modTotal);
+  });
+}
+function fl_loadCounts(){
+  if(!COUNTS_URL) return;
+  var cbName='__flc'+Date.now();
+  window[cbName]=function(resp){
+    try{ fl_applyCounts((resp&&resp.counts)||{}); }catch(e){}
+    try{ delete window[cbName]; }catch(e){}
+    var sc=document.getElementById(cbName); if(sc) sc.remove();
+  };
+  var s=document.createElement('script'); s.id=cbName;
+  s.src=COUNTS_URL+(COUNTS_URL.indexOf('?')>=0?'&':'?')+'counts=1&callback='+cbName;
+  s.onerror=function(){ try{ delete window[cbName]; }catch(e){} s.remove(); };
+  document.head.appendChild(s);
+}
+fl_loadCounts();
 </script>
 </body>
 </html>
