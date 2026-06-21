@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Formation Labs — Claim your sections</title>
+<title>Formation Labs, claim your sections</title>
 <meta name="description" content="Claim the engineering sections you will author and verify for the Formation Labs verified AI engineer for the built environment." />
 <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --bg:#130a0f;--cream:#ece3da;--muted:#a8949c;--faint:#74636c;
+    --bg:#130a0f;--cream:#ece3da;--muted:#b3a0a8;--faint:#8a7882;
     --gold:#e2b557;--velvet:#8e3358;--rose:#e79ab2;
     --line:rgba(236,227,218,0.12);--line-2:rgba(236,227,218,0.07);--panel:rgba(255,255,255,0.025);
     --mono:'IBM Plex Mono',ui-monospace,monospace;--serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif;
@@ -63,7 +63,7 @@
   .role label{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--cream);cursor:pointer}
 
   .disc{border:1px solid var(--line);border-radius:4px;margin-bottom:10px;background:var(--panel);overflow:hidden}
-  .disc>summary{list-style:none;cursor:pointer;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;font-family:var(--serif);font-size:19px}
+  .disc>summary{list-style:none;cursor:pointer;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;font-family:var(--serif);font-size:19px;scroll-margin-top:150px}
   .disc>summary::-webkit-details-marker{display:none}
   .disc>summary .c{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
   .disc[open]>summary{border-bottom:1px solid var(--line-2);color:var(--gold)}
@@ -88,7 +88,7 @@
   .tbtn{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:3px;padding:10px 13px;cursor:pointer;white-space:nowrap}
   .tbtn:hover{border-color:var(--gold);color:var(--gold)}
 
-  .consent{display:flex;align-items:flex-start;gap:11px;margin-top:18px;font-size:15px;color:var(--cream);cursor:pointer;line-height:1.45}
+  .consent{display:flex;align-items:flex-start;gap:11px;margin-top:18px;font-size:15px;color:var(--cream);cursor:pointer;line-height:1.45;scroll-margin-bottom:130px}
 
   .barwrap{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(13,6,9,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
   .bar{max-width:var(--maxw);margin:0 auto;padding:14px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -104,12 +104,12 @@
   .done svg{width:84px;color:var(--gold);margin:0 auto 24px;filter:drop-shadow(0 0 30px rgba(226,181,87,.25))}
   .done h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,4vw,44px);margin-bottom:14px}
   .done p{color:var(--muted);max-width:48ch;margin:0 auto}
-  .err{color:var(--rose);font-family:var(--mono);font-size:12px;margin-top:10px;min-height:16px}
+  .err{color:var(--rose);font-family:var(--mono);font-size:13px;line-height:1.5;margin-top:10px;min-height:16px;scroll-margin-bottom:130px}
 
   @media(max-width:760px){
     .fields{grid-template-columns:1fr}
     .subs{grid-template-columns:1fr}
-    form{padding-bottom:172px}
+    form{padding-bottom:200px}
     .bar{flex-direction:column;align-items:stretch;gap:10px}
     .bar .btn{justify-content:center}
   }
@@ -136,9 +136,9 @@
 
 <main class="shell">
   <section class="intro">
-    <div class="kick"><span>Join the founding technical team</span></div>
-    <h1>The hardest engineering judgment lives in a few thousand minds, and most of them are about to retire.</h1>
-    <p class="lead">Formation Labs is built and run by PhD civil engineers and a professor from the Mobasher group at ASU. We are building engineering AI from first principles, where deterministic verified tools do the analysis, the model only orchestrates, and a named expert verifies every skill and stands behind it. We are now adding domain authorities to the founding team, across structures, geotechnical, water and environmental, transportation, construction, and the disciplines around them, to claim areas of the knowledge map and author the deep specialist skills that cover them. <b>You tell us where your judgment is strongest, take scoped assignments alongside a team that can check your work, and stand as the named author and verifier of each skill,</b> with credit and ownership that stay attached to your name and carry forward from one project to the next.</p>
+    <div class="kick"><span>For practicing engineers and domain experts</span></div>
+    <h1>Become a member of our technical team.</h1>
+    <p class="lead">Formation Labs is a team of PhD civil engineers building a verified AI engineer for the built environment, one that runs real calculations and shows the work behind every answer. We are bringing on experienced engineers to own the areas they know best. <b>You build the methods, check the work, and stay the named expert behind each one.</b> Pick the sections that match your expertise below, add anything we are missing, and we will be in touch to plan it with you. This takes about two minutes, and a real person on our team will follow up.</p>
   </section>
 
   <form id="form">
@@ -148,10 +148,10 @@
         <div class="f"><label class="lbl" for="name">Full name</label><input type="text" id="name" required /></div>
         <div class="f"><label class="lbl" for="email">Email</label><input type="email" id="email" required /></div>
         <div class="f"><label class="lbl" for="aff">Affiliation / title</label><input type="text" id="aff" placeholder="e.g. PhD candidate, ASU / Structural EIT, firm" /></div>
-        <div class="f"><label class="lbl" for="cred">Credentials</label><input type="text" id="cred" placeholder="e.g. PE, PhD, 8 yrs in steel design" /></div>
+        <div class="f"><label class="lbl" for="cred">Credentials (optional)</label><input type="text" id="cred" placeholder="e.g. PE, PhD, 8 yrs in steel design" /></div>
         <div class="f full"><label class="lbl">How you want to contribute</label>
           <div class="role">
-            <label><input type="checkbox" class="role-c" value="Author" checked /> Author (build the skill)</label>
+            <label><input type="checkbox" class="role-c" value="Author" /> Author (build the skill)</label>
             <label><input type="checkbox" class="role-c" value="Verifier" /> Verify / review</label>
             <label><input type="checkbox" class="role-c" value="Advisor" /> Advise</label>
           </div>
@@ -160,9 +160,10 @@
     </section>
 
     <section class="sec">
-      <div class="sec-h"><span class="n">02</span><span class="t">Claim your sections — Civil</span><span class="ln"></span></div>
+      <div class="sec-h"><span class="n">02</span><span class="t">Claim your sections, Civil</span><span class="ln"></span></div>
+      <p class="builtenv-note">Claim only what you will personally stand behind. One section is enough to start, you do not need to work through the whole list.</p>
       <div class="tools">
-        <input id="search" type="text" placeholder="Search every section and tool — e.g. steel, PLAXIS, hydrology, Revit, scheduling, LiDAR" />
+        <input id="search" type="search" placeholder="Search every section and tool. Try steel, PLAXIS, hydrology, Revit, scheduling, LiDAR" />
         <button type="button" class="tbtn" id="expandAll">Expand all</button>
         <button type="button" class="tbtn" id="collapseAll">Collapse all</button>
       </div>
@@ -181,7 +182,8 @@
         <div class="f full"><label class="lbl" for="propose">Propose sections we do not list</label><textarea id="propose" placeholder="e.g. Steel design of substation structures; chloride service-life of marine decks"></textarea></div>
         <div class="f full"><label class="lbl" for="note">Anything else (optional)</label><textarea id="note" placeholder="Relevant work, tools you have built, availability"></textarea></div>
       </div>
-      <label class="consent"><input type="checkbox" id="consent" /> I am willing to author and/or verify the sections I selected, and to be contacted about scoping the work.</label>
+      <label class="consent"><input type="checkbox" id="consent" /> I am open to authoring or verifying the sections I selected, and I agree to be contacted about scoping the work. Selecting sections commits me to nothing until we agree on terms.</label>
+      <p class="builtenv-note">What we do with this. We use your details only to talk with you about authoring or verifying sections. We do not share or sell your information, and we will not add you to a mailing list. Ask us to remove it any time at hello@formationlabs.ai.</p>
       <div class="err" id="err"></div>
     </section>
   </form>
@@ -189,9 +191,13 @@
   <section class="done" id="done">
     <svg viewBox="1098 2264 6378 6001"><use href="#fl-mark"/></svg>
     <h2>Claim received.</h2>
-    <p>Thank you. We have your sections and we will reach out to scope the work with you. You can close this page.</p>
+    <p>Thank you. We have your sections and a real person on our team will email you to plan the work. If you do not hear from us within a few days, reach us at hello@formationlabs.ai.</p>
   </section>
 </main>
+
+<footer class="shell" style="padding:44px 0 120px;border-top:1px solid var(--line-2);color:var(--muted);font-size:14px;line-height:1.65">
+  Formation Labs, a verified engineering intelligence lab. Reach a person at <a href="mailto:hello@formationlabs.ai?subject=Formation%20Labs" style="color:var(--gold)">hello@formationlabs.ai</a>. &copy; 2026 Formation Labs.
+</footer>
 
 <div class="barwrap" id="barwrap">
   <div class="bar">
@@ -202,9 +208,15 @@
 
 <script>
 /* ============================================================
-   1) PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW (ends in /exec)
+   Capture: every claim is emailed to BACKUP_EMAIL through the
+   FormSubmit relay (no account needed). The relay must be
+   activated once: the first submission triggers a confirmation
+   email to BACKUP_EMAIL; click "Activate" in it and every later
+   claim arrives in that inbox. If the relay ever fails, the page
+   falls back to a pre-filled email so no claim is lost.
    ============================================================ */
-const ENDPOINT = "PASTE_APPS_SCRIPT_WEB_APP_URL_HERE";
+const BACKUP_EMAIL = "devanshpatel77@gmail.com";
+const ENDPOINT = "https://formsubmit.co/ajax/" + BACKUP_EMAIL;
 
 /* Civil taxonomy grounded in the NCEES FE Civil + five PE Civil depth specs (April 2024).
    Fundamentals = FE breadth every civil engineer/EIT has; the five disciplines = PE depth.
@@ -233,16 +245,16 @@ const CIVIL = [
     {name:"Loads & load combinations", subs:["Dead & live loads","Wind loads (ASCE 7)","Seismic loads (ASCE 7)","Snow, rain & ice","Crane & moving loads","Earth & flood loads","Load paths & tributary areas","Load combinations (LRFD / ASD)"]},
     {name:"Steel design (AISC)", subs:["Tension members","Compression members","Flexural members","Beam-columns","Plate girders","Composite members","Bolted connections","Welded connections","Base plates & anchorage","HSS & tube connections"]},
     {name:"Cold-formed steel (AISI)", subs:["Effective width & Direct Strength Method","Flexural & compression members","Web crippling","Connections","CFS shear walls & light framing"]},
-    {name:"Reinforced concrete (ACI 318)", subs:["Flexure","Shear","Torsion","Columns (P-M interaction)","Two-way & flat slabs","Punching shear","Walls & shear walls","Diaphragms & collectors","Strut-and-tie / deep beams","Development & detailing","Anchorage to concrete","Deflection & crack control"]},
+    {name:"Reinforced concrete (ACI 318)", subs:["Flexure","Shear","Torsion","Columns (P-M interaction)","Two-way & flat slabs","Slabs-on-ground & industrial floors (ACI 360)","Punching shear","Walls & shear walls","Diaphragms & collectors","Strut-and-tie / deep beams","Development & detailing","Anchorage to concrete","Deflection & crack control"]},
     {name:"Prestressed & post-tensioned concrete", subs:["Pre- vs post-tensioning","Prestress losses","Flexural & shear design","Tendon layout & load balancing","Anchorage zones","PT slabs & beams"]},
-    {name:"Masonry (TMS 402)", subs:["Materials & prism strength","ASD vs strength design","Reinforced masonry walls","Shear walls","Lintels & beams","Veneer & anchorage","Seismic detailing"]},
+    {name:"Masonry (TMS 402 / 602)", subs:["Materials & prism strength","ASD vs strength design","Reinforced masonry walls","Shear walls","Lintels & beams","Veneer & anchorage","Seismic detailing"]},
     {name:"Wood & mass timber (NDS / SDPWS)", subs:["Sawn lumber & engineered wood","Adjustment factors","Flexural & axial members","Connections (yield modes)","Wood shear walls & diaphragms","CLT & mass timber","Fire / char design"]},
     {name:"Foundations", subs:["Spread & combined footings","Mat / raft foundations","Deep foundations (piles, shafts)","Lateral pile design (p-y)","Pile groups","Retaining & basement walls","Soil-structure interaction"]},
     {name:"Lateral systems & seismic", subs:["Moment frames (steel / concrete)","Braced frames (CBF / EBF / BRBF)","Shear walls","Seismic detailing & capacity design","Base isolation & damping","Performance-based design","ASCE 41 existing buildings","Diaphragms & collectors"]},
     {name:"Wind engineering", subs:["Wind loads & pressures","Along- & across-wind dynamic response","Tall-building serviceability","Vortex shedding","Wind-tunnel testing"]},
     {name:"Bridge engineering (AASHTO)", subs:["Bridge types","HL-93 loads & distribution","Superstructure design","Substructure & foundations","Bearings & joints","Load rating","Seismic & scour"]},
-    {name:"Specialty structures", subs:["Blast & progressive collapse","Fatigue & fracture","Tanks & silos","Towers & stacks (ASCE 10 / TIA-222)","Crane runways & machine foundations","Precast & tilt-up","Offshore / marine"]},
-    {name:"Forensic, repair & strengthening", subs:["Condition assessment & NDE","Failure investigation","Concrete / steel / masonry repair","FRP strengthening (ACI 440)","Seismic retrofit","Historic preservation"]},
+    {name:"Specialty structures", subs:["Blast & progressive collapse","Fatigue & fracture","Tanks & silos","Towers (ASCE 10 / TIA-222)","Crane runways & machine foundations","Precast & tilt-up","Offshore / marine"]},
+    {name:"Forensic, repair & strengthening", subs:["Condition assessment & NDE","Failure investigation","Concrete / steel / masonry repair","FRP strengthening (ACI 440.2R)","Seismic retrofit","Historic preservation"]},
     {name:"Construction-phase engineering", subs:["Formwork, falsework & shoring","Erection engineering & stability","Special inspections & submittals","Constructability & tolerances"]}
   ]},
   {d:"Geotechnical", m:[
@@ -342,7 +354,7 @@ const CIVIL = [
     {name:"Civil / site & corridor design", subs:["Civil 3D","OpenRoads Designer","OpenSite Designer","InfraWorks","Carlson Civil","GEOPAK"]},
     {name:"BIM & coordination", subs:["Revit","Navisworks","Tekla Structures","ArchiCAD","Solibri","Bentley OpenBuildings","Autodesk Construction Cloud"]},
     {name:"Structural analysis & design", subs:["SAP2000","ETABS","SAFE","CSiBridge","STAAD.Pro","RAM Structural System","RAM Concept","RISA-3D","RISAFloor","midas Gen / Civil","SCIA Engineer","Autodesk Robot","Dlubal RFEM","S-FRAME","LARSA 4D"]},
-    {name:"Structural FEA (advanced)", subs:["ABAQUS","ANSYS","LS-DYNA","PERFORM-3D","OpenSees","DIANA FEA"]},
+    {name:"Structural FEA (advanced)", subs:["ABAQUS","ANSYS","LS-DYNA","OpenSees","DIANA FEA"]},
     {name:"Connection & component design", subs:["IDEA StatiCa","RAM Connection","Hilti PROFIS","spColumn / spBeam / spSlab","ADAPT-Builder","ENERCALC","Tekla Tedds"]},
     {name:"Steel detailing", subs:["Tekla Structures","SDS2","Advance Steel"]},
     {name:"Geotechnical — slope & FE", subs:["Rocscience Slide2 / Slide3","RS2 / RS3","GeoStudio (SLOPE/W, SEEP/W, SIGMA/W, QUAKE/W)","PLAXIS 2D / 3D","FLAC / FLAC3D","GEO5","OptumG2 / G3"]},
@@ -353,7 +365,7 @@ const CIVIL = [
     {name:"Water distribution & treatment", subs:["EPANET","WaterGEMS / WaterCAD","InfoWater","HAMMER","BioWin","GPS-X","WEST","CapdetWorks"]},
     {name:"Groundwater & environmental", subs:["MODFLOW","MODPATH / MT3DMS","Visual MODFLOW","GMS","FEFLOW","AERMOD","WASP / QUAL2K","BASINS"]},
     {name:"Transportation — corridor & traffic", subs:["Synchro / SimTraffic","PTV Vissim / Visum / Vistro","Aimsun","TransModeler","SIDRA","HCS","AutoTURN","CORSIM"]},
-    {name:"Transportation — planning, pavement & safety", subs:["TransCAD","Cube","Emme","AASHTOWare Pavement ME","DARWin","FAARFIELD","Safety Analyst","IHSDM"]},
+    {name:"Transportation — planning, pavement & safety", subs:["TransCAD","Cube","Emme","AASHTOWare Pavement ME","FAARFIELD","Safety Analyst","IHSDM"]},
     {name:"Construction — scheduling", subs:["Primavera P6","MS Project","Asta Powerproject","Tilos","Phoenix Project Manager","Acumen Fuse"]},
     {name:"Construction — estimating & takeoff", subs:["HCSS HeavyBid","B2W Estimate","Sage Estimating","RSMeans Data","On-Screen Takeoff","PlanSwift","Bluebeam (takeoff)","AGTEK","CostX","Trimble TBC-HCE"]},
     {name:"Construction — PM & field", subs:["Procore","Autodesk Build / BIM 360","Oracle Aconex / Unifier","InEight","Fieldwire","PlanGrid","Bluebeam Revu","e-Builder"]},
@@ -413,7 +425,7 @@ function refresh(){
   // per-discipline counts
   document.querySelectorAll('.c[data-disc]').forEach(function(c){
     var d=c.getAttribute('data-disc'); var n=0;
-    document.querySelectorAll('.sub:checked').forEach(function(s){ if(esc(s.getAttribute('d')|| s.dataset.d)===d) n++; });
+    document.querySelectorAll('.sub:checked').forEach(function(s){ if(esc(s.dataset.d)===d) n++; });
     c.textContent=n+' claimed';
   });
   // module indeterminate states
@@ -424,7 +436,9 @@ function refresh(){
   validate();
 }
 function validate(){
-  var ok = document.getElementById('name').value.trim() && document.getElementById('email').value.trim() &&
+  var em=document.getElementById('email').value.trim();
+  var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+  var ok = document.getElementById('name').value.trim() && emailOk &&
            document.getElementById('consent').checked &&
            (document.querySelectorAll('.sub:checked').length>0 || document.getElementById('propose').value.trim());
   submitBtn.disabled=!ok;
@@ -432,39 +446,67 @@ function validate(){
 document.addEventListener('change', function(e){
   if(e.target.classList.contains('modall')){
     var box=e.target.closest('.mod');
-    box.querySelectorAll('.sub').forEach(function(s){ s.checked=e.target.checked; });
+    box.querySelectorAll('.sub').forEach(function(s){
+      var lbl=s.closest('label'); if(lbl && lbl.style.display==='none') return;
+      s.checked=e.target.checked;
+    });
   }
   if(e.target.classList.contains('sub')||e.target.classList.contains('modall')) refresh();
   validate();
 });
 ['name','email','consent','propose'].forEach(function(id){ document.getElementById(id).addEventListener('input', validate); });
 
-submitBtn.addEventListener('click', function(){
+function doSubmit(){
+  var err=document.getElementById('err'); err.textContent='';
+  var name=document.getElementById('name').value.trim();
+  var email=document.getElementById('email').value.trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
+    err.textContent='Please enter a valid email so we can reach you.'; return;
+  }
   var sections=[];
   document.querySelectorAll('.sub:checked').forEach(function(s){
     sections.push({discipline:s.dataset.d, module:s.dataset.m, subsection:s.value});
   });
   var roles=[]; document.querySelectorAll('.role-c:checked').forEach(function(r){ roles.push(r.value); });
-  var payload={
-    name:document.getElementById('name').value.trim(),
-    email:document.getElementById('email').value.trim(),
+  var readable=sections.map(function(s){ return s.discipline+' > '+s.module+' > '+s.subsection; }).join('\n');
+  var data={
+    name:name, email:email,
     affiliation:document.getElementById('aff').value.trim(),
     credentials:document.getElementById('cred').value.trim(),
-    role:roles, sections:sections,
+    role:roles.join(', '),
+    sections_count:sections.length,
+    sections:readable,
+    sections_json:JSON.stringify(sections),
     proposed:document.getElementById('propose').value.trim(),
     note:document.getElementById('note').value.trim(),
-    consent:document.getElementById('consent').checked
+    consent:document.getElementById('consent').checked ? 'YES' : 'no',
+    _subject:'Formation Labs claim — '+(name||'unknown'),
+    _template:'table',
+    _captcha:'false'
   };
-  var err=document.getElementById('err');
-  if(ENDPOINT.indexOf('PASTE_')===0){
-    err.textContent='Endpoint not configured yet. (Admin: paste the Apps Script URL into enlist.html.)';
-    console.log('Formation Labs claim payload:', payload); return;
-  }
   submitBtn.disabled=true; submitBtn.textContent='Submitting...';
-  fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)})
-    .then(function(){ finish(); })
-    .catch(function(){ err.textContent='Could not submit. Check your connection and try again.'; submitBtn.disabled=false; submitBtn.textContent='Submit my claim →'; });
-});
+  fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+    .then(function(r){ return r.json().then(function(j){return {ok:r.ok,j:j};}).catch(function(){return {ok:r.ok,j:null};}); })
+    .then(function(res){
+      var j=res.j||{};
+      if(res.ok && (j.success===true||j.success==='true'||j.success===undefined)){ finish(); }
+      else { throw new Error(j.message||'relay error'); }
+    })
+    .catch(function(){ showFallback(data); });
+}
+submitBtn.addEventListener('click', doSubmit);
+document.getElementById('form').addEventListener('submit', function(e){ e.preventDefault(); if(!submitBtn.disabled) doSubmit(); });
+function showFallback(d){
+  var err=document.getElementById('err');
+  var body='Name: '+d.name+'\nEmail: '+d.email+'\nAffiliation: '+d.affiliation+
+    '\nCredentials: '+d.credentials+'\nRole: '+d.role+
+    '\nSections ('+d.sections_count+'):\n'+d.sections+
+    '\nProposed: '+d.proposed+'\nNote: '+d.note;
+  var href='mailto:'+BACKUP_EMAIL+'?subject='+encodeURIComponent('Formation Labs claim — '+d.name)+
+    '&body='+encodeURIComponent(body);
+  err.innerHTML='Submission did not go through. <a href="'+href+'" style="color:var(--gold);text-decoration:underline">Send it to us by email instead</a> so your claim still reaches us.';
+  submitBtn.disabled=false; submitBtn.textContent='Submit my claim →';
+}
 function finish(){
   document.getElementById('form').style.display='none';
   document.getElementById('barwrap').style.display='none';
@@ -501,6 +543,13 @@ function applySearch(){
     disc.open=anyDisc;
   });
 }
+document.getElementById('barwrap').addEventListener('click', function(e){
+  if(submitBtn.disabled && e.target!==submitBtn){
+    var err=document.getElementById('err');
+    err.textContent='Add your name and a valid email, tick the consent box, and claim at least one section or propose one.';
+    err.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+});
 search.addEventListener('input', applySearch);
 document.getElementById('expandAll').addEventListener('click', function(){ document.querySelectorAll('.disc').forEach(function(d){ if(d.style.display!=='none') d.open=true; }); });
 document.getElementById('collapseAll').addEventListener('click', function(){ document.querySelectorAll('.disc').forEach(function(d){ d.open=false; }); });
