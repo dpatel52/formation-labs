@@ -202,7 +202,7 @@
 
 <div class="barwrap" id="barwrap">
   <div class="bar">
-    <div class="count"><b id="cnt">0</b> sections claimed</div>
+    <div class="count"><b id="cnt">0</b> <span id="cntword">sections</span> selected</div>
     <button class="btn btn-gold" id="submit" disabled>Submit my claim &rarr;</button>
   </div>
 </div>
@@ -401,7 +401,7 @@ function render(data, mount){
   data.forEach(function(disc){
     var det=document.createElement('details'); det.className='disc';
     var sum=document.createElement('summary');
-    sum.innerHTML='<span>'+disc.d+'</span><span class="c" data-disc="'+esc(disc.d)+'">0 claimed</span>';
+    sum.innerHTML='<span>'+disc.d+'</span><span class="c" data-disc="'+esc(disc.d)+'">0 claims</span>';
     det.appendChild(sum);
     var body=document.createElement('div'); body.className='body';
     disc.m.forEach(function(mod){
@@ -428,12 +428,7 @@ var cntEl=document.getElementById('cnt'), submitBtn=document.getElementById('sub
 function refresh(){
   var checked=document.querySelectorAll('.sub:checked');
   cntEl.textContent=checked.length;
-  // per-discipline counts
-  document.querySelectorAll('.c[data-disc]').forEach(function(c){
-    var d=c.getAttribute('data-disc'); var n=0;
-    document.querySelectorAll('.sub:checked').forEach(function(s){ if(esc(s.dataset.d)===d) n++; });
-    c.textContent=n+' claimed';
-  });
+  var cw=document.getElementById('cntword'); if(cw) cw.textContent = checked.length===1?'section':'sections';
   // module indeterminate states
   document.querySelectorAll('.modall').forEach(function(ma){
     var box=ma.closest('.mod');
@@ -586,6 +581,7 @@ function fl_setBadge(host, n){
   } else if(b){ b.remove(); }
 }
 function fl_applyCounts(counts){
+  var discTotals={};
   document.querySelectorAll('.mod').forEach(function(mod){
     var modTotal=0;
     mod.querySelectorAll('.sub').forEach(function(cb){
@@ -593,8 +589,15 @@ function fl_applyCounts(counts){
       var n=counts[key]||0;
       fl_setBadge(cb.closest('label'), n);
       modTotal+=n;
+      if(n){ var dk=esc(cb.dataset.d); discTotals[dk]=(discTotals[dk]||0)+n; }
     });
     fl_setBadge(mod.querySelector('.mod-h'), modTotal);
+  });
+  // discipline header shows RECORDED claims (matches the badges), not your selection
+  document.querySelectorAll('.c[data-disc]').forEach(function(c){
+    var n=discTotals[c.getAttribute('data-disc')]||0;
+    c.textContent = n+(n===1?' claim':' claims');
+    c.style.color = n>0 ? 'var(--gold)' : '';
   });
 }
 function fl_loadCounts(){
