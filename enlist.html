@@ -436,8 +436,10 @@ function refresh(){
   });
   // module indeterminate states
   document.querySelectorAll('.modall').forEach(function(ma){
-    var box=ma.closest('.mod'); var subs=box.querySelectorAll('.sub'); var on=box.querySelectorAll('.sub:checked').length;
-    ma.checked = on>0 && on===subs.length; ma.indeterminate = on>0 && on<subs.length;
+    var box=ma.closest('.mod');
+    var vis=Array.prototype.filter.call(box.querySelectorAll('.sub'), function(s){ var l=s.closest('label'); return !(l && l.style.display==='none'); });
+    var on=vis.filter(function(s){ return s.checked; }).length;
+    ma.checked = on>0 && on===vis.length; ma.indeterminate = on>0 && on<vis.length;
   });
   validate();
 }
