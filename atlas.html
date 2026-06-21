@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Formation Labs — Knowledge Atlas</title>
-<meta name="description" content="The full Formation Labs knowledge universe: a base engineer trained from first principles, a domain-expert library, capabilities, workflows, and the verification harness." />
+<title>Formation Labs · Knowledge Atlas</title>
+<meta name="description" content="The Formation Labs harness, the full map of engineering domains we build and verify, from a base engineer trained on first principles to a deep domain-expert library, capabilities, workflows, and the verification layer." />
 <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,10 +34,12 @@
   .legend{position:fixed;right:22px;bottom:34px;z-index:10;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);text-align:right;line-height:1.9}
   .legend b{color:var(--cream)}
   .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:8px;vertical-align:middle}
-  @media(max-width:680px){.motto,.hint{display:none}}
+  @media(max-width:900px){.motto,.hint{display:none}}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
 </head>
 <body>
+<h1 class="sr-only">Formation Labs knowledge atlas</h1>
 <header>
   <div class="brand"><span class="a">formation</span><span class="b">Labs</span></div>
   <div class="motto">Built on first principles &middot; Verified by domain experts</div>
@@ -51,7 +53,7 @@
   <div><b>Planned</b><span class="dot" style="background:#6f5c66"></span></div>
   <div style="margin-top:7px;color:var(--faint);text-transform:none;letter-spacing:0">filled = has more inside</div>
 </div>
-<div class="tag" id="statusbar">The Formation Labs knowledge universe</div>
+<div class="tag" id="statusbar">The Formation Labs harness, every domain we build and verify</div>
 
 <script>
 function n(name, kids){ return {name:name, children:(kids||[]).map(function(k){return (typeof k==='string')?{name:k}:k;})}; }
@@ -62,7 +64,7 @@ var DATA = n("FORMATION LABS", [
     n("Structural", ["Structural analysis","Structural dynamics","Stability & buckling","Nonlinear & plastic analysis","Loads & combinations","Steel design (AISC)","Cold-formed steel","Reinforced concrete (ACI)","Prestressed & post-tensioned","Masonry","Wood & mass timber","Foundations","Lateral systems & seismic","Wind loads (ASCE 7)","Bridge engineering","Specialty structures","Forensic, repair & strengthening","Construction-phase engineering"]),
     n("Geotechnical", ["Soil mechanics","Site investigation","Laboratory testing","Shallow foundations","Deep foundations","Earth-retaining structures","Slope stability","Ground improvement","Seepage & dewatering","Earthquake geotechnical","Rock mechanics","Geosynthetics","Problematic soils","Instrumentation & earthwork"]),
     n("Transportation", ["Highway geometric design","Roadway & corridor design","Intersections & interchanges","Traffic flow theory","Capacity & LOS (HCM)","Traffic signals & control","Traffic studies & data","Planning & travel demand","Traffic safety (HSM)","Traffic control devices (MUTCD)","Work zones & MOT",n("Pavement engineering", ["Flexible pavement design","Rigid (PCC) pavement design","Composite pavements","Pavement overlays & rehabilitation","Mechanistic-empirical design (Pavement ME / AASHTOWare)","AASHTO 1993 pavement design","Pavement structural evaluation (FWD / deflection)","Pavement condition & distress (IRI, PCI, rutting, cracking)","Pavement management systems (PMS)","Pavement preservation & maintenance","Airfield pavement design (FAA)","Asphalt mix design (Superpave, Marshall)","Concrete pavement materials & jointing","Subgrade, base & subbase design","Roadway & subsurface drainage"]),"Roadside safety","Transportation drainage","Multimodal & accessibility","ITS & connected vehicles"]),
-    n("Water Resources & Environmental", ["Hydrology — statistical","Hydrology — rainfall-runoff","Open-channel hydraulics","Closed-conduit hydraulics","Stormwater management","Floodplain & river engineering","Water distribution","Drinking water treatment","Wastewater collection","Wastewater treatment","Water quality","Groundwater & hydrogeology","Environmental engineering","Specialty water resources"]),
+    n("Water Resources & Environmental", ["Hydrology · statistical","Hydrology · rainfall-runoff","Open-channel hydraulics","Closed-conduit hydraulics","Stormwater management","Floodplain & river engineering","Water distribution","Drinking water treatment","Wastewater collection","Wastewater treatment","Water quality","Groundwater & hydrogeology","Environmental engineering","Specialty water resources"]),
     n("Construction Eng. & Management", ["Cost estimating","Scheduling","Project & construction management","Operations & methods","Equipment & productivity","Temporary works","Construction safety","Quality control & assurance","Construction surveying & layout","Sustainability in construction"]),
     n("Materials", ["Concrete mix design","Concrete properties & testing","Concrete durability & special","Asphalt & bituminous","Aggregates","Steel, rebar, masonry & timber","Nondestructive testing"]),
     n("Surveying & Geomatics", ["Measurement & error theory","Distance & angle measurement","Leveling","Traverse & COGO","Topographic surveys & mapping","Boundary & cadastral","Route surveying & curves","GNSS / GPS surveying","Geodesy & coordinate systems","Photogrammetry & remote sensing","LiDAR, drones & monitoring"]),
@@ -161,7 +163,7 @@ var DATA = n("FORMATION LABS", [
     n("Field execution & instrumented data acquisition", ["Field measurement & survey-grade capture","Load & proof testing","In-situ instrumentation & telemetry","Sample collection & chain of custody","Real-time sensor data ingestion"])
   ]),
   n("Workflows", ["Design & sizing","Analysis & modeling","Review & QC","Code compliance & plan review","Quantity takeoff & estimating","Permitting & entitlement","Inspection & condition assessment","Forensic investigation & litigation","Monitoring & digital twin","Feasibility & due diligence","Multi-domain council","Research & literature synthesis","Commissioning & handover"]),
-  n("Harness", ["First-principles logic","Verified tools & answer keys","Benchmarking & re-certification","Named domain-expert verifiers","Provenance & audit trail","Scope & refusal contracts","Human sign-off","Agentic orchestration & federation"]),
+  n("Verification & trust", ["First-principles logic","Verified tools & answer keys","Benchmarking & re-certification","Named domain-expert verifiers","Provenance & audit trail","Scope & refusal contracts","Human sign-off","Agentic orchestration & federation"]),
   n("Built Environment", [
     n("Architecture, interiors & space", ["Architectural design & schematic layout","Interior systems & fit-out","Space programming & adjacency","Accessibility & universal design","Acoustics & daylighting","Historic preservation & adaptive reuse"]),
     n("Building physics", ["Building envelope & moisture","Thermal performance & energy modeling","Fire & life safety engineering","Vertical transportation","Building acoustics & vibration isolation"]),
@@ -190,7 +192,7 @@ var DATA = n("FORMATION LABS", [
 var dx=15, dy=270;
 var root = d3.hierarchy(DATA);
 root.x0=0; root.y0=0;
-root.descendants().forEach(function(d,i){ d.id=i; d._children=d.children; if(d.depth>=2) d.children=null; });
+root.descendants().forEach(function(d,i){ d.id=i; d._children=(d.children&&d.children.length)?d.children:null; if(d.depth>=2) d.children=null; });
 
 var COL = {live:"#e2b557", building:"#e79ab2", open:"#6f5c66"};
 var STATUS = {
@@ -214,7 +216,7 @@ computeAgg(root);
 var counts={live:0,building:0,open:0};
 (function countAll(d){ var k=d._children||d.children; if(!k||!k.length){ counts[st(d)]++; return; } k.forEach(countAll); })(root);
 var sb=document.getElementById("statusbar");
-if(sb){ sb.textContent = counts.live+" live  ·  "+counts.building+" in progress  ·  "+counts.open+" planned  —  the Formation Labs knowledge universe"; }
+if(sb){ sb.textContent = counts.live+" live  ·  "+counts.building+" in progress  ·  "+counts.open+" planned  ·  the Formation Labs harness, every domain we build and verify"; }
 
 var W=window.innerWidth, H=window.innerHeight;
 var svg=d3.select("#chart").append("svg").attr("width",W).attr("height",H)
@@ -237,7 +239,10 @@ function update(source){
   var nodeEnter=node.enter().append("g")
     .attr("transform",function(){return "translate("+source.y0+","+source.x0+")";})
     .attr("fill-opacity",0).attr("stroke-opacity",0)
-    .on("click",function(event,d){ d.children=d.children?null:d._children; update(d); });
+    .attr("tabindex",0).attr("role","button")
+    .attr("aria-label",function(d){ return d.data.name + (d._children?" (toggle)":""); })
+    .on("click",function(event,d){ d.children=d.children?null:d._children; update(d); })
+    .on("keydown",function(event,d){ if(event.key==="Enter"||event.key===" "){ event.preventDefault(); d.children=d.children?null:d._children; update(d); } });
   nodeEnter.append("circle")
     .attr("r",function(d){return d.depth===0?7:(d._children?5:3.6);})
     .attr("fill",function(d){return d.children?"#130a0f":COL[d.agg];})
@@ -271,18 +276,20 @@ function update(source){
 }
 update(root);
 
-// fit the initial view
-setTimeout(function(){
+// fit the tree to the viewport (re-runs on resize)
+function fitView(animate){
   var b={x0:1e9,x1:-1e9,y0:1e9,y1:-1e9};
   root.descendants().forEach(function(d){ b.x0=Math.min(b.x0,d.x); b.x1=Math.max(b.x1,d.x); b.y0=Math.min(b.y0,d.y); b.y1=Math.max(b.y1,d.y); });
   var w=(b.y1-b.y0)+460, h=(b.x1-b.x0)+120;
   var k=Math.min(W/w, H/h, 1)*0.92;
   var tx=W/2 - k*((b.y0+b.y1)/2) + 30;
   var ty=H/2 - k*((b.x0+b.x1)/2);
-  svg.transition().duration(450).call(zoom.transform, d3.zoomIdentity.translate(tx,ty).scale(k));
-}, 120);
+  (animate?svg.transition().duration(450):svg).call(zoom.transform, d3.zoomIdentity.translate(tx,ty).scale(k));
+}
+setTimeout(function(){ fitView(true); }, 120);
 
-window.addEventListener("resize",function(){ W=window.innerWidth; H=window.innerHeight; svg.attr("width",W).attr("height",H); });
+var rzT;
+window.addEventListener("resize",function(){ W=window.innerWidth; H=window.innerHeight; svg.attr("width",W).attr("height",H); clearTimeout(rzT); rzT=setTimeout(function(){ fitView(false); }, 150); });
 </script>
 </body>
 </html>

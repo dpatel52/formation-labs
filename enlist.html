@@ -19,7 +19,7 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:var(--sans);background:var(--bg);color:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{font-family:var(--sans);background:var(--bg);color:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
     background:radial-gradient(56% 48% at 14% 2%,rgba(123,45,78,0.3),transparent 60%),radial-gradient(44% 42% at 94% 96%,rgba(212,168,67,0.1),transparent 62%),linear-gradient(180deg,#130a0f,#0d0609);}
   a{color:inherit}
@@ -73,7 +73,7 @@
   .mod-h label{font-family:var(--sans);font-weight:500;font-size:15px;color:var(--cream);cursor:pointer;display:flex;align-items:center;gap:8px}
   .mod-h .all{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
   .subs{display:grid;grid-template-columns:repeat(2,1fr);gap:7px 18px;padding-left:2px}
-  .subs label{display:flex;align-items:flex-start;gap:9px;font-size:14px;color:var(--muted);cursor:pointer;line-height:1.35}
+  .subs label{display:flex;flex-wrap:wrap;align-items:flex-start;gap:9px;font-size:14px;color:var(--muted);cursor:pointer;line-height:1.35}
   .subs label:hover{color:var(--cream)}
   .claimcount{display:inline-block;margin-left:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--gold);background:rgba(226,181,87,.12);border:1px solid rgba(226,181,87,.32);border-radius:9px;padding:1px 7px;white-space:nowrap;vertical-align:middle}
   input[type=checkbox]{appearance:none;-webkit-appearance:none;width:16px;height:16px;border:1px solid var(--line);border-radius:3px;background:transparent;cursor:pointer;flex-shrink:0;margin-top:1px;position:relative;transition:.15s}
@@ -164,7 +164,7 @@
       <div class="sec-h"><span class="n">02</span><span class="t">Claim your sections, Civil</span><span class="ln"></span></div>
       <p class="builtenv-note">Claim only what you will personally stand behind. One section is enough to start, you do not need to work through the whole list.</p>
       <div class="tools">
-        <input id="search" type="search" placeholder="Search every section and tool. Try steel, PLAXIS, hydrology, Revit, scheduling, LiDAR" />
+        <input id="search" type="search" aria-label="Search every section and tool" placeholder="Search every section and tool. Try steel, PLAXIS, hydrology, Revit, scheduling, LiDAR" />
         <button type="button" class="tbtn" id="expandAll">Expand all</button>
         <button type="button" class="tbtn" id="collapseAll">Collapse all</button>
       </div>
@@ -298,8 +298,8 @@ const CIVIL = [
     {name:"ITS & connected vehicles", subs:["ITS architecture","Field devices & detection","Freeway & arterial management","Traffic management centers","Connected / automated vehicles (V2X)","Tolling & managed lanes"]}
   ]},
   {d:"Water Resources & Environmental", m:[
-    {name:"Hydrology — statistical", subs:["Precipitation & IDF","Design storms (NOAA Atlas 14 / SCS)","Frequency analysis (Log-Pearson)","Flood frequency & regression","Evaporation & ET","Infiltration","Snow hydrology"]},
-    {name:"Hydrology — rainfall-runoff", subs:["Watershed delineation","Time of concentration","Rational method","SCS / NRCS curve number","Unit hydrographs","Hydrograph routing (Muskingum)","Continuous simulation"]},
+    {name:"Hydrology · statistical", subs:["Precipitation & IDF","Design storms (NOAA Atlas 14 / SCS)","Frequency analysis (Log-Pearson)","Flood frequency & regression","Evaporation & ET","Infiltration","Snow hydrology"]},
+    {name:"Hydrology · rainfall-runoff", subs:["Watershed delineation","Time of concentration","Rational method","SCS / NRCS curve number","Unit hydrographs","Hydrograph routing (Muskingum)","Continuous simulation"]},
     {name:"Open-channel hydraulics", subs:["Manning & uniform flow","Specific energy & critical flow","Hydraulic jump & momentum","Gradually varied flow profiles","Channel design","Energy dissipation","Scour","Weirs & flumes"]},
     {name:"Closed-conduit hydraulics", subs:["Energy & continuity (Bernoulli)","Friction (Darcy / Hazen-Williams)","Minor losses","Pipe networks (Hardy Cross)","Pumps & pump stations","Water hammer & surge"]},
     {name:"Stormwater management", subs:["Storm sewer design","Inlets & gutter flow","Detention & retention basins","Green infrastructure / LID","Water-quality BMPs","MS4 & NPDES","SWPPP & erosion control"]},
@@ -326,9 +326,9 @@ const CIVIL = [
     {name:"Sustainability in construction", subs:["LEED & green building","Construction waste management","Erosion & sediment control","Embodied carbon & EPDs"]}
   ]},
   {d:"Materials", m:[
-    {name:"Concrete — mix design", subs:["Cement types & chemistry","SCMs (fly ash / slag / silica fume)","Aggregates for concrete","Chemical admixtures","ACI 211 mix proportioning","Trial batching & adjustment"]},
-    {name:"Concrete — properties & testing", subs:["Fresh properties (slump / air)","Compressive strength","Flexural & tensile strength","Modulus of elasticity","Shrinkage & creep","Maturity & in-place strength","Rapid chloride permeability"]},
-    {name:"Concrete — durability & special", subs:["Corrosion & carbonation","Sulfate attack & ASR","Freeze-thaw","Exposure classes & service life","SCC / HPC / UHPC","Mass & lightweight concrete","Shotcrete","Fiber-reinforced concrete"]},
+    {name:"Concrete · mix design", subs:["Cement types & chemistry","SCMs (fly ash / slag / silica fume)","Aggregates for concrete","Chemical admixtures","ACI 211 mix proportioning","Trial batching & adjustment"]},
+    {name:"Concrete · properties & testing", subs:["Fresh properties (slump / air)","Compressive strength","Flexural & tensile strength","Modulus of elasticity","Shrinkage & creep","Maturity & in-place strength","Rapid chloride permeability"]},
+    {name:"Concrete · durability & special", subs:["Corrosion & carbonation","Sulfate attack & ASR","Freeze-thaw","Exposure classes & service life","SCC / HPC / UHPC","Mass & lightweight concrete","Shotcrete","Fiber-reinforced concrete"]},
     {name:"Asphalt & bituminous", subs:["PG binder grading","Superpave mix design","Marshall & Hveem methods","HMA volumetrics","Performance tests (rutting / moisture)","RAP & recycling"]},
     {name:"Aggregates", subs:["Sources & production","Gradation & fineness modulus","Specific gravity & absorption","LA abrasion & soundness","Reactivity (ASR) testing"]},
     {name:"Steel, rebar, masonry & timber", subs:["Structural steel grades & properties","Reinforcing steel (A615 / A706)","Prestressing strand","Bolt & weld testing","Masonry units, mortar & grout","Lumber grading & engineered wood"]},
@@ -363,20 +363,20 @@ const CIVIL = [
     {name:"Structural FEA (advanced)", subs:["ABAQUS","ANSYS","LS-DYNA","OpenSees","DIANA FEA"]},
     {name:"Connection & component design", subs:["IDEA StatiCa","RAM Connection","Hilti PROFIS","spColumn / spBeam / spSlab","ADAPT-Builder","ENERCALC","Tekla Tedds"]},
     {name:"Steel detailing", subs:["Tekla Structures","SDS2","Advance Steel"]},
-    {name:"Geotechnical — slope & FE", subs:["Rocscience Slide2 / Slide3","RS2 / RS3","GeoStudio (SLOPE/W, SEEP/W, SIGMA/W, QUAKE/W)","PLAXIS 2D / 3D","FLAC / FLAC3D","GEO5","OptumG2 / G3"]},
-    {name:"Geotechnical — foundations & walls", subs:["LPILE","GROUP","APILE","SHAFT","RSPile","FB-MultiPier","AllPile","DeepEX","Settle3","gINT"]},
-    {name:"Geotechnical — liquefaction & site response", subs:["CLiq","LiquefyPro","NovoLIQ","DEEPSOIL","SHAKE2000","ProShake"]},
+    {name:"Geotechnical · slope & FE", subs:["Rocscience Slide2 / Slide3","RS2 / RS3","GeoStudio (SLOPE/W, SEEP/W, SIGMA/W, QUAKE/W)","PLAXIS 2D / 3D","FLAC / FLAC3D","GEO5","OptumG2 / G3"]},
+    {name:"Geotechnical · foundations & walls", subs:["LPILE","GROUP","APILE","SHAFT","RSPile","FB-MultiPier","AllPile","DeepEX","Settle3","gINT"]},
+    {name:"Geotechnical · liquefaction & site response", subs:["CLiq","LiquefyPro","NovoLIQ","DEEPSOIL","SHAKE2000","ProShake"]},
     {name:"Hydrology & river hydraulics", subs:["HEC-RAS","HEC-HMS","HEC-SSP","TR-20 / TR-55","HydroCAD","SRH-2D","TUFLOW","FLO-2D","MIKE","WMS","HY-8"]},
     {name:"Stormwater & sewer", subs:["EPA SWMM","PCSWMM","XPSWMM","InfoWorks ICM","StormCAD / CivilStorm / PondPack","SewerGEMS / SewerCAD","Autodesk SSA / InfoDrainage","ICPR"]},
     {name:"Water distribution & treatment", subs:["EPANET","WaterGEMS / WaterCAD","InfoWater","HAMMER","BioWin","GPS-X","WEST","CapdetWorks"]},
     {name:"Groundwater & environmental", subs:["MODFLOW","MODPATH / MT3DMS","Visual MODFLOW","GMS","FEFLOW","AERMOD","WASP / QUAL2K","BASINS"]},
-    {name:"Transportation — corridor & traffic", subs:["Synchro / SimTraffic","PTV Vissim / Visum / Vistro","Aimsun","TransModeler","SIDRA","HCS","AutoTURN","CORSIM"]},
-    {name:"Transportation — planning, pavement & safety", subs:["TransCAD","Cube","Emme","AASHTOWare Pavement ME","FAARFIELD","Safety Analyst","IHSDM"]},
-    {name:"Construction — scheduling", subs:["Primavera P6","MS Project","Asta Powerproject","Tilos","Phoenix Project Manager","Acumen Fuse"]},
-    {name:"Construction — estimating & takeoff", subs:["HCSS HeavyBid","B2W Estimate","Sage Estimating","RSMeans Data","On-Screen Takeoff","PlanSwift","Bluebeam (takeoff)","AGTEK","CostX","Trimble TBC-HCE"]},
-    {name:"Construction — PM & field", subs:["Procore","Autodesk Build / BIM 360","Oracle Aconex / Unifier","InEight","Fieldwire","PlanGrid","Bluebeam Revu","e-Builder"]},
-    {name:"Construction — earthwork & machine control", subs:["AGTEK","Trimble Earthworks","Topcon MAGNET","Leica iCON","Carlson Takeoff"]},
-    {name:"Surveying — field & office", subs:["Trimble Business Center","Trimble Access","Leica Infinity / Captivate","Topcon MAGNET","Carlson SurvCE","StarNet","MicroSurvey"]},
+    {name:"Transportation · corridor & traffic", subs:["Synchro / SimTraffic","PTV Vissim / Visum / Vistro","Aimsun","TransModeler","SIDRA","HCS","AutoTURN","CORSIM"]},
+    {name:"Transportation · planning, pavement & safety", subs:["TransCAD","Cube","Emme","AASHTOWare Pavement ME","FAARFIELD","Safety Analyst","IHSDM"]},
+    {name:"Construction · scheduling", subs:["Primavera P6","MS Project","Asta Powerproject","Tilos","Phoenix Project Manager","Acumen Fuse"]},
+    {name:"Construction · estimating & takeoff", subs:["HCSS HeavyBid","B2W Estimate","Sage Estimating","RSMeans Data","On-Screen Takeoff","PlanSwift","Bluebeam (takeoff)","AGTEK","CostX","Trimble TBC-HCE"]},
+    {name:"Construction · PM & field", subs:["Procore","Autodesk Build / BIM 360","Oracle Aconex / Unifier","InEight","Fieldwire","PlanGrid","Bluebeam Revu","e-Builder"]},
+    {name:"Construction · earthwork & machine control", subs:["AGTEK","Trimble Earthworks","Topcon MAGNET","Leica iCON","Carlson Takeoff"]},
+    {name:"Surveying · field & office", subs:["Trimble Business Center","Trimble Access","Leica Infinity / Captivate","Topcon MAGNET","Carlson SurvCE","StarNet","MicroSurvey"]},
     {name:"Reality capture & point clouds", subs:["Pix4D","Agisoft Metashape","ContextCapture","Trimble RealWorks","Leica Cyclone","Autodesk ReCap","CloudCompare","DJI Terra","FARO SCENE"]},
     {name:"GIS & geospatial", subs:["ArcGIS Pro","ArcGIS Online","QGIS","Global Mapper","FME","Google Earth Pro"]},
     {name:"Computation & math", subs:["MATLAB","Python (NumPy / SciPy / pandas)","Mathcad","SMath","Excel / VBA","Mathematica","R","Jupyter"]},
@@ -457,8 +457,7 @@ document.addEventListener('change', function(e){
       s.checked=e.target.checked;
     });
   }
-  if(e.target.classList.contains('sub')||e.target.classList.contains('modall')) refresh();
-  validate();
+  if(e.target.classList.contains('sub')||e.target.classList.contains('modall')){ refresh(); } else { validate(); }
 });
 ['name','email','consent','propose'].forEach(function(id){ document.getElementById(id).addEventListener('input', validate); });
 
@@ -486,7 +485,7 @@ function doSubmit(){
     proposed:document.getElementById('propose').value.trim(),
     note:document.getElementById('note').value.trim(),
     consent:document.getElementById('consent').checked ? 'YES' : 'no',
-    _subject:'Formation Labs claim — '+(name||'unknown'),
+    _subject:'Formation Labs claim · '+(name||'unknown'),
     _template:'table',
     _captcha:'false'
   };
@@ -522,7 +521,7 @@ function showFallback(d){
     '\nCredentials: '+d.credentials+'\nRole: '+d.role+
     '\nSections ('+d.sections_count+'):\n'+d.sections+
     '\nProposed: '+d.proposed+'\nNote: '+d.note;
-  var href='mailto:'+BACKUP_EMAIL+'?subject='+encodeURIComponent('Formation Labs claim — '+d.name)+
+  var href='mailto:'+BACKUP_EMAIL+'?subject='+encodeURIComponent('Formation Labs claim · '+d.name)+
     '&body='+encodeURIComponent(body);
   err.innerHTML='Submission did not go through. <a href="'+href+'" style="color:var(--gold);text-decoration:underline">Send it to us by email instead</a> so your claim still reaches us.';
   submitBtn.disabled=false; submitBtn.textContent='Submit my claim →';
