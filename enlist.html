@@ -494,26 +494,26 @@ function doSubmit(){
   submitBtn.disabled=true; submitBtn.textContent='Submitting...';
   var fd=new FormData();
   Object.keys(data).forEach(function(key){ fd.append(key, data[key]); });
+  var us=Object.keys(data).map(function(k){ return encodeURIComponent(k)+'='+encodeURIComponent(data[k]); }).join('&');
+  // best-effort email notification via the relay; it never controls success
+  function emailNotify(){ try{ fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:fd}).catch(function(){}); }catch(e){} }
   if(STORE_URL){
-    try {
-      var us=Object.keys(data).map(function(k){ return encodeURIComponent(k)+'='+encodeURIComponent(data[k]); }).join('&');
-      fetch(STORE_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:us});
-    } catch(e){}
+    emailNotify();
+    // primary capture: record to your Google Sheet (first-party, not blockable). Success when it completes.
+    (function store(n){
+      fetch(STORE_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:us})
+        .then(function(){ finish(); })
+        .catch(function(){ if(n>0){ setTimeout(function(){ store(n-1); }, 1200); } else { showFallback(data); } });
+    })(1);
+  } else {
+    // no sheet configured: fall back to the relay as the success signal
+    (function attempt(n){
+      fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:fd})
+        .then(function(r){ return r.json().then(function(j){return {ok:r.ok,j:j};}).catch(function(){return {ok:r.ok,j:null};}); })
+        .then(function(res){ var j=res.j||{}; if(res.ok && (j.success===true||j.success==='true'||j.success===undefined)){ finish(); return; } throw new Error('relay'); })
+        .catch(function(){ if(n>0){ setTimeout(function(){ attempt(n-1); }, 1200); } else { showFallback(data); } });
+    })(1);
   }
-  function attempt(n){
-    return fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:fd})
-      .then(function(r){ return r.json().then(function(j){return {ok:r.ok,j:j};}).catch(function(){return {ok:r.ok,j:null};}); })
-      .then(function(res){
-        var j=res.j||{};
-        if(res.ok && (j.success===true||j.success==='true'||j.success===undefined)){ finish(); return; }
-        throw new Error((j&&j.message)||'relay error');
-      })
-      .catch(function(){
-        if(n>0){ return new Promise(function(rs){ setTimeout(rs,1200); }).then(function(){ return attempt(n-1); }); }
-        showFallback(data);
-      });
-  }
-  attempt(1);
 }
 submitBtn.addEventListener('click', doSubmit);
 document.getElementById('form').addEventListener('submit', function(e){ e.preventDefault(); if(!submitBtn.disabled) doSubmit(); });
