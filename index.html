@@ -3,399 +3,132 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Formation Labs · The AI Harness for the Built Environment</title>
-<meta name="description" content="Hire an AI engineer that comes with a harness built and verified by human domain experts. Every result is computed by a tested tool, shown step by step, and traceable to its source." />
-<link rel="icon" type="image/svg+xml" href="favicon.svg?v=2" />
+<title>Formation Labs</title>
+<meta name="description" content="Formation Labs: AI tools and services for the built environment. Centuries of human knowledge, a new intelligence for the world we build." />
+<meta property="og:title" content="Formation Labs" />
+<meta property="og:description" content="AI tools and services for the built environment. Centuries of human knowledge, a new intelligence for the world we build." />
+<meta name="theme-color" content="#f4f1ea" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=4" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<style>
-  :root{
-    --bg:#130a0f; --bg-soft:#1c1018;
-    --cream:#ece3da; --muted:#a8949c; --faint:#74636c;
-    --gold:#e2b557; --gold-deep:#caa043; --velvet:#8e3358; --rose:#e79ab2;
-    --line:rgba(236,227,218,0.12); --line-2:rgba(236,227,218,0.07);
-    --mono:'IBM Plex Mono',ui-monospace,monospace;
-    --serif:'Fraunces',Georgia,serif;
-    --sans:'Inter',system-ui,sans-serif;
-    --maxw:1220px; --ease:cubic-bezier(.22,.61,.36,1);
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:var(--sans);background:var(--bg);color:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
-    background:
-      radial-gradient(58% 50% at 16% 4%, rgba(123,45,78,0.34), transparent 60%),
-      radial-gradient(46% 44% at 92% 86%, rgba(212,168,67,0.12), transparent 62%),
-      radial-gradient(90% 70% at 50% 122%, rgba(74,14,46,0.45), transparent 72%),
-      linear-gradient(180deg,#130a0f,#0d0609);}
-  #bg{position:fixed;inset:0;z-index:-1;pointer-events:none}
-  a{color:inherit;text-decoration:none}
-  em{font-style:italic}
-
-  /* drawing-sheet frame */
-  .frame{position:fixed;inset:15px;border:1px solid var(--line-2);pointer-events:none;z-index:6}
-  .frame::before,.frame::after{content:"";position:absolute;width:9px;height:9px;border:1px solid rgba(226,181,87,.4)}
-  .frame::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
-  .frame::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
-
-  .shell{max-width:var(--maxw);margin:0 auto;padding:0 40px}
-  .mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--muted)}
-  .gold{color:var(--gold)}
-  .hl{color:var(--gold);font-style:italic}
-
-  /* header / title block */
-  header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.45s var(--ease)}
-  header.on{background:rgba(13,6,9,.74);backdrop-filter:blur(13px);border-bottom:1px solid var(--line-2)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:84px;max-width:var(--maxw);margin:0 auto;padding:0 40px}
-  .brand{display:flex;align-items:center;gap:13px}
-  .brand .mark{width:38px;height:38px;color:var(--cream)}
-  .wm{font-size:22px;display:flex;align-items:baseline;gap:7px}
-  .wm .a{font-family:var(--serif);font-style:italic;font-weight:500;letter-spacing:-.01em}
-  .wm .b{font-family:var(--mono);font-weight:400;text-transform:uppercase;letter-spacing:.12em;font-size:18px}
-  .links{display:flex;gap:30px;align-items:center}
-  .links a{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);transition:color .25s}
-  .links a:hover{color:var(--cream)}
-  .btn{font-family:var(--sans);font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border-radius:2px;border:1px solid transparent;cursor:pointer;transition:.3s var(--ease);white-space:nowrap}
-  .btn-gold{background:var(--gold);color:#2a1607}
-  .btn-gold:hover{background:#f0cb74;transform:translateY(-1px)}
-  .btn-ghost{border:1px solid var(--line);color:var(--cream)}
-  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-  .btn .ar{transition:transform .3s var(--ease)}
-  .btn:hover .ar{transform:translateX(3px)}
-
-  /* hero */
-  #hero{min-height:100vh;display:flex;align-items:center;padding:150px 0 90px}
-  .hero-grid{display:grid;grid-template-columns:1.45fr .85fr;gap:60px;align-items:center;width:100%}
-  .kick{display:inline-flex;align-items:center;gap:12px;margin-bottom:30px}
-  .kick::before{content:"";width:34px;height:1px;background:var(--gold)}
-  .kick span{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.24em;color:var(--gold)}
-  h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,6.4vw,82px);line-height:1.015;letter-spacing:-.02em}
-  .hero-sub{font-size:clamp(17px,1.5vw,20px);color:var(--muted);max-width:54ch;margin-top:30px}
-  .hero-sub b{color:var(--cream);font-weight:500}
-  .hero-cta{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap}
-
-  /* verification seal */
-  .seal-wrap{display:flex;flex-direction:column;align-items:center;gap:18px}
-  .seal{position:relative;width:clamp(170px,17vw,220px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;
-    border:1px solid rgba(226,181,87,.5);
-    box-shadow:inset 0 0 0 7px var(--bg), inset 0 0 0 8px rgba(226,181,87,.2), 0 0 70px rgba(226,181,87,.09);
-    animation:rise 1.1s var(--ease) both}
-  .seal svg{width:56%;color:var(--gold);filter:drop-shadow(0 0 16px rgba(226,181,87,.22))}
-  .seal-cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);text-align:center;line-height:1.7}
-  .seal-cap b{color:var(--muted);font-weight:500}
-
-  /* sections */
-  section{position:relative;scroll-margin-top:100px}
-  .band{padding:108px 0;border-top:1px solid var(--line-2)}
-  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:34px}
-  .sec-head .num{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--gold)}
-  .sec-head .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-  .sec-head .ln{flex:1;height:1px;background:var(--line);transform:translateY(-3px)}
-  h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.9vw,48px);line-height:1.08;letter-spacing:-.015em;max-width:20ch}
-  .lead{font-size:clamp(16px,1.3vw,19px);color:var(--muted);max-width:62ch;margin-top:22px}
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-  .two.rev .a{order:2}
-
-  /* stats */
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:50px;border:1px solid var(--line)}
-  .stat{padding:30px 26px;border-right:1px solid var(--line)}
-  .stat:last-child{border-right:0}
-  .stat .n{font-family:var(--serif);font-size:clamp(32px,3.7vw,44px);line-height:1}
-  .stat .n i{font-style:normal;color:var(--gold);font-size:.52em}
-  .stat .t{margin-top:12px;font-size:13.5px;color:var(--muted);line-height:1.5}
-  .src{margin-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--faint);text-transform:uppercase}
-
-  /* console */
-  .console{border:1px solid var(--line);background:rgba(8,4,7,.66);border-radius:3px;overflow:hidden;box-shadow:0 30px 70px -34px rgba(0,0,0,.85)}
-  .console .bar{display:flex;align-items:center;gap:8px;padding:13px 16px;border-bottom:1px solid var(--line-2)}
-  .dot{width:10px;height:10px;border-radius:50%}
-  .d1{background:var(--velvet)}.d2{background:var(--gold)}.d3{background:#4a6b4a}
-  .console .bar .cap{margin-left:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
-  .console .body{font-family:var(--mono);font-size:13.5px;line-height:1.85;padding:22px;color:#c7d8c2}
-  .body .u{color:var(--cream)}
-  .body .u::before{content:"> ";color:var(--gold)}
-  .body .m{color:var(--gold-deep)}
-  .body .ok{color:#8fcf86}
-  .body .no{color:var(--rose)}
-  .body .dim{color:var(--faint)}
-  .body .sp{height:15px}
-  .cap-note{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:16px}
-
-  /* skills grid */
-  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
-  .cell{border:1px solid var(--line);border-radius:2px;padding:16px;min-height:92px;position:relative}
-  .cell .cn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--faint)}
-  .cell .ct{font-size:15px;margin-top:11px;color:var(--cream)}
-  .cell .cs{position:absolute;top:15px;right:15px;font-family:var(--mono);font-size:10px;letter-spacing:.08em}
-  .cell.v{border-color:rgba(226,181,87,.42);background:linear-gradient(180deg,rgba(226,181,87,.07),transparent)}
-  .cell.v .cs{color:var(--gold)}
-  .cell.r .cs{color:var(--rose)}
-  .cell.r{border-color:rgba(231,154,178,.4)}
-  .cell.p{opacity:.6}
-  .cell.p .cs{color:var(--faint)}
-
-  /* scope tags */
-  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-  .tag{font-family:var(--mono);font-size:12px;letter-spacing:.06em;padding:9px 16px;border:1px solid var(--line);border-radius:2px;color:var(--muted)}
-  .tag.on{border-color:var(--gold);color:var(--gold)}
-  .tag.next{border-color:rgba(231,154,178,.45);color:var(--rose)}
-
-  /* guarantees list */
-  .rules{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:14px;border:1px solid var(--line)}
-  .rule{padding:26px 28px;border-right:1px solid var(--line);border-top:1px solid var(--line)}
-  .rule:nth-child(-n+2){border-top:0}
-  .rule:nth-child(2n){border-right:0}
-  .rule .rn{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.1em}
-  .rule h3{font-family:var(--serif);font-weight:400;font-size:21px;margin:10px 0 7px}
-  .rule p{font-size:14.5px;color:var(--muted);line-height:1.55}
-
-  /* closing */
-  #hire{padding:130px 0 100px;text-align:center;border-top:1px solid var(--line-2)}
-  .close-h{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.6vw,54px);line-height:1.1;max-width:18ch;margin:30px auto 34px;letter-spacing:-.015em}
-  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:48px}
-  .pcard{border:1px solid var(--line);border-radius:3px;padding:24px;background:rgba(255,255,255,0.025);transition:border-color .3s}
-  .pcard:hover{border-color:rgba(226,181,87,.4)}
-  .pcard .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
-  .pcard h3{font-family:var(--serif);font-weight:400;font-size:20px;margin:13px 0 8px;line-height:1.15}
-  .pcard p{font-size:14px;color:var(--muted);line-height:1.55}
-  @media(max-width:760px){.pillars{grid-template-columns:1fr}}
-  footer{border-top:1px solid var(--line-2);padding:38px 0}
-  .foot{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
-  .foot .meta{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
-
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
-  .reveal.in{opacity:1;transform:none}
-  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-
-  @media(max-width:920px){
-    .shell,.nav{padding-left:24px;padding-right:24px}
-    .links{display:none}
-    .nav .btn{padding:9px 14px;font-size:13px}
-    .wm{font-size:18px} .wm .b{font-size:15px}
-    h1{font-size:clamp(38px,9vw,56px)}
-    .hero-grid{grid-template-columns:1fr;gap:50px}
-    .seal-wrap{order:-1;align-items:flex-start}
-    .two,.two.rev .a{grid-template-columns:1fr;order:0}
-    .two{gap:34px}
-    .stats{grid-template-columns:1fr 1fr}
-    .stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
-    .grid{grid-template-columns:1fr 1fr}
-    .rules{grid-template-columns:1fr}
-    .rule{border-right:0}
-    .frame{display:none}
-    .band{padding:74px 0}
-  }
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}.reveal{opacity:1;transform:none}}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css?v=1792211472" />
 </head>
 <body>
-<canvas id="bg"></canvas>
-<div class="frame"></div>
-
+<a class="skip" href="#main">Skip to content</a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <g id="fl-mark">
-    <path fill="currentColor" d="M4920.81 6281.03c180.03,0 330.04,18.85 499.99,-38.5 23.89,-8.06 28.22,-13.89 57.04,-21.23 0,130.42 9.87,230.61 -25.97,329.95 -13.42,37.18 -39.64,84.91 -65.57,107.48 -51.82,45.13 -81.57,36.69 -94.14,88.17 246.76,-62.88 270.49,-74.19 550.42,31.12 375.86,141.4 123.29,404.89 83.07,470.58 84.69,21.58 185.67,137.73 185.67,238.91 0,157.14 -165.82,346.41 -218.44,346.41 -117.04,0 -441.03,-607.06 -509.6,-744.7 -37.9,-76.07 -68.73,-135.55 -112.59,-199.39 -45.45,-66.14 -117.25,-88.45 -172.81,-145.46 -59.67,-61.24 -129.03,-291.56 -161.19,-397.08 -6.16,-20.2 -10.33,-52.69 -15.88,-66.26zm-2413.8 -107.51c-73.23,-53.64 -116.02,-223.08 -62.44,-343.03 8.45,-18.91 13.45,-27.79 25.76,-43.5 25.81,-32.94 3.35,-18.37 36.68,-31.56 -50.83,115.85 -24.93,301.08 0,418.09zm1081.3 -1791.81c-72.4,0 -131.13,-6.4 -193.44,-39.3l-46.85 -32.38c159.69,0 231.11,5.24 356.72,-39.91 37.36,-13.43 38.35,-14.67 67.49,-33.7 21.89,-14.29 39.66,-24.57 59.07,-42.9l106.53 -110.45c-40.01,187.83 -124.6,298.63 -349.51,298.63zm54.61 -609.22c25.04,-37.39 28.55,-18.34 76.41,-35.89l153.24 -71.32c35.52,-20.15 38.54,-27.79 71.82,-52.85 98.85,-74.43 118.33,-111.82 182.26,-170.96 426.93,-394.9 1177.08,-423.35 1523.48,35.09 45.53,60.26 68.38,105.87 100.81,176.43 17.11,37.18 24.69,53.71 39.6,100.04 45.65,141.89 58.84,183.75 83.72,350.42 62.31,417.44 46.84,904.13 -61.63,1313.35 -43.11,162.63 -95.41,305.41 -188.51,414.99l-10.69 12.19c-1.59,1.73 -3.94,4.17 -5.56,5.87 -10.72,11.21 -21.94,21.91 -34.33,34.13 -28.18,27.77 -51.42,43.86 -84.54,62.82 -312.85,179.05 -854.35,-66.83 -1081.04,-215.8 -111.89,-73.52 -133.08,-96.43 -223.57,-173.57 -69.85,-59.55 -129.96,-141.01 -181.15,-219.98 -23.61,-36.43 -77.06,-143.35 -87.27,-191.24l-21.84 0c-34.02,159.68 -221.49,194.56 -317.3,48.39 -17.94,-27.37 -26.69,-46.93 -37.91,-89.94 -16.5,-63.26 -3.41,-48.13 -61.52,-64.13 -43.04,-11.85 -53.74,-11.76 -88.34,-34.78 -88.07,-58.58 -117.5,-137.9 -117.5,-265.69 21.45,17.2 30.1,36.91 51.08,63.59 1.47,1.87 3.55,4.58 5.04,6.42 1.5,1.85 3.61,4.54 5.12,6.35l50.89 51.86c109.62,95.23 292.45,81.91 415.02,-18.09 96.18,-78.48 234.03,148.02 328.6,-93.99 47.02,-120.29 19.16,-317.29 -29.76,-418.65 -27.96,-57.92 -30.68,-22.57 -14.86,-82.33 61.92,-233.87 -25.49,-428.01 -57.5,-578.29 -117.34,29.9 -40.03,95.56 -382.28,95.56zm-655.33 35.84c0,58.46 11.69,111.74 32.76,155.28 -65.99,38.19 -88.41,50.34 -139.47,110.26 -50.47,59.22 -78.97,145.22 -78.97,236.16 0,107.59 50,118.13 87.38,179.18 -194.37,112.48 -260.79,352.29 -141.85,561.28 15.59,27.4 34.5,45.13 56.98,69.07 24.14,25.69 47.13,38.77 63.02,62.48 -280.83,71.56 -729.35,413.79 -593.18,827.93 20.12,61.19 46.08,89.26 79.83,139.65 -122.22,-31.14 -100.57,-71.96 -174.75,-131.4 -12.04,56.51 -32.77,115.22 -32.77,191.13 0,101.1 21.16,191.6 84.21,254.31 80.26,79.85 143.98,21.59 229.44,-18.79 57.22,-27.03 105.65,-46.27 163.78,-71.73 114.38,-50.08 211.08,-94.83 326.14,-145.01 262.8,-114.62 216.09,-81.11 306.54,-417.3 14.79,-55 39.24,-142.77 58.56,-186.81 42.18,10.74 257.76,139 324.57,170.61 37.51,17.75 80.36,40.5 123.24,44.4 -1.96,-1.87 -5.32,-7.21 -6.27,-5.09 -5.74,12.91 -201.26,-141.08 -201.26,-401.05 84.61,21.55 158.39,59.72 251.21,59.72 8.69,40.8 67.28,138.81 91.74,174.43 107.54,156.63 261.81,293.66 415.15,394.07l159.3 100.53c57,30.86 117.48,67.39 174.96,95.34 92.01,44.75 108.71,22.99 140.6,132.91 38.19,131.65 87.06,280.18 146.55,401.16 59.06,120.1 174.97,124.98 243.45,307.13 97.03,258.15 227.24,503.71 358.69,742.52 24.46,44.41 83.06,141.24 93.58,184.33 484.67,0 987.59,-48.42 1433.9,-259.42 55.43,-26.2 113.3,-60.18 171.66,-75.05 0,-55.88 2.33,-39.07 -14.07,-80.17 -65.08,-163.07 -132.94,-330.57 -235.61,-470.98 -86.57,-118.4 -191.94,-202 -311.89,-280.03 -146,-94.96 -311.54,-129.78 -469.04,-203.76 -58.15,-27.32 -76.29,-126.11 -120.56,-190.67 -93.38,-136.21 -320.19,-243.31 -465.31,-327.29 28.81,-47.06 68.36,-64.21 98.44,-107.36 96.06,-137.86 166.31,-284.71 205.22,-456.43 18.93,-83.5 45.85,-157.83 45.85,-248.49 184.09,0 218.57,62.47 411.74,-51.4 116.7,-68.79 188.98,-224.88 188.98,-390.59 0,-120.48 -112.27,-274.02 -196.61,-298.64 44.8,-210.28 4.54,-328.31 -128.08,-469.13 -15.48,-16.42 -90.35,-60.05 -90.35,-80.36 0,-128.65 10.36,-186.31 -31.29,-312.2 -64.62,-195.31 -174.41,-274.98 -188.93,-342.85 -5.66,-26.46 -5.97,-49.35 -12,-82.45 -4.25,-23.37 -11.87,-46.52 -20.19,-73.48 -31.11,-100.91 -76.46,-170.3 -141.85,-239.06l-77.46 -70.57c-9.39,-6.46 -21.21,-12.95 -27.57,-17.63 -64.15,-47.12 -82.52,-165.93 -236.01,-255.53 -41.48,-24.21 -68.59,-38.83 -116.3,-51.99 -49.97,-13.8 -92.3,-15.56 -148.5,-28.71 -179.7,-42.04 -218.78,-84.17 -455.69,-34.08 -88.78,18.78 -67,34.29 -163.74,18.49 -44.39,-7.25 -118.85,5.05 -170.06,10.64 -52.52,5.72 -111.76,20.16 -161.26,38.64 -102.59,38.29 -217.06,29.85 -316.43,72.02 -50.93,21.61 -93.29,40.42 -135.26,67.08 -387,245.73 -456.13,594.72 -544.63,670.56 -113.12,96.96 -220.26,216.66 -220.26,404.16z"/>
-    <path fill="currentColor" d="M3271.57 6233.25c-39.52,3.6 -87.89,34.37 -127.8,51.36l-399.75 160.06c-189.64,81.71 -751.31,307.13 -890.29,400.05 -171.89,114.93 -402.59,255.49 -515.39,439.72 45.09,-4.1 81.69,-25.22 128.7,-38.41 489.46,-137.41 1137.3,2.9 1604.11,150.09 818.04,257.93 1533.93,628.94 2428.54,628.94 -10.6,-49.76 -56.79,-136.17 -80.1,-187.14l-174.75 -370.31c-83.65,-183.02 -170.07,-415.69 -306.49,-512.93 -56.51,-40.27 -103.01,-72.63 -130.35,-144.13l-71.59 -208.4c-54.05,-177.85 -73.51,-202.57 -255.53,-281.96l-1025.18 -431.69c-36.47,-16.57 -56.1,-33.81 -96.77,-37.52l-45.02 189.67c-12.1,44.89 -38.52,142.27 -42.35,192.59z"/>
-  </g>
+<symbol id="mark" viewBox="1338 2504 5898 5521"><path fill="currentColor" d="M4920.81 6281.03c180.03,0 330.04,18.85 499.99,-38.5 23.89,-8.06 28.22,-13.89 57.04,-21.23 0,130.42 9.87,230.61 -25.97,329.95 -13.42,37.18 -39.64,84.91 -65.57,107.48 -51.82,45.13 -81.57,36.69 -94.14,88.17 246.76,-62.88 270.49,-74.19 550.42,31.12 375.86,141.4 123.29,404.89 83.07,470.58 84.69,21.58 185.67,137.73 185.67,238.91 0,157.14 -165.82,346.41 -218.44,346.41 -117.04,0 -441.03,-607.06 -509.6,-744.7 -37.9,-76.07 -68.73,-135.55 -112.59,-199.39 -45.45,-66.14 -117.25,-88.45 -172.81,-145.46 -59.67,-61.24 -129.03,-291.56 -161.19,-397.08 -6.16,-20.2 -10.33,-52.69 -15.88,-66.26zm-2413.8 -107.51c-73.23,-53.64 -116.02,-223.08 -62.44,-343.03 8.45,-18.91 13.45,-27.79 25.76,-43.5 25.81,-32.94 3.35,-18.37 36.68,-31.56 -50.83,115.85 -24.93,301.08 0,418.09zm1081.3 -1791.81c-72.4,0 -131.13,-6.4 -193.44,-39.3l-46.85 -32.38c159.69,0 231.11,5.24 356.72,-39.91 37.36,-13.43 38.35,-14.67 67.49,-33.7 21.89,-14.29 39.66,-24.57 59.07,-42.9l106.53 -110.45c-40.01,187.83 -124.6,298.63 -349.51,298.63zm54.61 -609.22c25.04,-37.39 28.55,-18.34 76.41,-35.89l153.24 -71.32c35.52,-20.15 38.54,-27.79 71.82,-52.85 98.85,-74.43 118.33,-111.82 182.26,-170.96 426.93,-394.9 1177.08,-423.35 1523.48,35.09 45.53,60.26 68.38,105.87 100.81,176.43 17.11,37.18 24.69,53.71 39.6,100.04 45.65,141.89 58.84,183.75 83.72,350.42 62.31,417.44 46.84,904.13 -61.63,1313.35 -43.11,162.63 -95.41,305.41 -188.51,414.99l-10.69 12.19c-1.59,1.73 -3.94,4.17 -5.56,5.87 -10.72,11.21 -21.94,21.91 -34.33,34.13 -28.18,27.77 -51.42,43.86 -84.54,62.82 -312.85,179.05 -854.35,-66.83 -1081.04,-215.8 -111.89,-73.52 -133.08,-96.43 -223.57,-173.57 -69.85,-59.55 -129.96,-141.01 -181.15,-219.98 -23.61,-36.43 -77.06,-143.35 -87.27,-191.24l-21.84 0c-34.02,159.68 -221.49,194.56 -317.3,48.39 -17.94,-27.37 -26.69,-46.93 -37.91,-89.94 -16.5,-63.26 -3.41,-48.13 -61.52,-64.13 -43.04,-11.85 -53.74,-11.76 -88.34,-34.78 -88.07,-58.58 -117.5,-137.9 -117.5,-265.69 21.45,17.2 30.1,36.91 51.08,63.59 1.47,1.87 3.55,4.58 5.04,6.42 1.5,1.85 3.61,4.54 5.12,6.35l50.89 51.86c109.62,95.23 292.45,81.91 415.02,-18.09 96.18,-78.48 234.03,148.02 328.6,-93.99 47.02,-120.29 19.16,-317.29 -29.76,-418.65 -27.96,-57.92 -30.68,-22.57 -14.86,-82.33 61.92,-233.87 -25.49,-428.01 -57.5,-578.29 -117.34,29.9 -40.03,95.56 -382.28,95.56zm-655.33 35.84c0,58.46 11.69,111.74 32.76,155.28 -65.99,38.19 -88.41,50.34 -139.47,110.26 -50.47,59.22 -78.97,145.22 -78.97,236.16 0,107.59 50,118.13 87.38,179.18 -194.37,112.48 -260.79,352.29 -141.85,561.28 15.59,27.4 34.5,45.13 56.98,69.07 24.14,25.69 47.13,38.77 63.02,62.48 -280.83,71.56 -729.35,413.79 -593.18,827.93 20.12,61.19 46.08,89.26 79.83,139.65 -122.22,-31.14 -100.57,-71.96 -174.75,-131.4 -12.04,56.51 -32.77,115.22 -32.77,191.13 0,101.1 21.16,191.6 84.21,254.31 80.26,79.85 143.98,21.59 229.44,-18.79 57.22,-27.03 105.65,-46.27 163.78,-71.73 114.38,-50.08 211.08,-94.83 326.14,-145.01 262.8,-114.62 216.09,-81.11 306.54,-417.3 14.79,-55 39.24,-142.77 58.56,-186.81 42.18,10.74 257.76,139 324.57,170.61 37.51,17.75 80.36,40.5 123.24,44.4 -1.96,-1.87 -5.32,-7.21 -6.27,-5.09 -5.74,12.91 -201.26,-141.08 -201.26,-401.05 84.61,21.55 158.39,59.72 251.21,59.72 8.69,40.8 67.28,138.81 91.74,174.43 107.54,156.63 261.81,293.66 415.15,394.07l159.3 100.53c57,30.86 117.48,67.39 174.96,95.34 92.01,44.75 108.71,22.99 140.6,132.91 38.19,131.65 87.06,280.18 146.55,401.16 59.06,120.1 174.97,124.98 243.45,307.13 97.03,258.15 227.24,503.71 358.69,742.52 24.46,44.41 83.06,141.24 93.58,184.33 484.67,0 987.59,-48.42 1433.9,-259.42 55.43,-26.2 113.3,-60.18 171.66,-75.05 0,-55.88 2.33,-39.07 -14.07,-80.17 -65.08,-163.07 -132.94,-330.57 -235.61,-470.98 -86.57,-118.4 -191.94,-202 -311.89,-280.03 -146,-94.96 -311.54,-129.78 -469.04,-203.76 -58.15,-27.32 -76.29,-126.11 -120.56,-190.67 -93.38,-136.21 -320.19,-243.31 -465.31,-327.29 28.81,-47.06 68.36,-64.21 98.44,-107.36 96.06,-137.86 166.31,-284.71 205.22,-456.43 18.93,-83.5 45.85,-157.83 45.85,-248.49 184.09,0 218.57,62.47 411.74,-51.4 116.7,-68.79 188.98,-224.88 188.98,-390.59 0,-120.48 -112.27,-274.02 -196.61,-298.64 44.8,-210.28 4.54,-328.31 -128.08,-469.13 -15.48,-16.42 -90.35,-60.05 -90.35,-80.36 0,-128.65 10.36,-186.31 -31.29,-312.2 -64.62,-195.31 -174.41,-274.98 -188.93,-342.85 -5.66,-26.46 -5.97,-49.35 -12,-82.45 -4.25,-23.37 -11.87,-46.52 -20.19,-73.48 -31.11,-100.91 -76.46,-170.3 -141.85,-239.06l-77.46 -70.57c-9.39,-6.46 -21.21,-12.95 -27.57,-17.63 -64.15,-47.12 -82.52,-165.93 -236.01,-255.53 -41.48,-24.21 -68.59,-38.83 -116.3,-51.99 -49.97,-13.8 -92.3,-15.56 -148.5,-28.71 -179.7,-42.04 -218.78,-84.17 -455.69,-34.08 -88.78,18.78 -67,34.29 -163.74,18.49 -44.39,-7.25 -118.85,5.05 -170.06,10.64 -52.52,5.72 -111.76,20.16 -161.26,38.64 -102.59,38.29 -217.06,29.85 -316.43,72.02 -50.93,21.61 -93.29,40.42 -135.26,67.08 -387,245.73 -456.13,594.72 -544.63,670.56 -113.12,96.96 -220.26,216.66 -220.26,404.16z"/><path fill="currentColor" d="M3271.57 6233.25c-39.52,3.6 -87.89,34.37 -127.8,51.36l-399.75 160.06c-189.64,81.71 -751.31,307.13 -890.29,400.05 -171.89,114.93 -402.59,255.49 -515.39,439.72 45.09,-4.1 81.69,-25.22 128.7,-38.41 489.46,-137.41 1137.3,2.9 1604.11,150.09 818.04,257.93 1533.93,628.94 2428.54,628.94 -10.6,-49.76 -56.79,-136.17 -80.1,-187.14l-174.75 -370.31c-83.65,-183.02 -170.07,-415.69 -306.49,-512.93 -56.51,-40.27 -103.01,-72.63 -130.35,-144.13l-71.59 -208.4c-54.05,-177.85 -73.51,-202.57 -255.53,-281.96l-1025.18 -431.69c-36.47,-16.57 -56.1,-33.81 -96.77,-37.52l-45.02 189.67c-12.1,44.89 -38.52,142.27 -42.35,192.59z"/></symbol>
 </svg>
 
-<header id="hdr">
-  <nav class="nav">
-    <a class="brand" href="#hero" aria-label="Formation Labs">
-      <svg class="mark" viewBox="1098 2264 6378 6001"><use href="#fl-mark"/></svg>
-      <span class="wm"><span class="a">formation</span><span class="b">Labs</span></span>
-    </a>
-    <div class="links">
-      <a href="#shortage">The need</a>
-      <a href="#hire">What you hire</a>
-      <a href="#harness">Verification &amp; trust</a>
-      <a href="#scope">Scope</a>
-      <a href="atlas.html">The library</a>
-    </div>
-    <a href="enlist.html" class="btn btn-gold">Join the team <span class="ar">&rarr;</span></a>
-  </nav>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Formation Labs, home"><svg class="mark" aria-hidden="true"><use href="#mark"/></svg>Formation Labs</a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 5h16M2 10h16M2 15h16"/></svg>
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Site">
+      <a href="#connect">How it works</a>
+      <a href="atlas.html">Atlas</a>
+      <a class="btn small primary" href="mailto:devanshpatel77@gmail.com?subject=Formation%20Labs">Talk to us</a>
+    </nav>
+  </div>
 </header>
 
-<main>
-<section id="hero">
-  <div class="shell">
-    <div class="hero-grid">
+<main id="main">
+  <section class="hero-globe" id="hero">
+    <div class="pin" id="top">
+      <canvas id="globe" aria-hidden="true"></canvas>
+      <svg class="maskSvg" aria-hidden="true" width="100%" height="100%">
+        <defs><mask id="logoMask" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><rect width="100%" height="100%" fill="#fff"/><g id="maskG"><use id="maskUse" href="#mark" width="5898" height="5521" style="color:#000"/></g></mask></defs>
+        <rect id="maskPaper" width="100%" height="100%" fill="var(--paper)" mask="url(#logoMask)"/>
+        <g id="inkG"><use href="#mark" width="5898" height="5521" style="color:var(--ink)" id="inkFill"/><use href="#mark" width="5898" height="5521" style="color:transparent" stroke="var(--ink)" stroke-width="40" id="inkLine"/></g>
+      </svg>
+      <div class="hero-head" id="heroHead">
+        <p class="brandline">Formation Labs</p>
+        <p class="label">AI tools and services for the built environment</p>
+        <button class="scrollhint" id="heroNext" type="button" aria-label="Scroll"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 1v11M2 8l5 5 5-5"/></svg></button>
+      </div>
+      <div class="hero-tail" id="heroTail">
+        <h1>Centuries of human knowledge.<br><em>A new intelligence</em> for the world we build.</h1>
+        <div class="cta">
+          <a class="btn primary" href="mailto:devanshpatel77@gmail.com?subject=Formation%20Labs">Talk to us <span class="arr" aria-hidden="true">&rarr;</span></a>
+          <a class="btn" href="atlas.html">Explore the Atlas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="block wrap" id="connect">
+    <div class="sec-head">
       <div>
-        <div class="kick"><span>Built on first principles &middot; Verified by domain experts</span></div>
-        <h1>We are building the <span class="hl">AI Harness</span> for the Built Environment.</h1>
-        <p class="hero-sub">Hire an AI engineer that comes with a harness built and verified by human domain experts. <b>Every result it gives is computed by a tested tool, shown step by step, and traceable to its source.</b></p>
-        <div class="hero-cta">
-          <a href="#hire" class="btn btn-gold">Interview an agent <span class="ar">&rarr;</span></a>
-          <a href="#harness" class="btn btn-ghost">See how verification works</a>
+        <h2 class="rv">How it works, <em>on one bridge.</em></h2>
+      </div>
+    </div>
+    <div class="connect rv">
+      <div class="cframe"><div id="connectScene"></div></div>
+      <div class="cside">
+        <div id="connectSteps" role="tablist" aria-label="Steps">
+          <button role="tab"><b>1</b>The 1994 pier drawing and four soil logs arrive</button>
+          <button role="tab"><b>2</b>They are pinned to pier 2 and the ground</button>
+          <button role="tab"><b>3</b>Deck, piers, piles, rock: what holds what</button>
+          <button role="tab"><b>4</b>What if the flood is 0.6 m higher?</button>
+          <button role="tab"><b>5</b>Five checks on this bridge need another look</button>
+          <button role="tab"><b>6</b>Every number still points to its source</button>
         </div>
       </div>
-      <div class="seal-wrap">
-        <div class="seal"><svg aria-hidden="true" viewBox="1098 2264 6378 6001"><use href="#fl-mark"/></svg></div>
-        <div class="seal-cap"><b>Human-verified</b><br/>domain-expert harness</div>
+    </div>
+  </section>
+
+
+  <section class="block wrap" id="atlas">
+    <div class="sec-head">
+      <div>
+        <h2 class="rv">A map of everything we build.</h2>
       </div>
     </div>
-  </div>
-</section>
+    <div class="homestrip rv" id="homestrip"><div id="homestripScene"></div></div>
+    <p class="fine rv" style="margin-top:12px">Select a place to open it in the Atlas.</p>
+  </section>
 
-<section id="shortage" class="band">
-  <div class="shell reveal">
-    <div class="sec-head"><span class="num">01</span><span class="lbl">The need</span><span class="ln"></span></div>
-    <h2>The built environment is running out of the people who hold it up.</h2>
-    <p class="lead">Experienced engineers are retiring faster than new ones qualify, and the volume of work keeps rising. Firms already turn away projects they cannot staff. A trustworthy AI engineer extends the reach of every expert who remains, rather than replacing the judgment only a person can provide.</p>
-    <div class="stats">
-      <div class="stat"><div class="n">18,000</div><div class="t">more engineers leave the profession each year than enter it</div></div>
-      <div class="stat"><div class="n">30<i>%</i></div><div class="t">of civil engineers are now over the age of fifty-five</div></div>
-      <div class="stat"><div class="n">1.9<i>M</i></div><div class="t">workers construction must find this decade to keep pace</div></div>
-      <div class="stat"><div class="n">92<i>%</i></div><div class="t">of contractors cannot fill the positions they have open</div></div>
-    </div>
-    <div class="src">Sources / U.S. Bureau of Labor Statistics, ASCE, ACEC, AGC, ABC</div>
-  </div>
-</section>
 
-<section id="hire" class="band">
-  <div class="shell reveal">
-    <div class="sec-head"><span class="num">02</span><span class="lbl">What you hire</span><span class="ln"></span></div>
-    <div class="two">
-      <div class="a">
-        <h2>An engineer that works the way your best junior does.</h2>
-        <p class="lead">It takes on the routine work beside your team, runs every calculation through a verified tool, and shows the basis for each result. You keep the judgment and the stamp, and it provides tireless, checkable capacity your firm can rely on. When a problem lies outside what it has been verified to do, it tells you so instead of guessing.</p>
+  <section class="invite" id="contribute">
+    <div class="wrap">
+      <div>
+        <h2>Know a subject? <em>Help write it down.</em></h2>
       </div>
-      <div class="b">
-        <div class="console">
-          <div class="bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="cap">Working session</span></div>
-          <div class="body">
-            <div class="u">Check the shear capacity of this beam.</div>
-            <div class="m">[ verified tool &middot; section-shear ]</div>
-            <div class="ok">Vc = 142 kN, with the full calculation shown.</div>
-            <div class="dim">basis &rarr; ACI 318, inputs as given</div>
-            <div class="sp"></div>
-            <div class="u">Now size the storm drain for this site.</div>
-            <div class="no">I am not verified for hydraulics or hydrology.</div>
-            <div class="no">I will not guess at a Manning equation answer.</div>
-            <div class="dim">refer this to a licensed engineer.</div>
-          </div>
-        </div>
-        <div class="cap-note">A live session. It runs a verified tool, shows its work, and refuses what it cannot verify.</div>
+      <div class="actions">
+        <a class="btn primary" href="enlist.html">Author a section <span class="arr" aria-hidden="true">&rarr;</span></a>
+        <a class="btn" href="mailto:devanshpatel77@gmail.com?subject=Formation%20Labs">Email us</a>
       </div>
     </div>
-  </div>
-</section>
-
-<section id="harness" class="band">
-  <div class="shell reveal">
-    <div class="sec-head"><span class="num">03</span><span class="lbl">Verification &amp; trust</span><span class="ln"></span></div>
-    <h2>Verification is what makes the engineer trustworthy.</h2>
-    <p class="lead">Behind every skill is a tool built from first principles by a human domain expert, proved against known answers, and signed. The model chooses the tool and explains the result, and it never computes the number itself. And when a problem outgrows the base engineer, the agent reaches into a library of verified expert minds and convenes a council to solve it.</p>
-    <div class="rules">
-      <div class="rule"><div class="rn">A</div><h3>Built by experts</h3><p>A human domain expert writes and owns each skill, and signs it before the engineer may use it.</p></div>
-      <div class="rule"><div class="rn">B</div><h3>Proved against truth</h3><p>Every skill reproduces a set of known answers within tolerance, and is re-examined when anything changes.</p></div>
-      <div class="rule"><div class="rn">C</div><h3>Traceable by design</h3><p>Each result carries its inputs, the tool and version that produced it, and the basis it stands on.</p></div>
-      <div class="rule"><div class="rn">D</div><h3>The human holds the stamp</h3><p>The licensed engineer keeps authority and liability. The agent makes that person faster and harder to fool.</p></div>
-    </div>
-    <div class="grid" style="margin-top:24px">
-      <div class="cell v"><div class="cn">SKILL 01</div><div class="ct">Section capacity</div><div class="cs">VERIFIED</div></div>
-      <div class="cell v"><div class="cn">SKILL 02</div><div class="ct">Load analysis</div><div class="cs">VERIFIED</div></div>
-      <div class="cell r"><div class="cn">SKILL 03</div><div class="ct">Code compliance</div><div class="cs">IN REVIEW</div></div>
-      <div class="cell p"><div class="cn">SKILL 04</div><div class="ct">Geotechnical</div><div class="cs">PLANNED</div></div>
-      <div class="cell p"><div class="cn">SKILL 05</div><div class="ct">Hydraulics</div><div class="cs">PLANNED</div></div>
-      <div class="cell p"><div class="cn">SKILL 06</div><div class="ct">Drainage</div><div class="cs">PLANNED</div></div>
-      <div class="cell p"><div class="cn">SKILL 07</div><div class="ct">Durability</div><div class="cs">PLANNED</div></div>
-      <div class="cell p"><div class="cn">SKILL 08</div><div class="ct">Sustainability</div><div class="cs">PLANNED</div></div>
-    </div>
-  </div>
-</section>
-
-<section id="scope" class="band">
-  <div class="shell reveal">
-    <div class="sec-head"><span class="num">04</span><span class="lbl">Scope</span><span class="ln"></span></div>
-    <h2>Civil engineering is where we begin. The built environment is where we are going.</h2>
-    <p class="lead">The same harness extends to every discipline that shares the same need, a trustworthy answer and not enough people to produce it.</p>
-    <div class="tags">
-      <span class="tag on">Civil</span>
-      <span class="tag next">Environmental</span>
-      <span class="tag">Geotechnical</span>
-      <span class="tag">Water resources</span>
-      <span class="tag">Transportation</span>
-      <span class="tag">Structural</span>
-      <span class="tag">Construction</span>
-      <span class="tag">Surveying</span>
-      <span class="tag">Sustainability</span>
-    </div>
-  </div>
-</section>
-
-<section id="library" class="band">
-  <div class="shell reveal">
-    <div class="sec-head"><span class="num">05</span><span class="lbl">The library</span><span class="ln"></span></div>
-    <h2>One harness. A growing universe of verified engineering.</h2>
-    <p class="lead">The base engineer is only the start. Around it grows a living library of verified, expert-owned knowledge, the deep minds an agent reaches for when a problem demands them. This is everything we are building, and where each piece stands today.</p>
-    <div class="pillars">
-      <div class="pcard"><div class="pn">01 &middot; The base engineer</div><h3>Hundreds of first-principles skills</h3><p>The standard civil package, across ten disciplines, from statics to surveying.</p></div>
-      <div class="pcard"><div class="pn">02 &middot; The expert library</div><h3>Deep minds, on demand</h3><p>Reliability, durability, fracture, forensics, fire, blast, tunneling, and far more.</p></div>
-      <div class="pcard"><div class="pn">03 &middot; Capabilities</div><h3>How it touches reality</h3><p>Read drawings, retrieve codes, run the tools, refuse what it cannot verify, write the deliverable.</p></div>
-      <div class="pcard"><div class="pn">04 &middot; Workflows</div><h3>What gets delivered</h3><p>Design, review, plan checks, takeoff, permitting, inspection, forensics, the council.</p></div>
-      <div class="pcard"><div class="pn">05 &middot; Verification &amp; trust</div><h3>The trust core</h3><p>First-principles logic, verified tools, named experts, full provenance. The human holds the stamp.</p></div>
-      <div class="pcard"><div class="pn">06 &middot; The built environment</div><h3>The canvas</h3><p>Civil is the start. The reach is everything humans design, build, and maintain.</p></div>
-    </div>
-    <div class="hero-cta" style="margin-top:36px"><a href="atlas.html" class="btn btn-gold">Explore the live knowledge atlas <span class="ar">&rarr;</span></a></div>
-  </div>
-</section>
-
-<section id="join">
-  <div class="shell reveal" style="text-align:center">
-    <div class="seal" style="margin:0 auto 4px"><svg aria-hidden="true" viewBox="1098 2264 6378 6001"><use href="#fl-mark"/></svg></div>
-    <h2 class="close-h">Put a verified AI engineer to work beside your team.</h2>
-    <div class="hero-cta" style="justify-content:center">
-      <a href="mailto:devanshpatel77@gmail.com?subject=Formation%20Labs" class="btn btn-gold">Interview an agent <span class="ar">&rarr;</span></a>
-      <a href="#hero" class="btn btn-ghost">Back to top</a>
-    </div>
-    <p style="margin-top:34px;color:var(--muted);font-size:15px">Are you a practicing engineer or domain expert? <a href="enlist.html" style="color:var(--gold)">Join our technical team</a> and author the sections you know best.</p>
-  </div>
-</section>
+  </section>
 </main>
 
 <footer>
-  <div class="shell foot">
-    <a class="brand" href="#hero" aria-label="Formation Labs">
-      <svg class="mark" aria-hidden="true" viewBox="1098 2264 6378 6001" style="width:30px;height:30px;color:var(--muted)"><use href="#fl-mark"/></svg>
-      <span class="wm" style="font-size:18px"><span class="a">formation</span><span class="b" style="font-size:15px">Labs</span></span>
-    </a>
-    <div class="meta">A verified engineering intelligence lab &middot; &copy; 2026 Formation Labs</div>
-    <div class="meta">Civil-01 / v0.1</div>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#top"><svg class="mark" aria-hidden="true"><use href="#mark"/></svg>Formation Labs</a>
+      <p class="fine">AI tools and services for the built environment.</p>
+      <p class="meta">&copy; 2026 Formation Labs</p>
+    </div>
+    <div>
+      <nav aria-label="Footer">
+        <a href="#connect">How it works</a>
+        <a href="atlas.html">Knowledge Atlas</a>
+        <a href="enlist.html">Contribute</a>
+        <a href="mailto:devanshpatel77@gmail.com?subject=Formation%20Labs">Email</a>
+      </nav>
+    </div>
   </div>
 </footer>
 
-<script>
-(function(){
-  var hdr=document.getElementById('hdr');
-  var sc=function(){ hdr.classList.toggle('on', window.scrollY>24) };
-  window.addEventListener('scroll',sc,{passive:true}); sc();
-
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!reduce && 'IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
-    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
-  } else { document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in')}); }
-
-  var c=document.getElementById('bg'), x=c.getContext('2d');
-  var DPR=Math.min(window.devicePixelRatio||1,2), W,H,cell=34,cols,rows,ag=[],raf;
-  var GOLD='226,181,87', VEL='190,90,130';
-  function size(){W=c.width=Math.floor(innerWidth*DPR);H=c.height=Math.floor(innerHeight*DPR);c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';cols=Math.ceil(innerWidth/cell)+1;rows=Math.ceil(innerHeight/cell)+1;}
-  size(); window.addEventListener('resize',size);
-  function spawn(n){ag=[];for(var i=0;i<n;i++){var hz=(i%2)===0;ag.push({x:Math.floor(Math.random()*cols),y:Math.floor(Math.random()*rows),dx:hz?(Math.random()<.5?1:-1):0,dy:hz?0:(Math.random()<.5?1:-1),g:Math.random()<.6,s:0,sp:9+Math.floor(Math.random()*16)});}}
-  spawn(innerWidth<800?12:24);
-  function px(gx,gy){return [gx*cell*DPR,gy*cell*DPR];}
-  function grid(){x.fillStyle='rgba(236,227,218,0.04)';for(var a=0;a<cols;a++)for(var b=0;b<rows;b++){var p=px(a,b);x.fillRect(p[0],p[1],1*DPR,1*DPR);}}
-  function frame(){
-    x.fillStyle='rgba(19,10,15,0.17)';x.fillRect(0,0,W,H);grid();
-    for(var i=0;i<ag.length;i++){var a=ag[i];a.s++;if(a.s>=a.sp){a.s=0;a.x+=a.dx;a.y+=a.dy;if(Math.random()<.15){if(a.dx!==0){a.dy=Math.random()<.5?1:-1;a.dx=0;}else{a.dx=Math.random()<.5?1:-1;a.dy=0;}}if(a.x<0)a.x=cols;if(a.x>cols)a.x=0;if(a.y<0)a.y=rows;if(a.y>rows)a.y=0;}
-      var p=px(a.x,a.y),s=4*DPR;x.fillStyle='rgba('+(a.g?GOLD:VEL)+',0.85)';x.fillRect(p[0]-s/2,p[1]-s/2,s,s);x.fillStyle='rgba('+(a.g?GOLD:VEL)+',0.15)';x.fillRect(p[0]-s,p[1]-s,s*2,s*2);}
-    raf=requestAnimationFrame(frame);
-  }
-  if(!reduce){raf=requestAnimationFrame(frame);} else {x.fillStyle='#130a0f';x.fillRect(0,0,W,H);grid();}
-  document.addEventListener('visibilitychange',function(){ if(document.hidden){ if(raf) cancelAnimationFrame(raf); } else if(!reduce){ raf=requestAnimationFrame(frame); } });
-})();
-</script>
+<script src="assets/atlas-domains.js?v=3"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="assets/scene.js?v=1792211472"></script>
+<script src="assets/land-110m.js?v=3"></script>
+<script src="assets/globe.js?v=1792211472"></script>
+<script src="assets/site.js?v=1792211472"></script>
 </body>
 </html>

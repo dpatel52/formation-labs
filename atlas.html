@@ -4,292 +4,96 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Formation Labs · Knowledge Atlas</title>
-<meta name="description" content="The Formation Labs harness, the full map of engineering domains we build and verify, from a base engineer trained on first principles to a deep domain-expert library, capabilities, workflows, and the verification layer." />
-<link rel="icon" type="image/svg+xml" href="favicon.svg?v=2" />
+<meta name="description" content="The Formation Labs Knowledge Atlas: the built environment in fourteen entry points, the disciplines behind them, the life of a project, and the honest state of what Formation Labs covers today." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=4" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<style>
-  :root{--bg:#130a0f;--cream:#ece3da;--muted:#a8949c;--faint:#74636c;--gold:#e2b557;--velvet:#8e3358;--rose:#e79ab2;--line:rgba(236,227,218,0.12);
-    --mono:'IBM Plex Mono',monospace;--serif:'Fraunces',serif;--sans:'Inter',system-ui,sans-serif;}
-  *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%;overflow:hidden}
-  body{font-family:var(--sans);background:var(--bg);color:var(--cream)}
-  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-    background:radial-gradient(60% 50% at 12% 4%,rgba(123,45,78,0.34),transparent 60%),radial-gradient(48% 44% at 92% 92%,rgba(212,168,67,0.12),transparent 62%),linear-gradient(180deg,#130a0f,#0d0609);}
-  header{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:16px;
-    padding:16px 26px;border-bottom:1px solid rgba(236,227,218,0.07);background:rgba(13,6,9,0.66);backdrop-filter:blur(12px);flex-wrap:wrap}
-  .brand{display:flex;align-items:baseline;gap:9px}
-  .brand .a{font-family:var(--serif);font-style:italic;font-weight:400;font-size:21px}
-  .brand .b{font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;font-size:17px}
-  .motto{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--gold)}
-  .hint{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
-  .back{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-  .back:hover{color:var(--gold)}
-  a{color:inherit;text-decoration:none}
-  #chart{position:fixed;inset:0;z-index:1}
-  .tag{position:fixed;left:0;right:0;bottom:0;z-index:10;text-align:center;padding:9px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);background:rgba(13,6,9,0.5)}
-  .node text{paint-order:stroke;stroke:#0d0609;stroke-width:3px;stroke-linejoin:round}
-  .legend{position:fixed;right:22px;bottom:34px;z-index:10;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);text-align:right;line-height:1.9}
-  .legend b{color:var(--cream)}
-  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:8px;vertical-align:middle}
-  @media(max-width:900px){.motto,.hint{display:none}}
-  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css?v=1792211472" />
+<link rel="stylesheet" href="assets/atlas.css?v=1792211472" />
 </head>
-<body>
-<h1 class="sr-only">Formation Labs knowledge atlas</h1>
-<header>
-  <div class="brand"><span class="a">formation</span><span class="b">Labs</span></div>
-  <div class="motto">Built on first principles &middot; Verified by domain experts</div>
-  <div class="hint">Click a node to open &middot; scroll to zoom &middot; drag to pan</div>
-  <a class="back" href="index.html">&larr; Back to site</a>
+<body class="atlas">
+<a class="skip" href="#atlasMain">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="mark" viewBox="1338 2504 5898 5521"><path fill="currentColor" d="M4920.81 6281.03c180.03,0 330.04,18.85 499.99,-38.5 23.89,-8.06 28.22,-13.89 57.04,-21.23 0,130.42 9.87,230.61 -25.97,329.95 -13.42,37.18 -39.64,84.91 -65.57,107.48 -51.82,45.13 -81.57,36.69 -94.14,88.17 246.76,-62.88 270.49,-74.19 550.42,31.12 375.86,141.4 123.29,404.89 83.07,470.58 84.69,21.58 185.67,137.73 185.67,238.91 0,157.14 -165.82,346.41 -218.44,346.41 -117.04,0 -441.03,-607.06 -509.6,-744.7 -37.9,-76.07 -68.73,-135.55 -112.59,-199.39 -45.45,-66.14 -117.25,-88.45 -172.81,-145.46 -59.67,-61.24 -129.03,-291.56 -161.19,-397.08 -6.16,-20.2 -10.33,-52.69 -15.88,-66.26zm-2413.8 -107.51c-73.23,-53.64 -116.02,-223.08 -62.44,-343.03 8.45,-18.91 13.45,-27.79 25.76,-43.5 25.81,-32.94 3.35,-18.37 36.68,-31.56 -50.83,115.85 -24.93,301.08 0,418.09zm1081.3 -1791.81c-72.4,0 -131.13,-6.4 -193.44,-39.3l-46.85 -32.38c159.69,0 231.11,5.24 356.72,-39.91 37.36,-13.43 38.35,-14.67 67.49,-33.7 21.89,-14.29 39.66,-24.57 59.07,-42.9l106.53 -110.45c-40.01,187.83 -124.6,298.63 -349.51,298.63zm54.61 -609.22c25.04,-37.39 28.55,-18.34 76.41,-35.89l153.24 -71.32c35.52,-20.15 38.54,-27.79 71.82,-52.85 98.85,-74.43 118.33,-111.82 182.26,-170.96 426.93,-394.9 1177.08,-423.35 1523.48,35.09 45.53,60.26 68.38,105.87 100.81,176.43 17.11,37.18 24.69,53.71 39.6,100.04 45.65,141.89 58.84,183.75 83.72,350.42 62.31,417.44 46.84,904.13 -61.63,1313.35 -43.11,162.63 -95.41,305.41 -188.51,414.99l-10.69 12.19c-1.59,1.73 -3.94,4.17 -5.56,5.87 -10.72,11.21 -21.94,21.91 -34.33,34.13 -28.18,27.77 -51.42,43.86 -84.54,62.82 -312.85,179.05 -854.35,-66.83 -1081.04,-215.8 -111.89,-73.52 -133.08,-96.43 -223.57,-173.57 -69.85,-59.55 -129.96,-141.01 -181.15,-219.98 -23.61,-36.43 -77.06,-143.35 -87.27,-191.24l-21.84 0c-34.02,159.68 -221.49,194.56 -317.3,48.39 -17.94,-27.37 -26.69,-46.93 -37.91,-89.94 -16.5,-63.26 -3.41,-48.13 -61.52,-64.13 -43.04,-11.85 -53.74,-11.76 -88.34,-34.78 -88.07,-58.58 -117.5,-137.9 -117.5,-265.69 21.45,17.2 30.1,36.91 51.08,63.59 1.47,1.87 3.55,4.58 5.04,6.42 1.5,1.85 3.61,4.54 5.12,6.35l50.89 51.86c109.62,95.23 292.45,81.91 415.02,-18.09 96.18,-78.48 234.03,148.02 328.6,-93.99 47.02,-120.29 19.16,-317.29 -29.76,-418.65 -27.96,-57.92 -30.68,-22.57 -14.86,-82.33 61.92,-233.87 -25.49,-428.01 -57.5,-578.29 -117.34,29.9 -40.03,95.56 -382.28,95.56zm-655.33 35.84c0,58.46 11.69,111.74 32.76,155.28 -65.99,38.19 -88.41,50.34 -139.47,110.26 -50.47,59.22 -78.97,145.22 -78.97,236.16 0,107.59 50,118.13 87.38,179.18 -194.37,112.48 -260.79,352.29 -141.85,561.28 15.59,27.4 34.5,45.13 56.98,69.07 24.14,25.69 47.13,38.77 63.02,62.48 -280.83,71.56 -729.35,413.79 -593.18,827.93 20.12,61.19 46.08,89.26 79.83,139.65 -122.22,-31.14 -100.57,-71.96 -174.75,-131.4 -12.04,56.51 -32.77,115.22 -32.77,191.13 0,101.1 21.16,191.6 84.21,254.31 80.26,79.85 143.98,21.59 229.44,-18.79 57.22,-27.03 105.65,-46.27 163.78,-71.73 114.38,-50.08 211.08,-94.83 326.14,-145.01 262.8,-114.62 216.09,-81.11 306.54,-417.3 14.79,-55 39.24,-142.77 58.56,-186.81 42.18,10.74 257.76,139 324.57,170.61 37.51,17.75 80.36,40.5 123.24,44.4 -1.96,-1.87 -5.32,-7.21 -6.27,-5.09 -5.74,12.91 -201.26,-141.08 -201.26,-401.05 84.61,21.55 158.39,59.72 251.21,59.72 8.69,40.8 67.28,138.81 91.74,174.43 107.54,156.63 261.81,293.66 415.15,394.07l159.3 100.53c57,30.86 117.48,67.39 174.96,95.34 92.01,44.75 108.71,22.99 140.6,132.91 38.19,131.65 87.06,280.18 146.55,401.16 59.06,120.1 174.97,124.98 243.45,307.13 97.03,258.15 227.24,503.71 358.69,742.52 24.46,44.41 83.06,141.24 93.58,184.33 484.67,0 987.59,-48.42 1433.9,-259.42 55.43,-26.2 113.3,-60.18 171.66,-75.05 0,-55.88 2.33,-39.07 -14.07,-80.17 -65.08,-163.07 -132.94,-330.57 -235.61,-470.98 -86.57,-118.4 -191.94,-202 -311.89,-280.03 -146,-94.96 -311.54,-129.78 -469.04,-203.76 -58.15,-27.32 -76.29,-126.11 -120.56,-190.67 -93.38,-136.21 -320.19,-243.31 -465.31,-327.29 28.81,-47.06 68.36,-64.21 98.44,-107.36 96.06,-137.86 166.31,-284.71 205.22,-456.43 18.93,-83.5 45.85,-157.83 45.85,-248.49 184.09,0 218.57,62.47 411.74,-51.4 116.7,-68.79 188.98,-224.88 188.98,-390.59 0,-120.48 -112.27,-274.02 -196.61,-298.64 44.8,-210.28 4.54,-328.31 -128.08,-469.13 -15.48,-16.42 -90.35,-60.05 -90.35,-80.36 0,-128.65 10.36,-186.31 -31.29,-312.2 -64.62,-195.31 -174.41,-274.98 -188.93,-342.85 -5.66,-26.46 -5.97,-49.35 -12,-82.45 -4.25,-23.37 -11.87,-46.52 -20.19,-73.48 -31.11,-100.91 -76.46,-170.3 -141.85,-239.06l-77.46 -70.57c-9.39,-6.46 -21.21,-12.95 -27.57,-17.63 -64.15,-47.12 -82.52,-165.93 -236.01,-255.53 -41.48,-24.21 -68.59,-38.83 -116.3,-51.99 -49.97,-13.8 -92.3,-15.56 -148.5,-28.71 -179.7,-42.04 -218.78,-84.17 -455.69,-34.08 -88.78,18.78 -67,34.29 -163.74,18.49 -44.39,-7.25 -118.85,5.05 -170.06,10.64 -52.52,5.72 -111.76,20.16 -161.26,38.64 -102.59,38.29 -217.06,29.85 -316.43,72.02 -50.93,21.61 -93.29,40.42 -135.26,67.08 -387,245.73 -456.13,594.72 -544.63,670.56 -113.12,96.96 -220.26,216.66 -220.26,404.16z"/><path fill="currentColor" d="M3271.57 6233.25c-39.52,3.6 -87.89,34.37 -127.8,51.36l-399.75 160.06c-189.64,81.71 -751.31,307.13 -890.29,400.05 -171.89,114.93 -402.59,255.49 -515.39,439.72 45.09,-4.1 81.69,-25.22 128.7,-38.41 489.46,-137.41 1137.3,2.9 1604.11,150.09 818.04,257.93 1533.93,628.94 2428.54,628.94 -10.6,-49.76 -56.79,-136.17 -80.1,-187.14l-174.75 -370.31c-83.65,-183.02 -170.07,-415.69 -306.49,-512.93 -56.51,-40.27 -103.01,-72.63 -130.35,-144.13l-71.59 -208.4c-54.05,-177.85 -73.51,-202.57 -255.53,-281.96l-1025.18 -431.69c-36.47,-16.57 -56.1,-33.81 -96.77,-37.52l-45.02 189.67c-12.1,44.89 -38.52,142.27 -42.35,192.59z"/></symbol>
+</svg>
+
+<header class="nav solid" id="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Formation Labs, home"><svg class="mark" aria-hidden="true"><use href="#mark"/></svg>Formation Labs</a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 5h16M2 10h16M2 15h16"/></svg>
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="index.html#connect">How it connects</a>
+      <a class="btn small primary" href="mailto:devanshpatel77@gmail.com?subject=Formation%20Labs">Talk to us</a>
+    </nav>
+  </div>
 </header>
-<div id="chart"></div>
-<div class="legend">
-  <div><b>Live</b><span class="dot" style="background:#e2b557"></span></div>
-  <div><b>In progress</b><span class="dot" style="background:#e79ab2"></span></div>
-  <div><b>Planned</b><span class="dot" style="background:#6f5c66"></span></div>
-  <div style="margin-top:7px;color:var(--faint);text-transform:none;letter-spacing:0">filled = has more inside</div>
-</div>
-<div class="tag" id="statusbar">The Formation Labs harness, every domain we build and verify</div>
 
+<main class="wrap" id="atlasApp">
+  <div class="atlas-head">
+    <div class="row">
+      <div>
+        <h1 style="margin-top:10px">A map of everything we build.</h1>
+      </div>
+      <div class="atlas-tools">
+        <div class="seg" id="perspective" role="tablist" aria-label="Perspective">
+          <button type="button" role="tab" data-p="world" aria-selected="true">Physical world</button>
+          <button type="button" role="tab" data-p="knowledge" aria-selected="false">Knowledge</button>
+          <button type="button" role="tab" data-p="lifecycle" aria-selected="false">Lifecycle</button>
+        </div>
+        <div class="seg" id="viewmode" role="tablist" aria-label="View" style="display:none">
+          <button type="button" role="tab" data-v="map" aria-selected="true">Explore</button>
+          <button type="button" role="tab" data-v="list" aria-selected="false">List</button>
+        </div>
+      </div>
+    </div>
+    <div class="atlas-tools" style="margin-top:16px">
+      <div class="search">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+        <input id="atlasSearch" type="search" placeholder="Search any subject, for example bridges, flooding, concrete, tunnels, EV charging" aria-label="Search the Atlas" autocomplete="off" />
+        <div class="search-results" id="searchResults" role="listbox"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip" id="strip">
+    <div id="stripScene"></div>
+    <span class="strip-note label">Select a place.</span>
+  </div>
+
+  <nav class="crumbs" id="crumbs" aria-label="Where you are"></nav>
+  <p class="sr-only" id="atlasLive" aria-live="polite"></p>
+  <div id="atlasMain"></div>
+</main>
+
+<footer style="margin-top:80px">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html"><svg class="mark" aria-hidden="true"><use href="#mark"/></svg>Formation Labs</a>
+      <p class="fine">AI tools and services for the built environment.</p>
+      <p class="meta">&copy; 2026 Formation Labs</p>
+    </div>
+    <div>
+      <nav aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="index.html#connect">How it connects</a>
+        <a href="index.html#foundation">Foundation</a>
+        <a href="enlist.html">Contribute</a>
+        <a href="atlas.html?v=list">Full list</a>
+        <a href="mailto:devanshpatel77@gmail.com?subject=Formation%20Labs">Email</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/atlas-data.js?v=3"></script>
+<script src="assets/scene.js?v=1792211472"></script>
+<script src="assets/atlas.js?v=1792211472"></script>
 <script>
-function n(name, kids){ return {name:name, children:(kids||[]).map(function(k){return (typeof k==='string')?{name:k}:k;})}; }
-
-var DATA = n("FORMATION LABS", [
-  n("Base Engineer (Civil)", [
-    n("Fundamentals", ["Engineering mathematics","Statics","Dynamics","Mechanics of materials","Fluid mechanics","Engineering economics","Ethics & practice","Programming & computation","Communication & sustainability"]),
-    n("Structural", ["Structural analysis","Structural dynamics","Stability & buckling","Nonlinear & plastic analysis","Loads & combinations","Steel design (AISC)","Cold-formed steel","Reinforced concrete (ACI)","Prestressed & post-tensioned","Masonry","Wood & mass timber","Foundations","Lateral systems & seismic","Wind loads (ASCE 7)","Bridge engineering","Specialty structures","Forensic, repair & strengthening","Construction-phase engineering"]),
-    n("Geotechnical", ["Soil mechanics","Site investigation","Laboratory testing","Shallow foundations","Deep foundations","Earth-retaining structures","Slope stability","Ground improvement","Seepage & dewatering","Earthquake geotechnical","Rock mechanics","Geosynthetics","Problematic soils","Instrumentation & earthwork"]),
-    n("Transportation", ["Highway geometric design","Roadway & corridor design","Intersections & interchanges","Traffic flow theory","Capacity & LOS (HCM)","Traffic signals & control","Traffic studies & data","Planning & travel demand","Traffic safety (HSM)","Traffic control devices (MUTCD)","Work zones & MOT",n("Pavement engineering", ["Flexible pavement design","Rigid (PCC) pavement design","Composite pavements","Pavement overlays & rehabilitation","Mechanistic-empirical design (Pavement ME / AASHTOWare)","AASHTO 1993 pavement design","Pavement structural evaluation (FWD / deflection)","Pavement condition & distress (IRI, PCI, rutting, cracking)","Pavement management systems (PMS)","Pavement preservation & maintenance","Airfield pavement design (FAA)","Asphalt mix design (Superpave, Marshall)","Concrete pavement materials & jointing","Subgrade, base & subbase design","Roadway & subsurface drainage"]),"Roadside safety","Transportation drainage","Multimodal & accessibility","ITS & connected vehicles"]),
-    n("Water Resources & Environmental", ["Hydrology · statistical","Hydrology · rainfall-runoff","Open-channel hydraulics","Closed-conduit hydraulics","Stormwater management","Floodplain & river engineering","Water distribution","Drinking water treatment","Wastewater collection","Wastewater treatment","Water quality","Groundwater & hydrogeology","Environmental engineering","Specialty water resources"]),
-    n("Construction Eng. & Management", ["Cost estimating","Scheduling","Project & construction management","Operations & methods","Equipment & productivity","Temporary works","Construction safety","Quality control & assurance","Construction surveying & layout","Sustainability in construction"]),
-    n("Materials", ["Concrete mix design","Concrete properties & testing","Concrete durability & special","Asphalt & bituminous","Aggregates","Steel, rebar, masonry & timber","Nondestructive testing"]),
-    n("Surveying & Geomatics", ["Measurement & error theory","Distance & angle measurement","Leveling","Traverse & COGO","Topographic surveys & mapping","Boundary & cadastral","Route surveying & curves","GNSS / GPS surveying","Geodesy & coordinate systems","Photogrammetry & remote sensing","LiDAR, drones & monitoring"]),
-    n("Digital delivery & BIM", ["BIM modeling & coordination","Civil infrastructure modeling","Digital twins","GIS analysis","Reality capture","Data, automation & ML"]),
-    n("Software & tools", ["CAD & drafting","Civil / corridor design","BIM & coordination","Structural analysis & design","Structural FEA","Connection & component design","Geotechnical software","Hydraulics & stormwater","Water & treatment","Groundwater & environmental","Transportation software","Construction PM, estimating & field","Survey & reality capture","GIS & geospatial","Computation & math"])
-  ]),
-  n("Domain-Expert Library", [
-    n("Reliability & risk", ["Structural reliability (FORM / SORM)","Monte Carlo simulation","Code calibration & LRFD","Systems reliability","FMEA & risk analysis","Probabilistic load & resistance","Bayesian updating"]),
-    n("Durability & service life", ["Chloride ingress & corrosion","Carbonation","ASR & sulfate attack","Freeze-thaw","Service-life modeling (fib MC)","Extended service-life design"]),
-    n("Fracture & fatigue mechanics", ["LEFM & fracture toughness","Quasi-brittle fracture & size effect","Crack-band & cohesive models","Fatigue life & S-N","Crack growth (Paris)"]),
-    n("Advanced materials science", ["Fiber-reinforced concrete (FRC)","UHPC","Textile-reinforced concrete (TRC)","Hybrid reinforced concrete","Concrete constitutive modeling","Advanced binders & asphalt","Composites & FRP"]),
-    n("Forensic engineering", ["Failure analysis & root cause","Structural collapse investigation","Distress & damage assessment","Fire & explosion investigation","Expert witness & litigation","Reverse engineering"]),
-    n("Structural fire engineering", ["Fire dynamics & loads","Thermal-structural analysis","Structural fire-resistance design"]),
-    n("Blast & extreme loading", ["Blast loading & dynamics","Progressive & disproportionate collapse","Impact & missile","Hardening & standoff"]),
-    n("Advanced seismic engineering", ["Performance-based seismic design","Nonlinear response history","Base isolation & damping","Seismic soil-structure interaction","Ground-motion selection","Seismic hazard analysis"]),
-    n("Wind engineering", ["Aerodynamics & wind tunnel","CFD for wind","Vortex-induced vibration","Tall-building wind","Long-span & cable aerodynamics"]),
-    n("Computational mechanics", ["Advanced nonlinear FEA","Multiphysics simulation","Meshless & peridynamics","ML surrogates & reduced-order","High-performance computing"]),
-    n("Advanced geotechnical", ["Centrifuge & physical modeling","Constitutive soil modeling","Unsaturated soil mechanics","Numerical geomechanics"]),
-    n("Tunneling & underground", ["TBM & NATM","Ground-support interaction","Settlement & risk","Deep excavation","Underground space"]),
-    n("Dams & hydraulic structures", ["Dam design & safety","Spillway hydraulics","Seepage & internal erosion","Dam-break & risk","Levees & flood control"]),
-    n("Bridge engineering (advanced)", ["Long-span (cable-stayed / suspension)","Segmental & balanced cantilever","Bridge dynamics & wind","Seismic bridge design","Load rating & assessment","Bridge inspection"]),
-    n("Coastal, offshore & marine", ["Coastal hydrodynamics","Storm surge & sea-level rise","Offshore platforms","Monopiles & marine foundations","Ports & harbors"]),
-    n("Transmission & telecom structures", ["Lattice towers","Transmission line design","Pole structures","Communication towers"]),
-    n("Pipelines & pressure systems", ["Pipeline design","Pipe stress & fatigue","Trenchless engineering","Water hammer & surge"]),
-    n("Industrial & nuclear", ["Nuclear structures","Power-plant structures","Industrial & process structures","Equipment & vessel supports","Machine foundations"]),
-    n("Energy & renewable structures", ["Wind turbine structures & foundations","Solar / PV structures","Battery & energy storage","Offshore wind"]),
-    n("Sustainability & carbon", ["Life-cycle assessment (LCA)","Embodied carbon & EPDs","Low-carbon concrete","Net-zero design","Circular economy"]),
-    n("Resilience & climate adaptation", ["Multi-hazard resilience","Climate-adaptive design","Flood / wildfire / heat resilience","Community resilience"]),
-    n("Sensors, SHM & digital twins", ["Structural health monitoring","Sensor networks & IoT","Data-driven diagnostics","Digital-twin operations"]),
-    n("Optimization & generative design", ["Structural optimization","Topology optimization","Generative & parametric design","AI-assisted design"]),
-    n("Structural dynamics, vibration & acoustics", ["Vibration serviceability (footfall, ISO 10137)","Machine foundation dynamics & isolation","Tuned mass & viscous dampers","Architectural & building acoustics","Ground-borne noise & vibration","Aeroelasticity & flutter"]),
-    n("Material-specific structural", ["Steel connection & joint mechanics","Structural masonry","Mass timber systems (CLT, glulam)","Aluminium & light-alloy structures","Structural glass mechanics","Cable, membrane & tensile structures","Polymer & adhesive joint mechanics"]),
-    n("Solid mechanics & failure science", ["Plasticity & crystal plasticity","Contact mechanics, tribology & wear","Creep & viscoelasticity","Continuum damage mechanics","Fastening & post-installed anchorage","Experimental mechanics (DIC, modal)","Stability & buckling theory","Residual stress & distortion"]),
-    n("Thermal & multiphysics loading", ["Heat transfer & thermal stress","Cryogenic structures (LNG)","Hygrothermal & moisture transport","Ice & snow engineering","Corrosion-fatigue & EAC","Stress-corrosion cracking"]),
-    n("Construction technology & industrialized construction", ["Lean construction & Last Planner","Modular & offsite (DfMA)","Construction robotics & automation","3D-printed / additive construction","4D / 5D BIM & simulation","Reality capture & progress tracking","Safety analytics & wearables"]),
-    n("AI & computation for AEC", ["Generative & design-space exploration","Automated code-compliance checking","Computer vision for defects & progress","Predictive maintenance analytics","Schedule & risk forecasting (ML)","Building energy & occupancy forecasting","Knowledge graphs & semantic AEC data"]),
-    n("Geospatial & digital infrastructure", ["Spatial data infrastructure (OGC)","City-scale & infrastructure digital twins","Hydrography & bathymetric survey","SAR / InSAR deformation monitoring","openBIM / IFC interoperability","Asset information & golden-thread data"]),
-    n("Mission-critical & specialty facility systems", ["Data-center & mission-critical facilities","Cleanroom & contamination control","Healthcare & laboratory systems","Advanced HVAC & thermal systems","District & central energy plant","Refrigeration & process cooling"]),
-    n("Airport & airfield engineering", ["Airfield pavement design (FAARFIELD, FAA AC 150)","Aircraft loading (ACN-PCN / ACR-PCR)","Runway, taxiway & apron geometry","Airfield pavement evaluation","Airport drainage & grading","Airfield lighting, marking & signage","Airport master planning & airspace (FAR Part 77)","Terminal & landside planning","Airport capacity & simulation","Airport noise & environmental (FAR Part 150)","Heliport & vertiport design"]),
-    n("Railway & track engineering", ["Track structure & geometry","Ballasted & slab track","Rail-wheel interaction & vehicle dynamics","Track substructure & subgrade","High-speed rail","Light rail & transit track","Turnouts & special trackwork","Railway bridges & structures","Corridor capacity & operations","Track maintenance & inspection"]),
-    n("Traffic operations & simulation", ["Microsimulation (VISSIM, Aimsun, SUMO)","Macro & mesoscopic modeling","Signal timing & coordination (Synchro, TRANSYT)","Adaptive signal control","Highway capacity (HCM)","Queueing & shockwave analysis","Ramp metering & freeway operations","Work-zone traffic analysis","Travel demand & assignment"]),
-    n("Transportation safety engineering", ["Predictive safety analysis (HSM)","Crash modeling & safety performance functions","Road safety audits","Roadside design & barriers (MASH)","Human factors & driver behavior","Systemic & network screening","Vulnerable road user safety","Vision Zero & safe system"]),
-    n("Intelligent transportation & connected/automated systems", ["ITS architecture & standards","Connected vehicle (V2X) infrastructure","Automated vehicle readiness","Traffic management centers","Sensing, detection & data fusion","Transportation data & analytics","Mobility-as-a-service"]),
-    n("Freight, logistics & ports", ["Freight demand & network modeling","Intermodal & container terminals","Port & marine terminal operations","Truck & corridor freight planning","Heavy-vehicle route loading","Supply-chain & logistics infrastructure","Last-mile & urban freight"]),
-    n("Rock mechanics & rock engineering", ["Rock mass classification (RMR, Q, GSI, RQD)","Intact rock & discontinuity strength","Hoek-Brown & Mohr-Coulomb criteria","Rock slope stability","Rock support & reinforcement","In-situ stress measurement","Rock blasting & fragmentation","Discrete fracture networks","Numerical rock modeling (UDEC / 3DEC)","Squeezing, swelling & rockburst"]),
-    n("Slope stability & landslide engineering", ["Limit equilibrium (Bishop, Spencer, Morgenstern-Price)","FE strength-reduction stability","Landslide investigation & characterization","Landslide monitoring & early warning","Slope stabilization & remediation","Rainfall-induced slope failure","Rapid-drawdown stability","Run-out & mobility analysis","Rockfall hazard","Risk-based slope management"]),
-    n("Ground improvement & deep foundations", ["Deep soil mixing & jet grouting","Stone columns & aggregate piers","Dynamic & vibro compaction","Preloading & vertical drains","Permeation & compaction grouting","Micropiles & helical piles","Drilled shafts & barrettes","Pile dynamics & driveability (PDA / CAPWAP)","Ground anchors & tiebacks","Geosynthetic-reinforced soil"]),
-    n("Earthquake geotechnical engineering", ["Liquefaction triggering & susceptibility","Liquefaction settlement & lateral spreading","Cyclic softening of clays","Site response & amplification","Newmark seismic slope displacement","Seismic earth pressures (Mononobe-Okabe)","Seismic retaining-wall design","Seismic pile foundation design","Liquefaction mitigation","Seismic dam & embankment performance"]),
-    n("Mining & geotechnical engineering", ["Surface mine slope stability","Underground mine & stope stability","Subsidence over workings","Pillar design & extraction ratio","Tailings storage facility design","Heap leach pad geotechnics","Backfill & paste fill","Mine waste & spoil stability","Caving & ground control"]),
-    n("Geophysics & subsurface imaging", ["Seismic refraction & reflection","Surface-wave methods (MASW, ReMi, SASW)","Electrical resistivity & induced polarization","Ground-penetrating radar","Borehole & crosshole geophysics","Gravity & magnetics","Electromagnetic surveys","Geophysical inversion & interpretation"]),
-    n("Engineering geology", ["Engineering & environmental geology","Site geological characterization & mapping","Geomorphology & terrain analysis","Subsurface resource evaluation","Geothermal subsurface engineering","Carbon-storage geomechanics","Induced seismicity"]),
-    n("Hydrology & watershed modeling", ["Distributed & physically-based models","Flood frequency & regional regression","Probable maximum precipitation & PMF","Continuous simulation & water balance","Snow hydrology & snowmelt","Nonstationary flood hydrology","Calibration & uncertainty","Climate-adjusted design storms","Real-time flood forecasting"]),
-    n("Computational hydraulics & CFD", ["1D unsteady channel modeling (HEC-RAS)","2D/3D hydrodynamics (TUFLOW, Delft3D)","Free-surface & shallow-water CFD","Multiphase & air-entrainment","Sediment & morphodynamic modeling","Flood-wave & dam-break routing (numerical)","Pressurized transient & surge","Cavitation & high-velocity flow"]),
-    n("River, fluvial & sediment engineering", ["Sediment transport mechanics","Channel stability & regime theory","Bridge & structure scour (HEC-18)","River restoration & natural channel design","Bank stabilization & grade control","Reservoir sedimentation","Fluvial geomorphology","Levee & flood-control channels"]),
-    n("Groundwater & hydrogeology", ["Aquifer testing & parameter estimation","Groundwater flow modeling (MODFLOW)","Contaminant transport (MT3D, RT3D)","Saltwater intrusion","Managed aquifer recharge","Wellfield design & capture zones","Vadose-zone & unsaturated flow","Karst & fractured-rock hydrogeology"]),
-    n("Water & wastewater treatment", ["Membrane filtration & desalination","Advanced oxidation & UV","Biological nutrient removal & MBR","Anaerobic digestion & resource recovery","Potable & non-potable reuse","Disinfection by-product control","Process modeling (BioWin, GPS-X)","Emerging contaminants & PFAS"]),
-    n("Water quality & aquatic systems", ["Surface-water quality modeling (QUAL2K, WASP)","Eutrophication & nutrient dynamics","TMDL & watershed loading","Aquatic chemistry & contaminant fate","Thermal & dissolved-oxygen modeling","Harmful algal blooms","Mixing-zone analysis"]),
-    n("Air quality & atmospheric engineering", ["Emission inventories","Air dispersion modeling (AERMOD, CALPUFF)","Air-pollution control technology","Indoor air quality","Greenhouse-gas accounting","Permitting & NAAQS compliance","Fugitive dust & odor control"]),
-    n("Solid & hazardous waste engineering", ["Landfill design, liners & leachate","Landfill gas & energy recovery","MSW systems & recycling","Waste-to-energy","Hazardous waste treatment, storage & disposal","Industrial & mining waste","RCRA compliance & characterization"]),
-    n("Site remediation & contaminated land", ["Phase I / II site assessment","Conceptual site models & exposure","Soil & groundwater remediation","In-situ chemical & bioremediation","Pump-and-treat & permeable reactive barriers","Vapor intrusion & soil-vapor extraction","Risk-based corrective action","Brownfield redevelopment","PFAS remediation"]),
-    n("Environmental permitting, NEPA & ecology", ["Environmental impact assessment & NEPA","Clean Water Act 404 & wetlands","Wetland delineation & mitigation banking","Endangered species & habitat","Stormwater & NPDES permitting","Cultural & natural resource surveys","Ecological restoration engineering"]),
-    n("Construction claims & dispute resolution", ["Delay & disruption analysis","Forensic schedule analysis","Time-impact analysis","Productivity loss & measured-mile","Quantum & damages","Acceleration & constructive change","Differing site conditions","Mediation, arbitration & litigation support"]),
-    n("Construction project controls", ["Integrated cost-schedule control","Earned value management systems","Schedule risk & Monte Carlo","Cost risk & contingency modeling","Estimate-at-completion forecasting","Progress measurement & reporting","Baseline & change control","Portfolio & program controls"]),
-    n("Heavy civil & construction methods", ["Earthwork & mass haul","Deep foundation installation","Ground improvement field methods","Cofferdams & dewatering","Marine & underwater construction","Heavy lifting & rigging engineering","Bridge erection methods","Roadway & pavement construction","Pipeline & utility installation"]),
-    n("Construction safety engineering", ["Fall protection","Excavation & trench safety","Scaffold & access safety","Crane & rigging safety","Confined-space entry","Electrical & lockout-tagout","Prevention through design","Safety management & OSHA compliance","Incident investigation & leading indicators","Safety analytics"]),
-    n("Construction quality management & inspection", ["Quality systems & inspection-test plans","Materials testing & acceptance","Special inspection programs","Concrete & steel field inspection","Welding inspection (AWS)","Nonconformance & corrective action","Statistical QC & acceptance sampling","Commissioning & functional testing"]),
-    n("Asphalt & bituminous materials science", ["Binder rheology & PG grading","Mix design (Superpave, Marshall, Hveem)","Performance testing (rutting, cracking, moisture)","Recycled asphalt (RAP / RAS)","Warm-mix & cold-mix","Polymer-modified binders","Aging & durability","Mechanistic material properties"]),
-    n("Welding & metallurgical engineering", ["Weld procedure specification & qualification (AWS D1.1 / D1.5)","Weld metallurgy & heat-affected zone","Welder qualification & CWI","Weld defects & discontinuities","Residual stress & distortion control","Steel heat treatment & toughness","Weld inspection & acceptance"]),
-    n("Cathodic protection & corrosion engineering", ["Impressed-current & sacrificial-anode systems","Cathodic protection design (NACE / AMPP)","Atmospheric & soil-side corrosion","Coatings & linings selection","Corrosion monitoring & survey","Stray-current & AC interference"]),
-    n("Connection & joint design", ["Bolted connections (AISC 360 Ch J)","Welded connections & weld design","Pre-qualified moment connections (AISC 358)","Bracing & gusset-plate connections","Base plates & column anchorage","RC beam-column joints (ACI 352R)","Precast connections","Timber & mass-timber connections","Tubular & HSS joints (CIDECT)"]),
-    n("Thin-shell & spatial structures", ["Shells & folded plates","Space frames & grid shells","Reticulated domes","Form-finding & funicular design","Stadium & long-span roofs","Pneumatic & air-supported structures","Cable & membrane structures"]),
-    n("Tall buildings & high-rise systems", ["Lateral system selection (frame, wall, tube, outrigger)","Differential column shortening","Creep & shrinkage time effects","Construction sequence & locked-in forces","Belt-truss & outrigger optimization","Supertall & mixed-use systems","Motion & occupant comfort"]),
-    n("Construction-phase & erection engineering", ["Erection sequence & stability","Falsework, shoring & reshoring","Formwork engineering","Temporary bracing & wind","Lifting, rigging & crane picks","Demolition engineering","Concrete construction loads (ACI 347)"]),
-    n("Repair, strengthening & assessment", ["Existing-structure assessment & load rating","Concrete repair (ICRI / ACI 562)","FRP strengthening (ACI 440)","Steel & connection retrofit","Seismic retrofit (ASCE 41)","External post-tensioning strengthening","Corrosion-damage rehabilitation","Historic & heritage strengthening"]),
-    n("Power systems & electrical grid engineering", ["Power distribution design","Power-flow & load-flow analysis","Short-circuit & protective coordination","Microgrid design & control","Distributed energy resource integration","Power electronics & inverters","Substation engineering","Energy storage integration","Renewable interconnection studies"]),
-    n("EV & electrified mobility infrastructure", ["EV charging design (Level 2 / DCFC)","Charging load & demand management","Fleet & depot electrification","Grid impact & make-ready","Charging site civil & structural","Vehicle-to-grid (V2G)","Utility coordination","Electrified transit depots"]),
-    n("Hydrogen & alternative fuels infrastructure", ["Hydrogen production (electrolysis / SMR)","Hydrogen storage & compression","Hydrogen pipelines & distribution","Fueling station design & safety (NFPA 2)","Ammonia & synthetic fuels","Biofuel & renewable natural gas","Carbon capture & sequestration infrastructure"]),
-    n("Mechanical & process plant / piping engineering", ["Process piping design (ASME B31.3)","Pipe stress analysis (Caesar II)","Pumps, compressors & rotating equipment","Pressure vessels & heat exchangers (ASME BPVC)","Plant layout & P&ID","Tanks & storage (API 650 / 620)","Process safety & relief systems","Material handling & conveying"]),
-    n("Telecommunications & broadband infrastructure", ["Fiber-optic outside-plant design","Wireless / cellular & small-cell","Tower & rooftop antenna mounts","Distributed antenna systems","Backbone & conduit routing","5G / mmWave deployment","Broadband access & permitting","Submarine & long-haul cable"]),
-    n("Industrial hygiene & hazardous building materials", ["Asbestos survey & abatement","Lead-based paint assessment","Mold & moisture intrusion","Indoor air quality & exposure","Hazardous-material inventory & abatement","Radon & soil-gas mitigation","PCB & contaminated-material management"]),
-    n("Demolition, decommissioning & deconstruction", ["Structural demolition engineering","Implosion & controlled demolition","Selective demolition & deconstruction","Material recovery & design for disassembly","Industrial / nuclear decommissioning","Site decommissioning & abandonment","Demolition waste & diversion"]),
-    n("Protective & security engineering", ["Threat & vulnerability assessment","Anti-terrorism / force protection (UFC 4-010-01)","Hostile-vehicle mitigation & barriers (ASTM F2656)","Ballistic & forced-entry design (UL 752)","Perimeter security & standoff","Crime prevention through environmental design (CPTED)","Blast standoff & protective glazing (GSA / ISC)"]),
-    n("Agricultural, irrigation & drainage engineering", ["Irrigation system design","Agricultural land drainage","On-farm water management","Land grading & reclamation","Surface & subsurface drainage networks","Crop water requirements & scheduling","Irrigation conveyance & canals"]),
-    n("Cold-regions & permafrost engineering", ["Permafrost foundations","Frost heave & frost-susceptible soils","Thaw settlement & degradation","Thermosyphon ground stabilization","Seasonal-frost & active-layer design","Arctic & cold-regions construction","Ice & snow loads"]),
-    n("Additional expert-authored brains", [])
-  ]),
-  n("Capabilities", [
-    n("Vision", ["Read drawings & plans","Produce drawings & details","Site photos & imagery","Defect & crack detection","Scans, point clouds & LiDAR"]),
-    n("Document reading", ["Specs & reports","Geotech & test reports","Contracts & RFPs","Data extraction"]),
-    n("Code & standards retrieval", ["Live code retrieval (ACI / ASCE / IBC / AASHTO)","Jurisdiction & amendments","Standards & test methods","Cite-or-refuse"]),
-    n("Computation", ["Deterministic solvers","Answer-key benchmarks","Units & sanity checks"]),
-    n("Software operation", ["Operate Revit / Civil 3D","Run FEA (SAP / ETABS / ABAQUS)","Hydraulic & geotech solvers","Scripting & automation"]),
-    n("Judgment & refusal", ["Problem framing","Sanity & plausibility","Scope & refusal contracts","Uncertainty communication"]),
-    n("Deliverables", ["Calculation packages","Engineering reports","Drawings & details","Permit & submittal sets","Plain-language summaries"]),
-    n("Memory", ["Firm standards & preferences","Project context & history","Provenance & audit"]),
-    n("Field execution & instrumented data acquisition", ["Field measurement & survey-grade capture","Load & proof testing","In-situ instrumentation & telemetry","Sample collection & chain of custody","Real-time sensor data ingestion"])
-  ]),
-  n("Workflows", ["Design & sizing","Analysis & modeling","Review & QC","Code compliance & plan review","Quantity takeoff & estimating","Permitting & entitlement","Inspection & condition assessment","Forensic investigation & litigation","Monitoring & digital twin","Feasibility & due diligence","Multi-domain council","Research & literature synthesis","Commissioning & handover"]),
-  n("Verification & trust", ["First-principles logic","Verified tools & answer keys","Benchmarking & re-certification","Named domain-expert verifiers","Provenance & audit trail","Scope & refusal contracts","Human sign-off","Agentic orchestration & federation"]),
-  n("Built Environment", [
-    n("Architecture, interiors & space", ["Architectural design & schematic layout","Interior systems & fit-out","Space programming & adjacency","Accessibility & universal design","Acoustics & daylighting","Historic preservation & adaptive reuse"]),
-    n("Building physics", ["Building envelope & moisture","Thermal performance & energy modeling","Fire & life safety engineering","Vertical transportation","Building acoustics & vibration isolation"]),
-    n("Green & high-performance buildings", ["LEED / WELL / green certification","Embodied & operational carbon","Net-zero & passive design","Daylight & occupant comfort","Material health & circularity","Resilient & climate-adaptive design"]),
-    n("Planning, urban systems & mobility", ["Urban planning & land use","Transportation planning & demand","Transit, micromobility & parking","Smart cities & sensing"]),
-    n("Real estate, cost & delivery", ["Feasibility & highest-and-best-use","Development pro forma & finance","Cost estimating & quantity takeoff","Procurement & delivery models","Scheduling & construction sequencing","Risk, claims & contingency"]),
-    n("Operations & asset management", ["Facilities management & O&M","Asset registers & lifecycle","Digital twin & BIM-FM handoff","Condition assessment & maintenance","Energy & utility operations","Space & occupancy management"]),
-    n("Environment, water & utilities", ["Stormwater & site drainage","Water supply & distribution","Wastewater & treatment","Solid waste & utilities","Environmental permitting & impact","Ecology, wetlands & remediation"]),
-    n("Codes, compliance & risk", ["Building codes & amendments","Permitting & plan review","Construction law & contracts","Insurance, bonding & liability","Resilience & business continuity"]),
-    n("HVAC & mechanical building systems", ["Heating & cooling load calculation","Psychrometrics & air-conditioning","Air-handling & ventilation","Ductwork & air distribution","Hydronic & chilled-water systems","Central plant (chillers, boilers, cooling towers)","VRF & heat pumps","Ventilation & indoor air quality (ASHRAE 62.1)","Dedicated outdoor air & energy recovery","Smoke control & stair pressurization"]),
-    n("Plumbing & fire protection systems", ["Domestic water supply & sizing","Sanitary drainage, waste & vent","Storm & roof drainage","Backflow prevention","Natural gas & fuel piping","Medical gas systems (NFPA 99)","Fire sprinklers (NFPA 13)","Standpipes & fire pumps (NFPA 14 / 20)","Hydraulic calculations","Clean-agent suppression (NFPA 2001)"]),
-    n("Electrical & power building systems", ["Power distribution & one-line diagrams","Load calculations & demand (NEC)","Service, switchgear & panelboards","Short-circuit & coordination study","Arc-flash analysis (NFPA 70E)","Grounding, bonding & lightning protection","Emergency & standby power","UPS & power quality","Motor control & VFDs","Electrical code compliance (NEC)"]),
-    n("Lighting & illumination engineering", ["Photometrics & illuminance (IES)","Interior lighting design","Exterior & site lighting","Daylight harvesting & integration","Lighting controls & dimming","Emergency & egress lighting","Human-centric & circadian lighting","Lighting power density (ASHRAE 90.1)","Light pollution & dark-sky"]),
-    n("Fire protection & life safety engineering", ["Means of egress & occupant load","Occupancy & construction classification","Fire & smoke compartmentation","Fire-resistance-rated assemblies","Egress & evacuation modeling","Smoke control design","Performance-based fire design (SFPE)","Fire & smoke modeling (CFD / FDS)","Fire alarm & detection (NFPA 72)","Fire department access & water supply"]),
-    n("Low-voltage, ICT & building technology", ["Structured cabling (TIA-568)","Audiovisual & multimedia","Security, access control & surveillance","Intrusion detection & mass notification","Distributed antenna & in-building wireless","Network & data infrastructure","Nurse call & healthcare comms","Pathways, spaces & telecom rooms"]),
-    n("Building automation, controls & smart buildings", ["Building automation systems (BAS / BMS)","Direct digital control (DDC)","Sequences of operation (ASHRAE G36)","Open protocols (BACnet / Modbus)","Fault detection & diagnostics","Analytics & ongoing commissioning","Smart building & IoT integration","Cybersecurity for building systems"]),
-    n("Facade & building enclosure engineering", ["Curtain wall systems","Window wall & storefront","Cladding & rainscreen","Structural sealant & glazing","Structural glass design","Enclosure thermal & condensation","Air & water infiltration testing","Enclosure commissioning","Building-integrated photovoltaics (BIPV)","Facade access & maintenance"]),
-    n("Landscape architecture & site development", ["Site grading & earthwork","Planting design & horticulture","Hardscape & site materials","Green-infrastructure site design","Site furnishings & amenities","Erosion control & site restoration","Irrigation design","Site accessibility & circulation"]),
-    n("Land use, zoning & entitlement", ["Zoning ordinances & use classification","Variances & conditional use permits","Rezoning & map amendments","Planned unit developments","Overlay & special districts","Entitlement strategy & process","Site plan & subdivision approval","Environmental review (NEPA / CEQA)","Easements, covenants & deed restrictions","Historic & landmark review"]),
-    n("Urban design & physical form", ["Urban design frameworks & guidelines","Streetscape & public realm","Block, street & parcel patterning","Typology & massing studies","Transit-oriented & corridor design","Walkability & pedestrian-scale design","Visual impact & view corridors","3D city & massing modeling","Design review & character standards"]),
-    n("Housing & community development", ["Housing needs assessment","Affordable & workforce housing","Mixed-income & inclusionary housing","Supportive & special-needs housing","Manufactured & modular housing","Missing-middle & gentle density","Housing finance & subsidy programs","Community development (CDBG / HOME)","Neighborhood revitalization","Anti-displacement & equity"]),
-    n("Economic development & infrastructure finance", ["Economic base & cluster analysis","Fiscal & economic impact analysis","Tax increment financing","Special assessment & BID districts","Impact fees & development charges","Municipal bonds & public finance","Value capture & land value finance","Incentives, abatements & enterprise zones","Benefit-cost analysis","Public-private partnership structuring"])
-  ])
-]);
-
-var dx=15, dy=270;
-var root = d3.hierarchy(DATA);
-root.x0=0; root.y0=0;
-root.descendants().forEach(function(d,i){ d.id=i; d._children=(d.children&&d.children.length)?d.children:null; if(d.depth>=2) d.children=null; });
-
-var COL = {live:"#e2b557", building:"#e79ab2", open:"#6f5c66"};
-var STATUS = {
-  "Statics":"live","Mechanics of materials":"live","Deterministic solvers":"live",
-  "First-principles logic":"live","Verified tools & answer keys":"live",
-  "Human sign-off":"live","Scope & refusal contracts":"live",
-  "Structural analysis":"building","Loads & combinations":"building","Steel design (AISC)":"building",
-  "Reinforced concrete (ACI)":"building","Engineering mathematics":"building","Sanity & plausibility":"building",
-  "Named domain-expert verifiers":"building","Benchmarking & re-certification":"building",
-  "Agentic orchestration & federation":"building","Provenance & audit trail":"building","Calculation packages":"building"
-};
-function st(d){ return STATUS[d.data.name] || "open"; }
-function computeAgg(d){
-  var kids = d._children || d.children;
-  if(!kids || !kids.length){ d.agg = st(d); return d.agg; }
-  var best="open";
-  kids.forEach(function(c){ var s=computeAgg(c); if(s==="live") best="live"; else if(s==="building" && best!=="live") best="building"; });
-  d.agg=best; return d.agg;
-}
-computeAgg(root);
-var counts={live:0,building:0,open:0};
-(function countAll(d){ var k=d._children||d.children; if(!k||!k.length){ counts[st(d)]++; return; } k.forEach(countAll); })(root);
-var sb=document.getElementById("statusbar");
-if(sb){ sb.textContent = counts.live+" live  ·  "+counts.building+" in progress  ·  "+counts.open+" planned  ·  the Formation Labs harness, every domain we build and verify"; }
-
-var W=window.innerWidth, H=window.innerHeight;
-var svg=d3.select("#chart").append("svg").attr("width",W).attr("height",H)
-  .style("font-family","Inter, sans-serif").style("font-size","12.5px");
-var gZoom=svg.append("g");
-var gLink=gZoom.append("g").attr("fill","none").attr("stroke","rgba(226,181,87,0.22)").attr("stroke-width",1);
-var gNode=gZoom.append("g").attr("class","node").attr("cursor","pointer").attr("pointer-events","all");
-var zoom=d3.zoom().scaleExtent([0.18,2.2]).on("zoom",function(e){ gZoom.attr("transform",e.transform); });
-svg.call(zoom);
-
-var tree=d3.tree().nodeSize([dx,dy]);
-var diagonal=d3.linkHorizontal().x(function(d){return d.y;}).y(function(d){return d.x;});
-
-function update(source){
-  var nodes=root.descendants().reverse();
-  var links=root.links();
-  tree(root);
-
-  var node=gNode.selectAll("g").data(nodes,function(d){return d.id;});
-  var nodeEnter=node.enter().append("g")
-    .attr("transform",function(){return "translate("+source.y0+","+source.x0+")";})
-    .attr("fill-opacity",0).attr("stroke-opacity",0)
-    .attr("tabindex",0).attr("role","button")
-    .attr("aria-label",function(d){ return d.data.name + (d._children?" (toggle)":""); })
-    .on("click",function(event,d){ d.children=d.children?null:d._children; update(d); })
-    .on("keydown",function(event,d){ if(event.key==="Enter"||event.key===" "){ event.preventDefault(); d.children=d.children?null:d._children; update(d); } });
-  nodeEnter.append("circle")
-    .attr("r",function(d){return d.depth===0?7:(d._children?5:3.6);})
-    .attr("fill",function(d){return d.children?"#130a0f":COL[d.agg];})
-    .attr("stroke",function(d){return COL[d.agg];})
-    .attr("stroke-width",function(d){return d.depth===0?2:(d._children?1.5:1);});
-  nodeEnter.append("text")
-    .attr("dy","0.32em")
-    .attr("x",function(d){return d._children||d.depth===0?-10:10;})
-    .attr("text-anchor",function(d){return d._children||d.depth===0?"end":"start";})
-    .attr("fill",function(d){ if(d._children) return d.depth<=1?"#ece3da":"#cdbcc4"; var c={live:"#f0d486",building:"#e79ab2",open:"#9d8a92"}; return c[d.agg]; })
-    .attr("font-weight",function(d){return d.depth<=1?600:400;})
-    .attr("font-size",function(d){return d.depth===0?"15px":(d.depth===1?"13.5px":"12.5px");})
-    .text(function(d){return d.data.name;});
-
-  var nodeUpdate=node.merge(nodeEnter);
-  nodeUpdate.transition().duration(260)
-    .attr("transform",function(d){return "translate("+d.y+","+d.x+")";})
-    .attr("fill-opacity",1).attr("stroke-opacity",1);
-  nodeUpdate.select("circle").attr("fill",function(d){return d.children?"#130a0f":COL[d.agg];}).attr("stroke",function(d){return COL[d.agg];});
-
-  node.exit().transition().duration(260)
-    .attr("transform",function(){return "translate("+source.y+","+source.x+")";})
-    .attr("fill-opacity",0).attr("stroke-opacity",0).remove();
-
-  var link=gLink.selectAll("path").data(links,function(d){return d.target.id;});
-  var linkEnter=link.enter().append("path").attr("d",function(){var o={x:source.x0,y:source.y0};return diagonal({source:o,target:o});});
-  link.merge(linkEnter).transition().duration(260).attr("d",diagonal);
-  link.exit().transition().duration(260).attr("d",function(){var o={x:source.x,y:source.y};return diagonal({source:o,target:o});}).remove();
-
-  root.eachBefore(function(d){ d.x0=d.x; d.y0=d.y; });
-}
-update(root);
-
-// fit the tree to the viewport (re-runs on resize)
-function fitView(animate){
-  var b={x0:1e9,x1:-1e9,y0:1e9,y1:-1e9};
-  root.descendants().forEach(function(d){ b.x0=Math.min(b.x0,d.x); b.x1=Math.max(b.x1,d.x); b.y0=Math.min(b.y0,d.y); b.y1=Math.max(b.y1,d.y); });
-  var w=(b.y1-b.y0)+460, h=(b.x1-b.x0)+120;
-  var k=Math.min(W/w, H/h, 1)*0.92;
-  var tx=W/2 - k*((b.y0+b.y1)/2) + 30;
-  var ty=H/2 - k*((b.x0+b.x1)/2);
-  (animate?svg.transition().duration(450):svg).call(zoom.transform, d3.zoomIdentity.translate(tx,ty).scale(k));
-}
-setTimeout(function(){ fitView(true); }, 120);
-
-var rzT;
-window.addEventListener("resize",function(){ W=window.innerWidth; H=window.innerHeight; svg.attr("width",W).attr("height",H); clearTimeout(rzT); rzT=setTimeout(function(){ fitView(false); }, 150); });
+(function(){var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');if(t)t.addEventListener('click',function(){var o=l.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false');});})();
 </script>
 </body>
 </html>
